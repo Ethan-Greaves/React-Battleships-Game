@@ -1,0 +1,13 @@
+.empty-cell {
+	width: 40px;
+	height: 40px;
+	background-color: darkgray;
+	border: 2px solid black;
+}
+
+.battleship-cell {
+	width: 40px;
+	height: 40px;
+	background-color: lightseagreen;
+	border: 2px solid black;
+}
