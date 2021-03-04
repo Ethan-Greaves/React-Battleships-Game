@@ -1,10 +1,10 @@
 import './App.css';
-import Board from './components/Board/Board'
+import BoardCreator from './components/BoardCreator/BoardCreator'
 
 function App() {
 	return (
 		<div className='App'>
-			<Board />
+			<BoardCreator />
 		</div>
 	);
 }
