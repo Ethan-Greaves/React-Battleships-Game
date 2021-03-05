@@ -1,7 +1,6 @@
 class BoardEditor {
-	constructor(board, shipsRemaining, battleshipAllowance) {
+	constructor(board, shipsRemaining) {
 		this.board = board;
-		this.battleshipAllowance = battleshipAllowance;
 		this.shipsRemaining = shipsRemaining;
 	}
 
@@ -28,7 +27,7 @@ class BoardEditor {
 			//*increment/decrement ships remaining based on true/false value of cell clicked
 			this.board[x][y].isBattleShip ? this.shipsRemaining-- : this.shipsRemaining++;
 		}
-    }
+	}
 }
 
 export default BoardEditor;

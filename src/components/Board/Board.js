@@ -4,12 +4,12 @@ import GridCell from '../GridCell/GridCell';
 import BoardCreator from '../../classes/BoardCreator';
 import BoardEditor from '../../classes/BoardEditor';
 
-const Board = ({ rows, columns, totalShipAllowance }) => {
+const Board = ({ rows, columns }) => {
 	//#region INITIALISATION
 	const boardCreator = new BoardCreator(rows, columns);
 	const [board, setBoard] = useState(boardCreator.createEmptyBoard());
 	const [ShipsRemaining, setShipsRemaining] = useState(boardCreator.getShipsRemaining());
-	const boardEditor = new BoardEditor(board, ShipsRemaining, totalShipAllowance);
+	const boardEditor = new BoardEditor(board, ShipsRemaining);
 	//#endregion
 
 	const changeBattleshipCell = (coords) => {
@@ -27,10 +27,17 @@ const Board = ({ rows, columns, totalShipAllowance }) => {
 		setShipsRemaining(boardCreator.getShipsRemaining());
 	};
 
+	const resetBoard = () => {
+		setBoard([...boardCreator.createEmptyBoard()]);
+		setShipsRemaining(boardCreator.getShipsRemaining());
+	};
+
 	return (
 		<>
 			<p style={{ width: '100%' }}>{`Ships Remaining: ${ShipsRemaining}`}</p>
-			<button onClick={randomiseBoard}>Randomize</button>
+			<button onClick={randomiseBoard}>Randomise</button>
+			<button onClick={resetBoard}>Reset</button>
+
 			{board.map((rows) => {
 				return (
 					<Grid container spacing={1} align='center' justify='center'>
@@ -55,7 +62,6 @@ const Board = ({ rows, columns, totalShipAllowance }) => {
 Board.defaultProps = {
 	rows: 12,
 	columns: 12,
-	totalShipAllowance: 10,
 };
 
 export default Board;
