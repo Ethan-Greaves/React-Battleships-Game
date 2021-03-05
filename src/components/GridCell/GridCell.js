@@ -2,9 +2,9 @@ import React from 'react';
 import useToggle from '../../hooks/useToggle';
 import './GridCell.css';
 
-const GridCell = ({ coord, isBattleShip, placeBattleShip }) => {
+const GridCell = ({ coords, isBattleShip, placeBattleShip }) => {
 	const handleClick = () => {
-		placeBattleShip(coord);
+		placeBattleShip(coords);
 	};
 
 	return (
