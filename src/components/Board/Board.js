@@ -10,16 +10,34 @@ const Board = ({ rows, columns }) => {
 	const [board, setBoard] = useState(boardCreator.createEmptyBoard());
 	const [ShipsRemaining, setShipsRemaining] = useState(boardCreator.getShipsRemaining());
 	const boardEditor = new BoardEditor(board, ShipsRemaining);
+	const [placementDirection, setPlacementDirection] = useState('left');
+	const defaultShipPlacementQueue = [
+		(x, y, direction) => boardEditor.placeCarrier(x, y, direction),
+		(x, y, direction) => boardEditor.placeBattleship(x, y, direction),
+		(x, y, direction) => boardEditor.placeCruiser(x, y, direction),
+		(x, y, direction) => boardEditor.placeSubmarine(x, y, direction),
+		(x, y, direction) => boardEditor.placeDestroyer(x, y, direction),
+	];
+	const [shipPlacementQueue, setShipPlacementQueue] = useState(defaultShipPlacementQueue);
+
 	//#endregion
+	const changePlacementDirection = (e) => {
+		if (e.key === 'w') setPlacementDirection('up');
+		if (e.key === 's') setPlacementDirection('down');
+		if (e.key === 'd') setPlacementDirection('right');
+		if (e.key === 'a') setPlacementDirection('left');
+	};
 
-	const changeBattleshipCell = (coords) => {
-		//* Destructure our coordinates out of the object
-		const { y, x } = coords;
-
-		boardEditor.changeBattleshipCell(x, y);
-
-		setBoard([...boardEditor.getBoard()]);
-		setShipsRemaining(boardEditor.getShipsRemaining());
+	const placeShip = (coords) => {
+		if (shipPlacementQueue.length > 0) {
+			//* Destructure our coordinates out of the object
+			const { x, y } = coords;
+			shipPlacementQueue[0](x, y, placementDirection);
+			shipPlacementQueue.shift();
+			setShipPlacementQueue(shipPlacementQueue);
+			setBoard([...boardEditor.getBoard()]);
+			setShipsRemaining(boardEditor.getShipsRemaining());
+		}
 	};
 
 	const randomiseBoard = () => {
@@ -28,12 +46,14 @@ const Board = ({ rows, columns }) => {
 	};
 
 	const resetBoard = () => {
+		// setShipsRemaining(boardCreator.getShipsRemaining());
+		setShipPlacementQueue(defaultShipPlacementQueue);
+
 		setBoard([...boardCreator.createEmptyBoard()]);
-		setShipsRemaining(boardCreator.getShipsRemaining());
 	};
 
 	return (
-		<>
+		<div onKeyDown={changePlacementDirection} tabIndex='0'>
 			<p style={{ width: '100%' }}>{`Ships Remaining: ${ShipsRemaining}`}</p>
 			<button onClick={randomiseBoard}>Randomise</button>
 			<button onClick={resetBoard}>Reset</button>
@@ -45,7 +65,7 @@ const Board = ({ rows, columns }) => {
 							return (
 								<Grid item>
 									<GridCell
-										placeBattleShip={changeBattleshipCell}
+										placeBattleShip={placeShip}
 										isBattleShip={cell.isBattleShip}
 										coords={cell.coords}
 									/>
@@ -55,13 +75,13 @@ const Board = ({ rows, columns }) => {
 					</Grid>
 				);
 			})}
-		</>
+		</div>
 	);
 };
 
 Board.defaultProps = {
-	rows: 12,
-	columns: 12,
+	rows: 8,
+	columns: 8,
 };
 
 export default Board;

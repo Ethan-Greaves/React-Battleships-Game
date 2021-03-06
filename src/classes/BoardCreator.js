@@ -2,7 +2,7 @@ class BoardCreator {
 	constructor(rows, cols) {
 		this.rows = rows;
 		this.cols = cols;
-		this.shipsRemaining = 20;
+		this.shipsRemaining = 15;
 	}
 
 	// TODO Want this method to be private
@@ -17,9 +17,9 @@ class BoardCreator {
 	//* Create a board where all the isBattleShip cells are false
 	createEmptyBoard() {
 		const gridArr = [];
-		for (let x = 0; x < this.rows; x++) {
+		for (let x = 0; x < this.cols; x++) {
 			const rowArr = [];
-			for (let y = 0; y < this.cols; y++) {
+			for (let y = 0; y < this.rows; y++) {
 				rowArr.push({ coords: { x, y }, isBattleShip: false });
 			}
 			gridArr.push(rowArr);

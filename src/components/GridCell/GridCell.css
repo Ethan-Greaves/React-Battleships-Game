@@ -5,6 +5,11 @@
 	border: 2px solid black;
 }
 
+.empty-cell:hover {
+	background-color: lightseagreen;
+	opacity: 0.5;
+}
+
 .battleship-cell {
 	width: 40px;
 	height: 40px;
