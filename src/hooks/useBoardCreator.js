@@ -16,7 +16,19 @@ const UseBoardCreator = (rows, cols) => {
 
 	const [board, setBoard] = useState(createEmptyBoard());
 
-	return [board, setBoard, createEmptyBoard];
+	const resetBoard = () => {
+		const resetBoard = board;
+		for (let x = 0; x < cols; x++) {
+			for (let y = 0; y < rows; y++) {
+				if (resetBoard[x][y].isBattleShip)
+					resetBoard[x][y].isBattleShip = !resetBoard[x][y].isBattleShip;
+			}
+		}
+
+		setBoard([...resetBoard]);
+	};
+
+	return [board, setBoard, resetBoard];
 };
 
 export default UseBoardCreator;

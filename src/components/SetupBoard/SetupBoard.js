@@ -5,9 +5,9 @@ import BoardEditor from '../../classes/BoardEditor';
 import useBoardCreator from '../../hooks/useBoardCreator';
 import useShipPlacementDirection from '../../hooks/useShipPlacementDirection';
 import useShipPlacementQueue from '../../hooks/useShipPlacementQueue';
-const Board = () => {
+const SetupBoard = () => {
 	//#region INITIALISATION
-	const [board, setBoard, createEmptyBoard] = useBoardCreator(10, 10);
+	const [board, setBoard, resetBoard] = useBoardCreator(10, 10);
 	const boardEditor = new BoardEditor(board);
 	const [placementDirection, changePlacementDirection] = useShipPlacementDirection('left');
 	const [shipPlacementQueue, setShipPlacementQueue, defaultShipPlacementQueue] = useShipPlacementQueue(
@@ -27,17 +27,15 @@ const Board = () => {
 		// setBoard([...boardCreator.createRandomBoard()]);
 	};
 
-	const resetBoard = () => {
-		// setShipsRemaining(boardCreator.getShipsRemaining());
+	const handleResetBoard = () => {
 		setShipPlacementQueue(defaultShipPlacementQueue);
-
-		setBoard([...createEmptyBoard()]);
+		resetBoard();
 	};
 
 	return (
 		<div onKeyDown={changePlacementDirection} tabIndex='0'>
 			<button onClick={randomiseBoard}>Randomise</button>
-			<button onClick={resetBoard}>Reset</button>
+			<button onClick={handleResetBoard}>Reset</button>
 
 			{board.map((rows) => {
 				return (
@@ -60,4 +58,4 @@ const Board = () => {
 	);
 };
 
-export default Board;
+export default SetupBoard;

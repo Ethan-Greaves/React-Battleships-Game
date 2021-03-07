@@ -1,10 +1,10 @@
 import './App.css';
-import Board from './components/Board/Board';
+import SetupBoard from './components/SetupBoard/SetupBoard';
 
 function App() {
 	return (
 		<div className='App'>
-			<Board />
+			<SetupBoard />
 		</div>
 	);
 }
