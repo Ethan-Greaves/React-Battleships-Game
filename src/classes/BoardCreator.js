@@ -2,17 +2,7 @@ class BoardCreator {
 	constructor(rows, cols) {
 		this.rows = rows;
 		this.cols = cols;
-		this.shipsRemaining = 15;
 	}
-
-	// TODO Want this method to be private
-	createBoard() {}
-
-	//#region GETTERS
-	getShipsRemaining() {
-		return this.shipsRemaining;
-	}
-	//#endregion
 
 	//* Create a board where all the isBattleShip cells are false
 	createEmptyBoard() {

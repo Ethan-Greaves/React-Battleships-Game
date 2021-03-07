@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { Grid } from '@material-ui/core';
 import GridCell from '../GridCell/GridCell';
-import BoardCreator from '../../classes/BoardCreator';
 import BoardEditor from '../../classes/BoardEditor';
+import useBoardCreator from '../../hooks/useBoardCreator';
+import useShipPlacementDirection from '../../hooks/useShipPlacementDirection';
 
-const Board = ({ rows, columns }) => {
+const Board = () => {
 	//#region INITIALISATION
-	const boardCreator = new BoardCreator(rows, columns);
-	const [board, setBoard] = useState(boardCreator.createEmptyBoard());
-	const [ShipsRemaining, setShipsRemaining] = useState(boardCreator.getShipsRemaining());
-	const boardEditor = new BoardEditor(board, ShipsRemaining);
-	const [placementDirection, setPlacementDirection] = useState('left');
+	const [board, setBoard, createEmptyBoard] = useBoardCreator(10, 10);
+	const boardEditor = new BoardEditor(board);
+	const [placementDirection, changePlacementDirection] = useShipPlacementDirection('left');
 	const defaultShipPlacementQueue = [
 		(x, y, direction) => boardEditor.placeCarrier(x, y, direction),
 		(x, y, direction) => boardEditor.placeBattleship(x, y, direction),
@@ -21,12 +20,6 @@ const Board = ({ rows, columns }) => {
 	const [shipPlacementQueue, setShipPlacementQueue] = useState(defaultShipPlacementQueue);
 
 	//#endregion
-	const changePlacementDirection = (e) => {
-		if (e.key === 'w') setPlacementDirection('up');
-		if (e.key === 's') setPlacementDirection('down');
-		if (e.key === 'd') setPlacementDirection('right');
-		if (e.key === 'a') setPlacementDirection('left');
-	};
 
 	const placeShip = (coords) => {
 		if (shipPlacementQueue.length > 0) {
@@ -36,25 +29,22 @@ const Board = ({ rows, columns }) => {
 			shipPlacementQueue.shift();
 			setShipPlacementQueue(shipPlacementQueue);
 			setBoard([...boardEditor.getBoard()]);
-			setShipsRemaining(boardEditor.getShipsRemaining());
 		}
 	};
 
 	const randomiseBoard = () => {
-		setBoard([...boardCreator.createRandomBoard()]);
-		setShipsRemaining(boardCreator.getShipsRemaining());
+		// setBoard([...boardCreator.createRandomBoard()]);
 	};
 
 	const resetBoard = () => {
 		// setShipsRemaining(boardCreator.getShipsRemaining());
 		setShipPlacementQueue(defaultShipPlacementQueue);
 
-		setBoard([...boardCreator.createEmptyBoard()]);
+		setBoard([...createEmptyBoard()]);
 	};
 
 	return (
 		<div onKeyDown={changePlacementDirection} tabIndex='0'>
-			<p style={{ width: '100%' }}>{`Ships Remaining: ${ShipsRemaining}`}</p>
 			<button onClick={randomiseBoard}>Randomise</button>
 			<button onClick={resetBoard}>Reset</button>
 
@@ -77,11 +67,6 @@ const Board = ({ rows, columns }) => {
 			})}
 		</div>
 	);
-};
-
-Board.defaultProps = {
-	rows: 8,
-	columns: 8,
 };
 
 export default Board;
