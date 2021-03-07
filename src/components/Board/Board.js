@@ -4,32 +4,23 @@ import GridCell from '../GridCell/GridCell';
 import BoardEditor from '../../classes/BoardEditor';
 import useBoardCreator from '../../hooks/useBoardCreator';
 import useShipPlacementDirection from '../../hooks/useShipPlacementDirection';
-
+import useShipPlacementQueue from '../../hooks/useShipPlacementQueue';
 const Board = () => {
 	//#region INITIALISATION
 	const [board, setBoard, createEmptyBoard] = useBoardCreator(10, 10);
 	const boardEditor = new BoardEditor(board);
 	const [placementDirection, changePlacementDirection] = useShipPlacementDirection('left');
-	const defaultShipPlacementQueue = [
-		(x, y, direction) => boardEditor.placeCarrier(x, y, direction),
-		(x, y, direction) => boardEditor.placeBattleship(x, y, direction),
-		(x, y, direction) => boardEditor.placeCruiser(x, y, direction),
-		(x, y, direction) => boardEditor.placeSubmarine(x, y, direction),
-		(x, y, direction) => boardEditor.placeDestroyer(x, y, direction),
-	];
-	const [shipPlacementQueue, setShipPlacementQueue] = useState(defaultShipPlacementQueue);
-
+	const [shipPlacementQueue, setShipPlacementQueue, defaultShipPlacementQueue] = useShipPlacementQueue(
+		boardEditor
+	);
 	//#endregion
 
 	const placeShip = (coords) => {
-		if (shipPlacementQueue.length > 0) {
-			//* Destructure our coordinates out of the object
-			const { x, y } = coords;
-			shipPlacementQueue[0](x, y, placementDirection);
-			shipPlacementQueue.shift();
-			setShipPlacementQueue(shipPlacementQueue);
-			setBoard([...boardEditor.getBoard()]);
-		}
+		//* Destructure our coordinates out of the object
+		const { x, y } = coords;
+		shipPlacementQueue.dequeue()(x, y, placementDirection);
+		setShipPlacementQueue(shipPlacementQueue);
+		setBoard([...boardEditor.getBoard()]);
 	};
 
 	const randomiseBoard = () => {
