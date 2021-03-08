@@ -19,8 +19,13 @@ class Queue {
 		this.size++;
 	}
 
+	returnFirstInQueue() {
+		if (!this.size) return () => void 0 || null;
+		return this.first.value;
+	}
+
 	dequeue() {
-		if (!this.first) return () => void 0 || null;
+		if (!this.size) return null;
 
 		const temp = this.first;
 
@@ -30,6 +35,8 @@ class Queue {
 
 		this.first = this.first.next;
 		this.size--;
+		console.log(temp.value);
+
 		return temp.value;
 	}
 }

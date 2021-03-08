@@ -5,22 +5,41 @@ import BoardEditor from '../../classes/BoardEditor';
 import useBoardCreator from '../../hooks/useBoardCreator';
 import useShipPlacementDirection from '../../hooks/useShipPlacementDirection';
 import useShipPlacementQueue from '../../hooks/useShipPlacementQueue';
+import useShipPlacer from '../../hooks/useShipPlacer';
+import UseShipPlacer from '../../hooks/useShipPlacer';
+
 const SetupBoard = () => {
 	//#region INITIALISATION
 	const [board, setBoard, resetBoard] = useBoardCreator(10, 10);
 	const boardEditor = new BoardEditor(board);
 	const [placementDirection, changePlacementDirection] = useShipPlacementDirection('left');
+	const {
+		placeCarrier,
+		placeBattleship,
+		placeCruiser,
+		placeSubmarine,
+		placeDestroyer,
+		modifiedBoard,
+	} = UseShipPlacer(board);
 	const [shipPlacementQueue, setShipPlacementQueue, defaultShipPlacementQueue] = useShipPlacementQueue(
-		boardEditor
+		placeCarrier,
+		placeBattleship,
+		placeCruiser,
+		placeSubmarine,
+		placeDestroyer
 	);
 	//#endregion
 
 	const placeShip = (coords) => {
 		//* Destructure our coordinates out of the object
 		const { x, y } = coords;
-		shipPlacementQueue.dequeue()(x, y, placementDirection);
-		setShipPlacementQueue(shipPlacementQueue);
-		setBoard([...boardEditor.getBoard()]);
+		const couldBePlaced = shipPlacementQueue.returnFirstInQueue()(x, y, placementDirection);
+
+		if (couldBePlaced) {
+			shipPlacementQueue.dequeue();
+			setShipPlacementQueue(shipPlacementQueue);
+			setBoard([...modifiedBoard]);
+		}
 	};
 
 	const randomiseBoard = () => {
