@@ -33,6 +33,8 @@ const SetupBoard = () => {
 	const placeShip = (coords) => {
 		//* Destructure our coordinates out of the object
 		const { x, y } = coords;
+
+		//* execute function and save return value
 		const couldBePlaced = shipPlacementQueue.returnFirstInQueue()(x, y, placementDirection);
 
 		if (couldBePlaced) {

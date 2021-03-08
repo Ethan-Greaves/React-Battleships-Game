@@ -8,27 +8,32 @@ const UseShipPlacer = (board) => {
 			const newBoard = modifiedBoard;
 			switch (direction) {
 				case 'up':
-					//* check each cell, as soon as a cell is off grid cancel the ship placement
-					for (let i = 0; i < amount; i++) if (x - i < 0) return false;
+					// TODO encapsulate into function
+					//* check each cell, as soon as a cell is off grid cancel the whole ship placement
+					for (let i = 0; i < amount; i++)
+						if (x - i < 0 || newBoard[x - i][y].isBattleShip) return false;
 					//* If we make it this far (don't return) then we know the ship can be placed
 					for (let i = 0; i < amount; i++)
 						newBoard[x - i][y].isBattleShip = !newBoard[x - i][y].isBattleShip;
 					break;
 				case 'down':
 					//TODO 10 is hard coded, need to pass through row/col length
-					for (let i = 0; i < amount; i++) if (x + i > 10) return false;
+					for (let i = 0; i < amount; i++)
+						if (x + i > 10 || newBoard[x + i][y].isBattleShip) return false;
 					for (let i = 0; i < amount; i++)
 						newBoard[x + i][y].isBattleShip = !newBoard[x + i][y].isBattleShip;
 					break;
 
 				case 'left':
-					for (let i = 0; i < amount; i++) if (y - i < 0) return false;
+					for (let i = 0; i < amount; i++)
+						if (y - i < 0 || newBoard[x][y - i].isBattleShip) return false;
 					for (let i = 0; i < amount; i++)
 						newBoard[x][y - i].isBattleShip = !newBoard[x][y - i].isBattleShip;
 					break;
 
 				case 'right':
-					for (let i = 0; i < amount; i++) if (y + i > 10) return false;
+					for (let i = 0; i < amount; i++)
+						if (y + i > 10 || newBoard[x][y + i].isBattleShip) return false;
 					for (let i = 0; i < amount; i++)
 						newBoard[x][y + i].isBattleShip = !newBoard[x][y + i].isBattleShip;
 					break;
