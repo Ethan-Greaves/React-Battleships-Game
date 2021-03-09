@@ -17,7 +17,6 @@ const UseShipPlacementQueue = (
 	defaultShipPlacementQueue.enqueue((x, y, direction) => placeDestroyer(x, y, direction));
 	//#endregion
 	const [shipPlacementQueue, setShipPlacementQueue] = useState(defaultShipPlacementQueue);
-	console.log(shipPlacementQueue);
 	return [shipPlacementQueue, setShipPlacementQueue, defaultShipPlacementQueue];
 };
 

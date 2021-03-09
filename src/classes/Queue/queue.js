@@ -19,6 +19,10 @@ class Queue {
 		this.size++;
 	}
 
+	getFirst() {
+		return this.first;
+	}
+
 	returnFirstInQueue() {
 		if (!this.size) return () => void 0 || null;
 		return this.first.value;

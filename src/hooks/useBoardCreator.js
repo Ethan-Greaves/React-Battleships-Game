@@ -28,7 +28,7 @@ const UseBoardCreator = (rows, cols) => {
 		setBoard([...resetBoard]);
 	};
 
-	return [board, setBoard, resetBoard];
+	return [board, setBoard, resetBoard, createEmptyBoard];
 };
 
 export default UseBoardCreator;

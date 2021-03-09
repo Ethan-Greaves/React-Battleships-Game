@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import { Grid } from '@material-ui/core';
 import GridCell from '../GridCell/GridCell';
-import BoardEditor from '../../classes/BoardEditor';
 import useBoardCreator from '../../hooks/useBoardCreator';
 import useShipPlacementDirection from '../../hooks/useShipPlacementDirection';
 import useShipPlacementQueue from '../../hooks/useShipPlacementQueue';
-import useShipPlacer from '../../hooks/useShipPlacer';
 import UseShipPlacer from '../../hooks/useShipPlacer';
 
-const SetupBoard = () => {
+const SetupBoard = ({ rows, cols }) => {
 	//#region INITIALISATION
-	const [board, setBoard, resetBoard] = useBoardCreator(10, 10);
-	const boardEditor = new BoardEditor(board);
-	const [placementDirection, changePlacementDirection] = useShipPlacementDirection('left');
+	const [board, setBoard, resetBoard] = useBoardCreator(rows, cols);
+	const [placementDirection, changePlacementDirection] = useShipPlacementDirection('horizontal');
 	const {
 		placeCarrier,
 		placeBattleship,
@@ -20,7 +17,8 @@ const SetupBoard = () => {
 		placeSubmarine,
 		placeDestroyer,
 		modifiedBoard,
-	} = UseShipPlacer(board);
+		placeShipsRandomly,
+	} = UseShipPlacer(board, rows, cols);
 	const [shipPlacementQueue, setShipPlacementQueue, defaultShipPlacementQueue] = useShipPlacementQueue(
 		placeCarrier,
 		placeBattleship,
@@ -45,12 +43,13 @@ const SetupBoard = () => {
 	};
 
 	const randomiseBoard = () => {
-		// setBoard([...boardCreator.createRandomBoard()]);
+		handleResetBoard();
+		placeShipsRandomly(shipPlacementQueue, setShipPlacementQueue);
 	};
 
 	const handleResetBoard = () => {
-		setShipPlacementQueue(defaultShipPlacementQueue);
 		resetBoard();
+		setShipPlacementQueue(defaultShipPlacementQueue);
 	};
 
 	return (
@@ -77,6 +76,11 @@ const SetupBoard = () => {
 			})}
 		</div>
 	);
+};
+
+SetupBoard.defaultProps = {
+	rows: 10,
+	cols: 10,
 };
 
 export default SetupBoard;
