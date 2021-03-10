@@ -1,20 +1,11 @@
 .empty-cell {
-	width: 40px;
-	height: 40px;
-	background-color: darkgray;
-	border: 2px solid black;
-	border-radius: 50px;
+	
 }
 
 .empty-cell:hover {
-	background-color: red;
-	opacity: 0.5;
+	
 }
 
 .battleship-cell {
-	border-radius: 50px;
-	width: 40px;
-	height: 40px;
-	background-color: red;
-	border: 2px solid black;
+	
 }

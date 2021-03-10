@@ -1,13 +1,17 @@
 import React from 'react';
-import useToggle from '../../hooks/useToggle';
 import './GridCell.css';
+import GridCellStyles from './GridCellStyles';
 
 const GridCell = ({ coords, isBattleShip, placeBattleShip, type }) => {
+	const styles = GridCellStyles({
+		isShip: isBattleShip,
+		type,
+	});
 	const handleClick = () => {
 		placeBattleShip(coords);
 	};
 
-	return <div onClick={handleClick} className={isBattleShip ? 'battleship-cell' : 'empty-cell'}></div>;
+	return <div onClick={handleClick} className={styles.cell}></div>;
 };
 
 export default GridCell;
