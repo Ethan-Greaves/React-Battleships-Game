@@ -39,7 +39,6 @@ class Queue {
 
 		this.first = this.first.next;
 		this.size--;
-		console.log(temp.value);
 
 		return temp.value;
 	}

@@ -16,7 +16,6 @@ const SetupBoard = ({ rows, cols }) => {
 		placeCruiser,
 		placeSubmarine,
 		placeDestroyer,
-		modifiedBoard,
 		placeShipsRandomly,
 	} = UseShipPlacer(board, rows, cols);
 	const [shipPlacementQueue, setShipPlacementQueue, defaultShipPlacementQueue] = useShipPlacementQueue(
@@ -28,6 +27,8 @@ const SetupBoard = ({ rows, cols }) => {
 	);
 	//#endregion
 
+	console.log(board);
+
 	const placeShip = (coords) => {
 		//* Destructure our coordinates out of the object
 		const { x, y } = coords;
@@ -38,7 +39,7 @@ const SetupBoard = ({ rows, cols }) => {
 		if (couldBePlaced) {
 			shipPlacementQueue.dequeue();
 			setShipPlacementQueue(shipPlacementQueue);
-			setBoard([...modifiedBoard]);
+			setBoard([...board]);
 		}
 	};
 
@@ -67,6 +68,7 @@ const SetupBoard = ({ rows, cols }) => {
 										placeBattleShip={placeShip}
 										isBattleShip={cell.isBattleShip}
 										coords={cell.coords}
+										type={cell.type}
 									/>
 								</Grid>
 							);
