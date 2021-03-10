@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const cell = (isShip, type) => {
-	let cellColour = 'darkgrey';
+	let cellColour = 'lightblue';
 
 	if (isShip) {
 		switch (type) {
@@ -9,13 +9,13 @@ const cell = (isShip, type) => {
 				cellColour = 'red';
 				break;
 			case 'battleship':
-				cellColour = 'blue';
+				cellColour = 'lightgreen';
 				break;
 			case 'cruiser':
 				cellColour = 'hotpink';
 				break;
 			case 'submarine':
-				cellColour = 'green';
+				cellColour = 'cyan';
 				break;
 			case 'destroyer':
 				cellColour = 'yellow';
@@ -30,8 +30,7 @@ const cell = (isShip, type) => {
 		width: '40px',
 		height: '40px',
 		backgroundColor: cellColour,
-		border: '2px solid black',
-		borderRadius: '50px',
+		border: '1px solid black',
 
 		'&:hover': {
 			backgroundColor: cellColour,

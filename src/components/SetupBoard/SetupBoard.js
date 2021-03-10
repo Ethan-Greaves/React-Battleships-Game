@@ -27,8 +27,6 @@ const SetupBoard = ({ rows, cols }) => {
 	);
 	//#endregion
 
-	console.log(board);
-
 	const placeShip = (coords) => {
 		//* Destructure our coordinates out of the object
 		const { x, y } = coords;
@@ -40,6 +38,8 @@ const SetupBoard = ({ rows, cols }) => {
 			shipPlacementQueue.dequeue();
 			setShipPlacementQueue(shipPlacementQueue);
 			setBoard([...board]);
+		} else {
+			console.log(`Couldn't place ${placementDirection} at coordinate ${x},${y}`);
 		}
 	};
 
@@ -60,7 +60,7 @@ const SetupBoard = ({ rows, cols }) => {
 
 			{board.map((rows) => {
 				return (
-					<Grid container spacing={1} align='center' justify='center'>
+					<Grid container  justify='center'>
 						{rows.map((cell) => {
 							return (
 								<Grid item>

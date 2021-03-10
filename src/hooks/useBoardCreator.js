@@ -6,7 +6,7 @@ const UseBoardCreator = (rows, cols) => {
 		for (let x = 0; x < cols; x++) {
 			const rowArr = [];
 			for (let y = 0; y < rows; y++) {
-				rowArr.push({ coords: { x, y }, isBattleShip: false });
+				rowArr.push({ coords: { x, y }, isBattleShip: false, isPreviewing: false });
 			}
 			gridArr.push(rowArr);
 		}
