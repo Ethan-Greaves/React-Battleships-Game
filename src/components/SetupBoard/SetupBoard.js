@@ -45,7 +45,7 @@ const SetupBoard = ({ rows, cols }) => {
 
 	const randomiseBoard = () => {
 		handleResetBoard();
-		placeShipsRandomly(shipPlacementQueue, setShipPlacementQueue);
+		placeShipsRandomly(defaultShipPlacementQueue, setShipPlacementQueue);
 	};
 
 	const handleResetBoard = () => {
