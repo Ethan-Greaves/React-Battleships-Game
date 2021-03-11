@@ -60,7 +60,7 @@ const SetupBoard = ({ rows, cols }) => {
 
 			{board.map((rows) => {
 				return (
-					<Grid container  justify='center'>
+					<Grid container justify='center'>
 						{rows.map((cell) => {
 							return (
 								<Grid item>

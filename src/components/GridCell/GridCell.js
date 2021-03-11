@@ -1,6 +1,5 @@
 import { Box, Grid } from '@material-ui/core';
 import React from 'react';
-import './GridCell.css';
 import GridCellStyles from './GridCellStyles';
 
 const GridCell = ({ coords, isBattleShip, placeBattleShip, type }) => {
@@ -19,8 +18,8 @@ const GridCell = ({ coords, isBattleShip, placeBattleShip, type }) => {
 				<>
 					<Grid container>
 						<p style={{ margin: 0 }}>{coords.x}</p>
-						<Box ml={3}></Box>
-						<div style={{ padding: 0 }} onClick={handleClick} className={styles.cell}></div>
+						<Box ml={2}></Box>
+						<div onClick={handleClick} className={styles.cell}></div>
 					</Grid>
 				</>
 			) : (

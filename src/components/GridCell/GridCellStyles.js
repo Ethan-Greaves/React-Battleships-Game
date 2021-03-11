@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const cell = (isShip, type) => {
-	let cellColour = 'lightblue';
+	let cellColour = 'lightgrey';
 
 	if (isShip) {
 		switch (type) {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Queue from '../classes/Queue/queue';
 
 const UseShipPlacementQueue = (
