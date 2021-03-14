@@ -3,7 +3,7 @@ import useBoardScanner from './useBoardScanner';
 const UseShipPlacer = (board, rows, cols) => {
 	const { getRandomEmptyCell, isCellEmpty, isCellInGrid } = useBoardScanner(board, rows, cols);
 
-	/** 
+	/**
 	 * Places a single cell (part of ship) on the board and saves the ship type
 	 * @param coordOne {number} - The first board coordinate.
 	 * @param coordTwo {number} - The second board coordinate.
@@ -18,15 +18,15 @@ const UseShipPlacer = (board, rows, cols) => {
 	 *  Places a ship on the board, depending on if the ship is in the grid 
 	 *  and all cells where it will be placed are empty.
 	 *
-	 *  @param x {number} - The x coord.
-	 *  @param y {number} - The y coord.
+	 * 	@param coords {object} - The x, y cell coordinates of where the ship is being placed
 	 *  @param amount {number} - The length of the ship/how many cells to check.
 	 *  @param direction {string} - Will the ship be placed horizontal or vertical.
 	 *  @param type {string} - Used to identify a specific ship.
 
 	 *  @return {boolean} can the ship be placed or not.
-	 */
-	const placeShip = (x, y, amount, direction, type) => {
+	*/
+	const placeShip = (coords, amount, direction, type) => {
+		const { x, y } = coords;
 		if (direction === 'vertical') {
 			for (let i = 0; i < amount; i++) if (!isCellInGrid(x - i) || !isCellEmpty(x - i, y)) return false;
 			for (let i = 0; i < amount; i++) placeCell(x - i, y, type);
@@ -43,12 +43,14 @@ const UseShipPlacer = (board, rows, cols) => {
 	 */
 	const placeShipsRandomly = (shipPlacementQueue, setShipPlacementQueue) => {
 		while (shipPlacementQueue.getFirst()) {
-			const { x, y } = getRandomEmptyCell().coords;
 			const directions = ['vertical', 'horizontal'];
-			const randDirection = directions[Math.floor(Math.random() * directions.length)];
+			const randomDirection = directions[Math.floor(Math.random() * directions.length)];
 
-			//* Execute function which is the value from the first in queue, save the return value
-			const canBePlaced = shipPlacementQueue.returnFirstInQueue()(x, y, randDirection);
+			//* Execute function which is the value from the first in queue, save the return value of said function
+			const canBePlaced = shipPlacementQueue.returnFirstInQueue()(
+				getRandomEmptyCell().coords,
+				randomDirection
+			);
 			if (!canBePlaced) return placeShipsRandomly(shipPlacementQueue, setShipPlacementQueue);
 
 			shipPlacementQueue.dequeue();
@@ -56,19 +58,8 @@ const UseShipPlacer = (board, rows, cols) => {
 		}
 	};
 
-	//* Functions that will be enqueued in ship placement queue
-	const placeCarrier = (x, y, direction) => placeShip(x, y, 5, direction, 'carrier');
-	const placeBattleship = (x, y, direction) => placeShip(x, y, 4, direction, 'battleship');
-	const placeCruiser = (x, y, direction) => placeShip(x, y, 3, direction, 'cruiser');
-	const placeSubmarine = (x, y, direction) => placeShip(x, y, 3, direction, 'submarine');
-	const placeDestroyer = (x, y, direction) => placeShip(x, y, 2, direction, 'destroyer');
-
 	return {
-		placeCarrier,
-		placeBattleship,
-		placeCruiser,
-		placeSubmarine,
-		placeDestroyer,
+		placeShip,
 		placeShipsRandomly,
 	};
 };

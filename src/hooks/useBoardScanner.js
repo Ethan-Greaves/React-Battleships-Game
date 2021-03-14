@@ -1,8 +1,14 @@
 const UseBoardScanner = (board, rows, cols) => {
+	/**
+	 * @returns {object} random cell from the board
+	 */
 	const getRandomCell = () => {
 		return board[Math.floor(Math.random() * rows)][Math.floor(Math.random() * cols)];
-    };
-    
+	};
+
+	/**
+	 * @returns {object} random empty cell from the board
+	 */
 	const getRandomEmptyCell = () => {
 		const randomCell = getRandomCell();
 		if (randomCell.isBattleShip) return getRandomEmptyCell();
@@ -11,8 +17,8 @@ const UseBoardScanner = (board, rows, cols) => {
 
 	/**
 	 * Check to see if cell is in the grid
-	 * @param {number} coord The coordinate to check if cell is in grid    
-	 * @returns {boolean} 
+	 * @param {number} coord The coordinate to check if cell is in grid
+	 * @returns {boolean}
 	 */
 	// TODO This function should be re-factored to check whole cell rather than one coord
 	const isCellInGrid = (coord) => {
