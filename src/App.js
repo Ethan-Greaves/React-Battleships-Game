@@ -1,11 +1,14 @@
 import './App.css';
 import SetupBoard from './components/SetupBoard/SetupBoard';
+import MainMenu from './components/MainMenu/MainMenu';
+import { Switch, Route } from 'react-router-dom';
 
 function App() {
 	return (
-		<div className='App'>
-			<SetupBoard />
-		</div>
+		<Switch>
+			<Route exact path="/" render={() => <MainMenu />} />
+			<Route exact path="/setupBoard" render={() => <SetupBoard />} />
+		</Switch>
 	);
 }
 
