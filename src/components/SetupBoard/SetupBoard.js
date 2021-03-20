@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+//#region IMPORTS
+import React, { useContext, useState } from 'react';
 import { Grid, Typography, Box, Button } from '@material-ui/core';
 import useBoardCreator from '../../hooks/useBoardCreator';
 import useShipPlacementDirection from '../../hooks/useShipPlacementDirection';
@@ -8,18 +9,17 @@ import { Link } from 'react-router-dom';
 import { playerBoardContext } from '../../context/playerBoard.context';
 import PlayerBoardSetup from '../Board/Board';
 import GridCell from '../GridCell/GridCell';
-
+//#endregion
 const SetupBoard = ({ rows, cols }) => {
 	//#region INITIALISATION
 	const [board, setBoard, resetBoard] = useBoardCreator(rows, cols);
 	const [placementDirection, changePlacementDirection] = useShipPlacementDirection('horizontal');
 	const { placeShip, placeShipsRandomly } = UseShipPlacer(board, rows, cols);
-	const [
-		shipPlacementQueue,
-		setShipPlacementQueue,
-		defaultShipPlacementQueue,
-	] = useShipPlacementQueue(placeShip);
+	const [shipPlacementQueue, setShipPlacementQueue, defaultShipPlacementQueue] = useShipPlacementQueue(
+		placeShip
+	);
 	const { dispatch } = useContext(playerBoardContext);
+	const [readyToPlay, setReadyToPlay] = useState(false);
 	//#endregion
 
 	const handlePlaceShip = (coords) => {
@@ -31,15 +31,19 @@ const SetupBoard = ({ rows, cols }) => {
 			setShipPlacementQueue(shipPlacementQueue);
 			setBoard([...board]);
 		}
+
+		if (!shipPlacementQueue.getFirst()) setReadyToPlay(true);
 	};
 
 	const randomiseBoard = () => {
 		handleResetBoard();
 		placeShipsRandomly(defaultShipPlacementQueue, setShipPlacementQueue);
+		setReadyToPlay(true);
 	};
 
 	const handleResetBoard = () => {
 		resetBoard();
+		setReadyToPlay(false);
 		setShipPlacementQueue(defaultShipPlacementQueue);
 	};
 
@@ -49,7 +53,6 @@ const SetupBoard = ({ rows, cols }) => {
 			<Typography variant="caption">Press 'A/D/LeftArrow/RightArrow to place horizontal</Typography>
 			<Box ml={3}></Box>
 			<Typography variant="caption">Press 'W/S/UpArrow/DownArrow to place vertical</Typography>
-
 			<PlayerBoardSetup
 				boardData={board}
 				render={(cell) => {
@@ -63,24 +66,23 @@ const SetupBoard = ({ rows, cols }) => {
 					);
 				}}
 			/>
-
 			<button onClick={randomiseBoard}>Randomise</button>
 			<button onClick={handleResetBoard}>Reset</button>
-			<Link to="/gameSession">
-				<Button
-					color="primary"
-					variant="contained"
-					onClick={() => dispatch({ type: 'SET_PLAYER_BOARD', board })}>
-					Let's play!
-				</Button>
-			</Link>
+			<Button
+				disabled={!readyToPlay}
+				color="primary"
+				variant="contained"
+				onClick={() => dispatch({ type: 'SET_PLAYER_BOARD', board })}>
+				<Link to="/gameSession">Let's play!</Link>
+			</Button>
 		</div>
 	);
 };
 
+//#region DEFAULT PROPS
 SetupBoard.defaultProps = {
 	rows: 10,
 	cols: 10,
 };
-
+//#endregion
 export default SetupBoard;
