@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 
 const MainMenu = () => {
 	const styles = MainMenuStyles();
+
+    const setGameMode = () => { };
+    
 	return (
 		<div className={styles.root}>
 			<Typography variant="h3" align="center">
@@ -14,10 +17,7 @@ const MainMenu = () => {
 			<Grid container spacing={2} justify="center">
 				<Grid item>
 					<Link to="/setupBoard">
-						<Button
-							color="primary"
-							variant="contained"
-							onClick={/*tell the game manager that the game mode is singleplayer */}>
+						<Button color="primary" variant="contained" onClick={setGameMode}>
 							Singleplayer
 						</Button>
 					</Link>

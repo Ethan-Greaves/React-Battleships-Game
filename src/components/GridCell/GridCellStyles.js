@@ -27,8 +27,8 @@ const cell = (isShip, type) => {
 	}
 
 	return {
-		width: '40px',
-		height: '40px',
+		width: '30px',
+		height: '30px',
 		backgroundColor: cellColour,
 		border: '1px solid black',
 

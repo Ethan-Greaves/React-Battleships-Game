@@ -2,13 +2,15 @@ import { Box, Grid } from '@material-ui/core';
 import React from 'react';
 import GridCellStyles from './GridCellStyles';
 
-const GridCell = ({ coords, isBattleShip, placeBattleShip, type }) => {
+const GridCell = ({ coords, isBattleShip, clickFunction, type }) => {
 	const styles = GridCellStyles({
 		isShip: isBattleShip,
 		type,
 	});
+
 	const handleClick = () => {
-		placeBattleShip(coords);
+		if (!null) return clickFunction(coords);
+		return null;
 	};
 
 	return (
