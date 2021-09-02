@@ -8,12 +8,8 @@
 <h4 align="center"><a  href="#">Live Demo</a></h4>
 <hr>
 
-## Overview 📖
-<h2>STILL IN DEVELOPMENT</h2>
-
-## Technologies used 👨‍💻
+<h2 style="text-align: center;">STILL IN DEVELOPMENT</h2>
 
 
-## Visuals 🎬
 
 
