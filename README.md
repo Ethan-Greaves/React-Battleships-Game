@@ -8,7 +8,7 @@
 <h4 align="center"><a  href="#">Live Demo</a></h4>
 <hr>
 
-<h2 style="text-align: center;">STILL IN DEVELOPMENT</h2>
+<h2 align="center">STILL IN DEVELOPMENT</h2>
 
 
 
