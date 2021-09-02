@@ -19,7 +19,7 @@ const SetupBoard = ({ rows, cols }) => {
 		placeShip
 	);
 	const { dispatch } = useContext(playerBoardContext);
-	const [readyToPlay, setReadyToPlay] = useState(false);
+	const [isReadyToPlay, setIsReadyToPlay] = useState(false);
 	//#endregion
 
 	const handlePlaceShip = (coords) => {
@@ -32,18 +32,18 @@ const SetupBoard = ({ rows, cols }) => {
 			setBoard([...board]);
 		}
 
-		if (!shipPlacementQueue.getFirst()) setReadyToPlay(true);
+		if (!shipPlacementQueue.getFirst()) setIsReadyToPlay(true);
 	};
 
 	const randomiseBoard = () => {
 		handleResetBoard();
 		placeShipsRandomly(defaultShipPlacementQueue, setShipPlacementQueue);
-		setReadyToPlay(true);
+		setIsReadyToPlay(true);
 	};
 
 	const handleResetBoard = () => {
 		resetBoard();
-		setReadyToPlay(false);
+		setIsReadyToPlay(false);
 		setShipPlacementQueue(defaultShipPlacementQueue);
 	};
 
@@ -69,7 +69,7 @@ const SetupBoard = ({ rows, cols }) => {
 			<button onClick={randomiseBoard}>Randomise</button>
 			<button onClick={handleResetBoard}>Reset</button>
 			<Button
-				disabled={!readyToPlay}
+				disabled={!isReadyToPlay}
 				color="primary"
 				variant="contained"
 				onClick={() => dispatch({ type: 'SET_PLAYER_BOARD', board })}>
