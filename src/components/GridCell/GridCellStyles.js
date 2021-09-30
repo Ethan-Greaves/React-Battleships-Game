@@ -1,12 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const cell = (isShip, type) => {
+const cell = (isShip, type, isPreviewing, isUnplaceable) => {
 	let cellColour = 'lightgrey';
+	let cellOpacity = 1;
 
 	if (isShip) {
 		switch (type) {
 			case 'carrier':
-				cellColour = 'red';
+				cellColour = 'orange';
 				break;
 			case 'battleship':
 				cellColour = 'lightgreen';
@@ -18,7 +19,7 @@ const cell = (isShip, type) => {
 				cellColour = 'cyan';
 				break;
 			case 'destroyer':
-				cellColour = 'yellow';
+				cellColour = 'rosybrown';
 				break;
 
 			default:
@@ -26,21 +27,33 @@ const cell = (isShip, type) => {
 		}
 	}
 
+	if (!isShip) {
+		if (isPreviewing) {
+			cellColour = 'SkyBlue';
+			cellOpacity = 0.5;
+		} else if (isUnplaceable) {
+			cellOpacity = 0.5;
+			cellColour = 'red';
+		}
+	}
+
 	return {
-		width: '30px',
-		height: '30px',
+		width: '40px',
+		height: '40px',
 		backgroundColor: cellColour,
 		border: '1px solid black',
+		opacity: cellOpacity,
 
 		'&:hover': {
 			backgroundColor: cellColour,
-			opacity: '0.5',
+			opacity: cellOpacity,
 		},
 	};
 };
 
 const useStyles = makeStyles(() => ({
-	cell: (props) => cell(props.isShip, props.type),
+	cell: (props) =>
+		cell(props.isShip, props.type, props.isPreviewing, props.isUnplaceable),
 }));
 
 export default useStyles;

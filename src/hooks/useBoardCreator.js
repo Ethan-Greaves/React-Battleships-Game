@@ -11,7 +11,12 @@ const UseBoardCreator = (rows, cols) => {
 		for (let x = 0; x < cols; x++) {
 			const rowArr = [];
 			for (let y = 0; y < rows; y++) {
-				rowArr.push({ coords: { x, y }, isBattleShip: false, isPreviewing: false });
+				rowArr.push({
+					coords: { x, y },
+					isBattleShip: false,
+					isPreviewing: false,
+					isUnplaceable: false,
+				});
 			}
 			gridArr.push(rowArr);
 		}
@@ -24,11 +29,12 @@ const UseBoardCreator = (rows, cols) => {
 	/**
 	 * Loops through the board and turns any isShip values to false
 	 */
-	// TODO is this necessary? why not re call create empty board then set state 
+	// TODO is this necessary? why not re call create empty board then set state
 	const resetBoard = () => {
 		for (let x = 0; x < cols; x++) {
 			for (let y = 0; y < rows; y++) {
-				if (board[x][y].isBattleShip) board[x][y].isBattleShip = !board[x][y].isBattleShip;
+				if (board[x][y].isBattleShip)
+					board[x][y].isBattleShip = !board[x][y].isBattleShip;
 			}
 		}
 

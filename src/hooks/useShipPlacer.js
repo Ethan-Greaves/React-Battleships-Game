@@ -28,10 +28,10 @@ const UseShipPlacer = (board, rows, cols) => {
 	const placeShip = (coords, amount, direction, type) => {
 		const { x, y } = coords;
 		if (direction === 'vertical') {
-			for (let i = 0; i < amount; i++) if (!isCellInGrid(x - i) || !isCellEmpty(x - i, y)) return false;
+			for (let i = 0; i < amount; i++) if (!isCellInGrid(x - i, y) || !isCellEmpty(x - i, y)) return false;
 			for (let i = 0; i < amount; i++) placeCell(x - i, y, type);
 		} else {
-			for (let i = 0; i < amount; i++) if (!isCellInGrid(y - i) || !isCellEmpty(x, y - i)) return false;
+			for (let i = 0; i < amount; i++) if (!isCellInGrid(x, y - i) || !isCellEmpty(x, y - i)) return false;
 			for (let i = 0; i < amount; i++) placeCell(x, y - i, type);
 		}
 		return true;

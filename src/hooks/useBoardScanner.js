@@ -21,8 +21,8 @@ const UseBoardScanner = (board, rows, cols) => {
 	 * @returns {boolean}
 	 */
 	// TODO This function should be re-factored to check whole cell rather than one coord
-	const isCellInGrid = (coord) => {
-		if (coord < 0 || coord > rows || coord > cols) return false;
+	const isCellInGrid = (x, y) => {
+		if (x < 0 || y < 0 || x > rows || y > cols) return false;
 		return true;
 	};
 
