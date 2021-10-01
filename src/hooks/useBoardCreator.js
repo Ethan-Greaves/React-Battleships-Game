@@ -35,6 +35,8 @@ const UseBoardCreator = (rows, cols) => {
 			for (let y = 0; y < rows; y++) {
 				if (board[x][y].isBattleShip)
 					board[x][y].isBattleShip = !board[x][y].isBattleShip;
+				if (board[x][y].isPreviewing)
+					board[x][y].isPreviewing = !board[x][y].isPreviewing;
 			}
 		}
 

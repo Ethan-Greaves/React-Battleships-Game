@@ -18,7 +18,6 @@ const UseShipPreview = (board, rows, cols) => {
                     //board[x - i][y].isUnplaceable = true; //* Show red preview to show cant be placed
                     return;
                 else {
-                    board[x - i][y].isUnplaceable = false;
                     board[x - i][y].isPreviewing = true;
                 }
             }
@@ -29,7 +28,6 @@ const UseShipPreview = (board, rows, cols) => {
                     //board[x - i][y].isUnplaceable = true; //* Show red preview to show cant be placed
                     return;
                 else {
-                    board[x][y - i].isUnplaceable = false;
                     board[x][y - i].isPreviewing = true;
                 }
             }
