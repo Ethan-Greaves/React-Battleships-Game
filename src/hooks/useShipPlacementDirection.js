@@ -7,6 +7,7 @@ const UseShipPlacementDirection = (startingDirection) => {
 	 * Changes the placement direction of a ship based on what key is pressed
 	 * @param {object} event Represents the event being fired for when a key is pressed down
 	 */
+	//TODO Change this to right click
 	const changePlacementDirection = (event) => {
 		if (event.key === 'w' || event.key === 'ArrowUp') setPlacementDirection('vertical');
 		if (event.key === 's' || event.key === 'ArrowDown') setPlacementDirection('vertical');

@@ -28,11 +28,12 @@ const cell = (isShip, type, isPreviewing, isUnplaceable) => {
 	}
 
 	if (!isShip) {
+		cellOpacity = 0.5;
+
 		if (isPreviewing) {
 			cellColour = 'SkyBlue';
-			cellOpacity = 0.5;
-		} else if (isUnplaceable) {
-			cellOpacity = 0.5;
+		}
+		if (isUnplaceable) {
 			cellColour = 'red';
 		}
 	}

@@ -7,10 +7,6 @@ const UseShipPreview = (board, rows, cols) => {
         const { x, y } = coords;
         const allCellCoords = [];
 		board[x][y].isPreviewing = true;
-        
-        // for (let i = 0; i < ; i++) {
-    
-        // }
 
         if (direction === "vertical") {
             for (let i = 0; i < amount; i++) {

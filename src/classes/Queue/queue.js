@@ -16,6 +16,7 @@ class Queue {
 			this.last.next = newNode;
 			this.last = newNode;
 		}
+		//*if we know the size then we know the ship type
 		this.size++;
 	}
 
@@ -41,6 +42,10 @@ class Queue {
 		this.size--;
 
 		return temp.value;
+	}
+
+	getSize() {
+		return this.size;
 	}
 }
 

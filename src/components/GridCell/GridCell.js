@@ -16,7 +16,7 @@ const GridCell = ({
 		isShip: isBattleShip,
 		type,
 		isPreviewing,
-		isUnplaceable
+		isUnplaceable,
 	});
 
 	const handleClick = () => {

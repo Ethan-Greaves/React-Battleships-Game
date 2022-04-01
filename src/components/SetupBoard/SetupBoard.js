@@ -1,6 +1,6 @@
 //#region IMPORTS
 import React, { useContext, useState } from 'react';
-import { Grid, Typography, Box, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import useBoardCreator from '../../hooks/useBoardCreator';
 import useShipPlacementDirection from '../../hooks/useShipPlacementDirection';
 import useShipPlacementQueue from '../../hooks/useShipPlacementQueue';
@@ -11,6 +11,7 @@ import { playerBoardContext } from '../../context/playerBoard.context';
 import PlayerBoardSetup from '../Board/Board';
 import GridCell from '../GridCell/GridCell';
 import useShipPreviewQueue from '../../hooks/useShipPreviewQueue.jsx';
+import SetupBoardStyles from './SetupBoardStyles';
 //#endregion
 const SetupBoard = ({ rows, cols }) => {
 	//#region INITIALISATION
@@ -23,7 +24,9 @@ const SetupBoard = ({ rows, cols }) => {
 	const { dispatch } = useContext(playerBoardContext);
 	const [isReadyToPlay, setIsReadyToPlay] = useState(false);
 	const { showPreview, removePreview } = useShipPreview(board, rows, cols);
-	const [shipPreviewQueue, setShipPreviewQueue, defaultShipPreviewQueue] = useShipPreviewQueue();
+	const [shipPreviewQueue, setShipPreviewQueue, defaultShipPreviewQueue] =
+		useShipPreviewQueue();
+	const styles = SetupBoardStyles();
 	//#endregion
 
 	const handlePlaceShip = (coords) => {
@@ -58,42 +61,54 @@ const SetupBoard = ({ rows, cols }) => {
 	};
 
 	const handleShipPreview = (coords) => {
-		showPreview(coords, shipPreviewQueue.returnFirstInQueue(), placementDirection);
+		showPreview(
+			coords,
+			shipPreviewQueue.returnFirstInQueue(),
+			placementDirection
+		);
 		setBoard([...board]);
 	};
 
 	const handleRemovePreview = (coords) => {
-		removePreview(coords, shipPreviewQueue.returnFirstInQueue(), placementDirection);
+		removePreview(
+			coords,
+			shipPreviewQueue.returnFirstInQueue(),
+			placementDirection
+		);
 		setBoard([...board]);
 	};
 
+	const shipNames = [
+		'destroyer',
+		'submarine',
+		'cruiser',
+		'battleship',
+		'carrier',
+	];
+
 	return (
 		<div onKeyDown={changePlacementDirection} tabIndex="0">
-			<Typography variant="h4">Place Your Ships...</Typography>
-			<Typography variant="caption">
-				Press 'A/D/LeftArrow/RightArrow to place horizontal
-			</Typography>
-			<Box ml={3}></Box>
-			<Typography variant="caption">
-				Press 'W/S/UpArrow/DownArrow to place vertical
-			</Typography>
-			<PlayerBoardSetup
-				boardData={board}
-				render={(cell) => {
-					return (
-						<GridCell
-							clickFunction={handlePlaceShip}
-							hoverFunction={handleShipPreview}
-							hoverExitFunction={handleRemovePreview}
-							isBattleShip={cell.isBattleShip}
-							isPreviewing={cell.isPreviewing}
-							isUnplaceable={cell.isUnplaceable}
-							coords={cell.coords}
-							type={cell.type}
-						/>
-					);
-				}}
-			/>
+			<h1>Currently placing {shipNames[shipPlacementQueue.getSize() - 1]}</h1>
+			<div className={styles.board}>
+				<PlayerBoardSetup
+					boardData={board}
+					render={(cell) => {
+						return (
+							<GridCell
+								clickFunction={handlePlaceShip}
+								hoverFunction={handleShipPreview}
+								hoverExitFunction={handleRemovePreview}
+								isBattleShip={cell.isBattleShip}
+								isPreviewing={cell.isPreviewing}
+								isUnplaceable={cell.isUnplaceable}
+								coords={cell.coords}
+								type={cell.type}
+							/>
+						);
+					}}
+				/>
+			</div>
+
 			<button onClick={randomiseBoard}>Randomise</button>
 			<button onClick={handleResetBoard}>Reset</button>
 			<Button
