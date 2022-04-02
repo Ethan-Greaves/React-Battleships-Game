@@ -10,7 +10,6 @@ import { Link } from 'react-router-dom';
 import { playerBoardContext } from '../../context/playerBoard.context';
 import PlayerBoardSetup from '../Board/Board';
 import GridCell from '../GridCell/GridCell';
-import useShipPreviewQueue from '../../hooks/useShipPreviewQueue.jsx';
 import SetupBoardStyles from './SetupBoardStyles';
 //#endregion
 const SetupBoard = ({ rows, cols }) => {
@@ -24,8 +23,6 @@ const SetupBoard = ({ rows, cols }) => {
 	const { dispatch } = useContext(playerBoardContext);
 	const [isReadyToPlay, setIsReadyToPlay] = useState(false);
 	const { showPreview, removePreview } = useShipPreview(board, rows, cols);
-	const [shipPreviewQueue, setShipPreviewQueue, defaultShipPreviewQueue] =
-		useShipPreviewQueue();
 	const styles = SetupBoardStyles();
 	//#endregion
 
@@ -39,8 +36,8 @@ const SetupBoard = ({ rows, cols }) => {
 		if (couldBePlaced) {
 			shipPlacementQueue.dequeue();
 			setShipPlacementQueue(shipPlacementQueue);
-			shipPreviewQueue.dequeue();
-			setShipPreviewQueue(shipPreviewQueue);
+			// shipPreviewQueue.dequeue();
+			// setShipPreviewQueue(shipPreviewQueue);
 			setBoard([...board]);
 		}
 
@@ -57,24 +54,22 @@ const SetupBoard = ({ rows, cols }) => {
 		resetBoard();
 		setIsReadyToPlay(false);
 		setShipPlacementQueue(defaultShipPlacementQueue);
-		setShipPreviewQueue(defaultShipPreviewQueue);
+		// setShipPreviewQueue(defaultShipPreviewQueue);
 	};
 
 	const handleShipPreview = (coords) => {
 		showPreview(
 			coords,
-			shipPreviewQueue.returnFirstInQueue(),
+			shipPlacementQueue.getSize() <= 2
+				? shipPlacementQueue.getSize() + 1
+				: shipPlacementQueue.getSize(),
 			placementDirection
 		);
 		setBoard([...board]);
 	};
 
 	const handleRemovePreview = (coords) => {
-		removePreview(
-			coords,
-			shipPreviewQueue.returnFirstInQueue(),
-			placementDirection
-		);
+		removePreview(coords, shipPlacementQueue.getSize(), placementDirection);
 		setBoard([...board]);
 	};
 

@@ -6,7 +6,11 @@ const PlayerBoardProvider = ({ children }) => {
 	const [board, dispatch] = useReducer(playerBoardReducer, {
 		playerBoard: [],
 	});
-	return <playerBoardContext.Provider value={{ board, dispatch }}>{children}</playerBoardContext.Provider>;
+	return (
+		<playerBoardContext.Provider value={{ board, dispatch }}>
+			{children}
+		</playerBoardContext.Provider>
+	);
 };
 
 export { PlayerBoardProvider, playerBoardContext };

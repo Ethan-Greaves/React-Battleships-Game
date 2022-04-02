@@ -7,6 +7,7 @@ import useAudio from '../../hooks/useAudio';
 import YourShip from '../../components/YourShip/YourShip';
 import YourShips from '../../components/YourShips/YourShips';
 import CustomButton from '../../components/CustomButton/CustomButton';
+import TitleCard from '../../components/TitleCard/TitleCard';
 
 const MainMenu = () => {
 	// const [playing, toggle] = useAudio(musicFile, true);
@@ -35,22 +36,20 @@ const MainMenu = () => {
 				justifyContent="center"
 				justify="center"
 				style={{ minHeight: '100vh' }}>
-				<Typography variant="h1" align="center" gutterBottom>
-					BATTLESHIPS
-				</Typography>
+				<TitleCard isHomePage={true} />
 				<Grid item>
 					<Link to="/setupBoard">
 						<CustomButton text="Singleplayer" />
 					</Link>
 				</Grid>
 				<Grid item>
-					<Button
+					{/* <Button
 						color="primary"
 						variant="contained"
 						onMouseOver={() => setMPButtonText('Coming Soon!')}
 						onMouseLeave={() => setMPButtonText('Multiplayer')}>
 						{multiplayerButtonText}
-					</Button>
+					</Button> */}
 					<CustomButton />
 				</Grid>
 				<Grid item>
