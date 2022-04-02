@@ -24,6 +24,10 @@ const SetupBoard = ({ rows, cols }) => {
 	const [isReadyToPlay, setIsReadyToPlay] = useState(false);
 	const { showPreview, removePreview } = useShipPreview(board, rows, cols);
 	const styles = SetupBoardStyles();
+	const [currentHoveredCoordinates, setCurrentHoveredCoordinates] = useState({
+		x: 0,
+		y: 0,
+	});
 	//#endregion
 
 	const handlePlaceShip = (coords) => {
@@ -58,18 +62,14 @@ const SetupBoard = ({ rows, cols }) => {
 	};
 
 	const handleShipPreview = (coords) => {
-		showPreview(
-			coords,
-			shipPlacementQueue.getSize() <= 2
-				? shipPlacementQueue.getSize() + 1
-				: shipPlacementQueue.getSize(),
-			placementDirection
-		);
+		console.log(coords);
+		setCurrentHoveredCoordinates(coords);
+		showPreview(coords, fixShipSize(), placementDirection);
 		setBoard([...board]);
 	};
 
 	const handleRemovePreview = (coords) => {
-		removePreview(coords, shipPlacementQueue.getSize(), placementDirection);
+		removePreview(coords, fixShipSize(), placementDirection);
 		setBoard([...board]);
 	};
 
@@ -81,8 +81,23 @@ const SetupBoard = ({ rows, cols }) => {
 		'carrier',
 	];
 
+	/**
+	 * Turns size from "5,4,3,2,1" to "5,4,3,3,2", so it aligns with the length of every battleship
+	 * @returns int Ship placement queue size
+	 */
+	const fixShipSize = () => {
+		return shipPlacementQueue.getSize() <= 2
+			? shipPlacementQueue.getSize() + 1
+			: shipPlacementQueue.getSize();
+	};
+
 	return (
-		<div onKeyDown={changePlacementDirection} tabIndex="0">
+		<div
+			onKeyDown={(e) => {
+				handleRemovePreview(currentHoveredCoordinates);
+				changePlacementDirection(e);
+			}}
+			tabIndex="0">
 			<h1>Currently placing {shipNames[shipPlacementQueue.getSize() - 1]}</h1>
 			<div className={styles.board}>
 				<PlayerBoardSetup
