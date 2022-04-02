@@ -8,25 +8,13 @@ const BoardSetup = () => {
 	return (
 		<div>
 			<Typography variant="h4">Place Your Ships...</Typography>
-			<Typography variant="caption">
-				Press 'A/D/LeftArrow/RightArrow to place horizontal
-			</Typography>
+			<Typography variant="caption">Press 'A/D/LeftArrow/RightArrow to place horizontal</Typography>
 			<Box ml={3}></Box>
-			<Typography variant="caption">
-				Press 'W/S/UpArrow/DownArrow to place vertical
-			</Typography>
+			<Typography variant="caption">Press 'W/S/UpArrow/DownArrow to place vertical</Typography>
 
 			<Grid container>
 				<Grid item>
-					<YourShips
-						ships={[
-							{ name: 'Carrier', size: 5, isBeingPlaced: true },
-							{ name: 'Battleship', size: 4, isBeingPlaced: false },
-							{ name: 'Cruiser', size: 3, isBeingPlaced: false },
-							{ name: 'Submarine', size: 3, isBeingPlaced: false },
-							{ name: 'Destroyer', size: 2, isBeingPlaced: false },
-						]}
-					/>
+					<YourShips />
 				</Grid>
 				<Grid item>
 					<SetupBoard />

@@ -11,17 +11,16 @@ import { playerBoardContext } from '../../context/playerBoard.context';
 import PlayerBoardSetup from '../Board/Board';
 import GridCell from '../GridCell/GridCell';
 import SetupBoardStyles from './SetupBoardStyles';
+import useEventBus from '../../hooks/useEventBus';
 //#endregion
 const SetupBoard = ({ rows, cols }) => {
 	//#region INITIALISATION
 	const [board, setBoard, resetBoard] = useBoardCreator(rows, cols);
-	const [placementDirection, changePlacementDirection] =
-		useShipPlacementDirection('horizontal');
+	const [placementDirection, changePlacementDirection] = useShipPlacementDirection('horizontal');
 	const { placeShip, placeShipsRandomly } = UseShipPlacer(board, rows, cols);
-	const [shipPlacementQueue, setShipPlacementQueue, defaultShipPlacementQueue] =
-		useShipPlacementQueue(placeShip);
-	const { dispatch } = useContext(playerBoardContext);
-	const [isReadyToPlay, setIsReadyToPlay] = useState(false);
+	const [shipPlacementQueue, setShipPlacementQueue, defaultShipPlacementQueue] = useShipPlacementQueue(placeShip);
+	// const { dispatch } = useContext(playerBoardContext);
+	// const [isReadyToPlay, setIsReadyToPlay] = useState(false);
 	const { showPreview, removePreview } = useShipPreview(board, rows, cols);
 	const styles = SetupBoardStyles();
 	const [currentHoveredCoordinates, setCurrentHoveredCoordinates] = useState({
@@ -32,33 +31,29 @@ const SetupBoard = ({ rows, cols }) => {
 
 	const handlePlaceShip = (coords) => {
 		//* execute function and save return value
-		const couldBePlaced = shipPlacementQueue.returnFirstInQueue()(
-			coords,
-			placementDirection
-		);
+		const couldBePlaced = shipPlacementQueue.returnFirstInQueue()(coords, placementDirection);
 
 		if (couldBePlaced) {
 			shipPlacementQueue.dequeue();
 			setShipPlacementQueue(shipPlacementQueue);
-			// shipPreviewQueue.dequeue();
-			// setShipPreviewQueue(shipPreviewQueue);
+			useEventBus.dispatch('shipPlaced', { message: 'ship has been placed' });
 			setBoard([...board]);
 		}
-
-		if (!shipPlacementQueue.getFirst()) setIsReadyToPlay(true);
 	};
 
 	const randomiseBoard = () => {
 		handleResetBoard();
 		placeShipsRandomly(defaultShipPlacementQueue, setShipPlacementQueue);
-		setIsReadyToPlay(true);
+		useEventBus.dispatch('boardRandomized', { message: 'board has been randomized' });
+
+		// setIsReadyToPlay(true);
 	};
 
 	const handleResetBoard = () => {
 		resetBoard();
-		setIsReadyToPlay(false);
+		// setIsReadyToPlay(false);
 		setShipPlacementQueue(defaultShipPlacementQueue);
-		// setShipPreviewQueue(defaultShipPreviewQueue);
+		useEventBus.dispatch('boardReset', { message: 'board has been reset' });
 	};
 
 	const handleShipPreview = (coords) => {
@@ -73,22 +68,14 @@ const SetupBoard = ({ rows, cols }) => {
 		setBoard([...board]);
 	};
 
-	const shipNames = [
-		'destroyer',
-		'submarine',
-		'cruiser',
-		'battleship',
-		'carrier',
-	];
+	const shipNames = ['destroyer', 'submarine', 'cruiser', 'battleship', 'carrier'];
 
 	/**
 	 * Turns size from "5,4,3,2,1" to "5,4,3,3,2", so it aligns with the length of every battleship
 	 * @returns int Ship placement queue size
 	 */
 	const fixShipSize = () => {
-		return shipPlacementQueue.getSize() <= 2
-			? shipPlacementQueue.getSize() + 1
-			: shipPlacementQueue.getSize();
+		return shipPlacementQueue.getSize() <= 2 ? shipPlacementQueue.getSize() + 1 : shipPlacementQueue.getSize();
 	};
 
 	return (
@@ -121,13 +108,13 @@ const SetupBoard = ({ rows, cols }) => {
 
 			<button onClick={randomiseBoard}>Randomise</button>
 			<button onClick={handleResetBoard}>Reset</button>
-			<Button
+			{/* <Button
 				disabled={!isReadyToPlay}
 				color="primary"
 				variant="contained"
 				onClick={() => dispatch({ type: 'SET_PLAYER_BOARD', board })}>
 				<Link to="/gameSession">Let's play!</Link>
-			</Button>
+			</Button> */}
 		</div>
 	);
 };
