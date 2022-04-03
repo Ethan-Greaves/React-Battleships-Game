@@ -53,7 +53,9 @@ const MainMenu = () => {
 					<CustomButton />
 				</Grid>
 				<Grid item>
-					<CustomButton text="Rules" />
+					<Link to="/rules">
+						<CustomButton text="Rules" />
+					</Link>
 				</Grid>
 				<Grid item>
 					<CustomButton text="Settings" />

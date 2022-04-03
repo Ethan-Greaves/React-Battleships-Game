@@ -21,6 +21,7 @@ const btn = (isBeingPlaced) => {
 		justifyContent: 'flex-start',
 		border: '2px solid yellow',
 		borderRadius: '0',
+		height: '50px',
 	};
 };
 
