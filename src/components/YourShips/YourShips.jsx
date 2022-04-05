@@ -1,17 +1,19 @@
 import YourShip from '../YourShip/YourShip';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import useEventBus from '../../hooks/useEventBus';
-import { Typography } from '@material-ui/core';
+import { Typography, Button } from '@material-ui/core';
+import YourShipStyles from './YourShipsStyles';
 
 
 const YourShips = () => {
-    const shipArr = [
+    const styles = YourShipStyles();
+    const shipArr = useMemo(() => [
         { name: 'Carrier', size: 5, isBeingPlaced: true },
         { name: 'Battleship', size: 4, isBeingPlaced: false },
         { name: 'Cruiser', size: 3, isBeingPlaced: false },
         { name: 'Submarine', size: 3, isBeingPlaced: false },
         { name: 'Destroyer', size: 2, isBeingPlaced: false },
-    ];
+    ], []);
     const [newShips, setNewShips] = useState(shipArr);
     const [allShipsPlaced, setAllShipsPlaced] = useState(false);
 
@@ -55,7 +57,11 @@ const YourShips = () => {
                 return (
                     <YourShip name={ship.name} size={ship.size} isBeingPlaced={ship.isBeingPlaced}/>
                 );
-            }) : <Typography variant="h6">Ships are in formation</Typography>}
+            }) :
+                <div>
+                    <Typography variant="h6">Ships are in formation</Typography>
+                    <Button variant="contained" className={styles.startGame}align="center">Start Game</Button>
+                </div>}
             
         </div>
     );

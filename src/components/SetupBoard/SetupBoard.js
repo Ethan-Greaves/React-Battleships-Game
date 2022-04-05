@@ -12,15 +12,17 @@ import SetupBoardStyles from './SetupBoardStyles';
 import useEventBus from '../../hooks/useEventBus';
 import useAudio from '../../hooks/useAudio';
 import retroChimeSfx from '../../assets/sfx/RetroChime.wav';
+import { settingsContext } from '../../context/settings.context';
 
 //#endregion
-const SetupBoard = ({ rows, cols }) => {
+const SetupBoard = () => {
 	//#region INITIALISATION
-	const [board, setBoard, resetBoard] = useBoardCreator(rows, cols);
+	const { boardSize } = useContext(settingsContext);
+	const [board, setBoard, resetBoard] = useBoardCreator(boardSize.rows, boardSize.cols);
 	const [placementDirection, changePlacementDirection] = useShipPlacementDirection('horizontal');
-	const { placeShip, placeShipsRandomly } = UseShipPlacer(board, rows, cols);
+	const { placeShip, placeShipsRandomly } = UseShipPlacer(board, boardSize.rows, boardSize.cols);
 	const [shipPlacementQueue, setShipPlacementQueue, defaultShipPlacementQueue] = useShipPlacementQueue(placeShip);
-	const { showPreview, removePreview } = useShipPreview(board, rows, cols);
+	const { showPreview, removePreview } = useShipPreview(board, boardSize.rows, boardSize.cols);
 	const styles = SetupBoardStyles();
 	const [currentHoveredCoordinates, setCurrentHoveredCoordinates] = useState({
 		x: 0,
@@ -109,10 +111,5 @@ const SetupBoard = ({ rows, cols }) => {
 	);
 };
 
-//#region DEFAULT PROPS
-SetupBoard.defaultProps = {
-	rows: 10,
-	cols: 10,
-};
 //#endregion
 export default SetupBoard;

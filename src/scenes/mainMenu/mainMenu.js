@@ -50,7 +50,7 @@ const MainMenu = () => {
 						onMouseLeave={() => setMPButtonText('Multiplayer')}>
 						{multiplayerButtonText}
 					</Button> */}
-					<CustomButton />
+					<CustomButton text="Multiplayer" />
 				</Grid>
 				<Grid item>
 					<Link to="/rules">
@@ -58,10 +58,12 @@ const MainMenu = () => {
 					</Link>
 				</Grid>
 				<Grid item>
-					<CustomButton text="Settings" />
+					<Link to="/settings">
+						<CustomButton text="Settings" />
+					</Link>
 				</Grid>
 				<Grid item>
-					<CustomButton text="custom button" />
+					<CustomButton text="Quit" />
 				</Grid>
 			</Grid>
 		</div>

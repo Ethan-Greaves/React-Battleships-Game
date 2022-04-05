@@ -4,10 +4,7 @@ import React from 'react';
 const TitleCard = ({ isHomePage }) => {
 	return (
 		<div>
-			<Typography
-				variant={isHomePage ? 'h1' : 'h2'}
-				align="center"
-				style={{ fontWeight: 'bold' }}>
+			<Typography variant={isHomePage ? 'h1' : 'h2'} align="center" style={{ fontWeight: 'bold' }}>
 				BATTLESHIPS
 			</Typography>
 			<Typography
@@ -24,6 +21,10 @@ const TitleCard = ({ isHomePage }) => {
 			</Typography>
 		</div>
 	);
+};
+
+TitleCard.defaultProps = {
+	isHomePage: false,
 };
 
 export default TitleCard;
