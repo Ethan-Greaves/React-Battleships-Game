@@ -16,6 +16,8 @@ const UseBoardCreator = (rows, cols) => {
 					isBattleShip: false,
 					isPreviewing: false,
 					isUnplaceable: false,
+					isHit: false,
+					isDestroyed: false,
 				});
 			}
 			gridArr.push(rowArr);
@@ -33,10 +35,8 @@ const UseBoardCreator = (rows, cols) => {
 	const resetBoard = () => {
 		for (let x = 0; x < cols; x++) {
 			for (let y = 0; y < rows; y++) {
-				if (board[x][y].isBattleShip)
-					board[x][y].isBattleShip = !board[x][y].isBattleShip;
-				if (board[x][y].isPreviewing)
-					board[x][y].isPreviewing = !board[x][y].isPreviewing;
+				if (board[x][y].isBattleShip) board[x][y].isBattleShip = !board[x][y].isBattleShip;
+				if (board[x][y].isPreviewing) board[x][y].isPreviewing = !board[x][y].isPreviewing;
 			}
 		}
 

@@ -7,20 +7,24 @@ const GridCell = ({
 	isBattleShip,
 	isPreviewing,
 	isUnplaceable,
+	isHit,
 	clickFunction,
 	hoverFunction,
 	hoverExitFunction,
+	computerBoardCell,
 	type,
 }) => {
 	const styles = GridCellStyles({
-		isShip: isBattleShip,
+		isBattleShip,
 		type,
 		isPreviewing,
 		isUnplaceable,
+		isHit,
+		computerBoardCell,
 	});
 
 	const handleClick = () => {
-		if (!null) return clickFunction(coords);
+		if (!null) return clickFunction(coords, isBattleShip, type);
 		return null;
 	};
 

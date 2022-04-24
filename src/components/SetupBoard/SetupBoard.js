@@ -98,6 +98,7 @@ const SetupBoard = () => {
 								isPreviewing={cell.isPreviewing}
 								isUnplaceable={cell.isUnplaceable}
 								coords={cell.coords}
+								computerBoardCell={false}
 								type={cell.type}
 							/>
 						);

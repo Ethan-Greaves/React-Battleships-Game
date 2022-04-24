@@ -1,10 +1,18 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const cell = (isShip, type, isPreviewing, isUnplaceable) => {
+const cell = (isBattleShip, type, isPreviewing, isUnplaceable, isHit, computerBoardCell) => {
 	let cellColour = 'lightgrey';
 	let cellOpacity = 1;
+	let border = '1px solid black';
 
-	if (isShip) {
+	if (isHit && isBattleShip) {
+		border = '1px solid red';
+		cellColour = 'red';
+	} else if (isHit && !isBattleShip) {
+		cellColour = 'grey';
+	}
+
+	if (isBattleShip && !isHit && !computerBoardCell) {
 		switch (type) {
 			case 'carrier':
 				cellColour = 'orange';
@@ -27,8 +35,8 @@ const cell = (isShip, type, isPreviewing, isUnplaceable) => {
 		}
 	}
 
-	if (!isShip) {
-		cellOpacity = 0.5;
+	if (!isBattleShip) {
+		// cellOpacity = 0.5;
 
 		if (isPreviewing) {
 			cellColour = 'SkyBlue';
@@ -42,7 +50,7 @@ const cell = (isShip, type, isPreviewing, isUnplaceable) => {
 		width: '40px',
 		height: '40px',
 		backgroundColor: cellColour,
-		border: '1px solid black',
+		border: border,
 		opacity: cellOpacity,
 
 		'&:hover': {
@@ -54,7 +62,7 @@ const cell = (isShip, type, isPreviewing, isUnplaceable) => {
 
 const useStyles = makeStyles(() => ({
 	cell: (props) =>
-		cell(props.isShip, props.type, props.isPreviewing, props.isUnplaceable),
+		cell(props.isBattleShip, props.type, props.isPreviewing, props.isUnplaceable, props.isHit, props.computerBoardCell),
 }));
 
 export default useStyles;
