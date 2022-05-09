@@ -2,15 +2,15 @@ import BoardSetup from './scenes/boardSetup/boardSetup';
 import MainMenu from './scenes/mainMenu/mainMenu';
 import Rules from './scenes/rules/rules';
 import Settings from './scenes/settings/settings';
-import GameSession from './components/GameSession/GameSession';
+import GameSession from './scenes/gameSession/gameSession';
 import { Switch, Route } from 'react-router-dom';
-import { PlayerBoardProvider } from './context/playerBoard.context';
+// import { PlayerBoardProvider } from './context/playerBoard.context';
 import { SettingsProvider } from './context/settings.context';
 
 function App() {
 	return (
 		<div className="App">
-			<PlayerBoardProvider>
+			{/* <PlayerBoardProvider> */}
 				<SettingsProvider>
 					<Switch>
 						<Route exact path="/" render={() => <MainMenu />} />
@@ -20,7 +20,7 @@ function App() {
 						<Route exact path="/settings" render={() => <Settings />} />
 					</Switch>
 				</SettingsProvider>
-			</PlayerBoardProvider>
+			{/* </PlayerBoardProvider> */}
 		</div>
 	);
 }

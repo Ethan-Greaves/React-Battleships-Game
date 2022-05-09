@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import useEventBus from '../../hooks/useEventBus';
 import { Typography, Button } from '@material-ui/core';
 import YourShipStyles from './YourShipsStyles';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 const YourShips = () => {
@@ -60,7 +61,9 @@ const YourShips = () => {
             }) :
                 <div>
                     <Typography variant="h6">Ships are in formation</Typography>
-                    <Button variant="contained" className={styles.startGame}align="center">Start Game</Button>
+                    <Link to="/gameSession">
+                        <Button variant="contained" className={styles.startGame}align="center">Start Game</Button>
+                    </Link>
                 </div>}
             
         </div>

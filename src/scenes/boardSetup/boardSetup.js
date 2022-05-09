@@ -23,7 +23,7 @@ const BoardSetup = () => {
 					<SetupBoard />
 				</Grid>
 				<Grid item>
-					<ComputerBoard />
+					{/* <ComputerBoard /> */}
 				</Grid>
 			</Grid>
 			{/* //TODO put this component in setupBoard file, make the ships arr part of state, shift array whenever ship is placed and dequeued */}
