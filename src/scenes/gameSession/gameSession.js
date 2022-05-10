@@ -7,7 +7,8 @@ import PlayerBoard from '../../components/PlayerBoard/PlayerBoard';
 
 const GameSession = () => {
 	const [dialogueText, setDialogueText] = useState('Get Ready To Play!');
-	const { gameState, setPlayerTurnState, setEnemyTurnState } = UseBattleSystem(setDialogueText);
+	const { gameState, setPlayerTurnState, setEnemyTurnState, setLostState, setWonState } =
+		UseBattleSystem(setDialogueText);
 	const location = useLocation();
 	const fromUseShips = location.state;
 	useEffect(() => {
@@ -25,10 +26,11 @@ const GameSession = () => {
 						gameState={gameState.state}
 						setPlayerTurnState={setPlayerTurnState}
 						boardData={fromUseShips.board}
+						setLostState={setLostState}
 					/>
 				</Grid>
 				<Grid item>
-					<ComputerBoard gameState={gameState.state} setEnemyTurnState={setEnemyTurnState} />
+					<ComputerBoard gameState={gameState.state} setEnemyTurnState={setEnemyTurnState} setWonState={setWonState} />
 				</Grid>
 			</Grid>
 		</div>

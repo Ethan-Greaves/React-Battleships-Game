@@ -8,10 +8,10 @@ import UseUnit from '../../hooks/useUnit';
 import PlayerBoardStyles from './PlayerBoardStyles';
 import { Typography } from '@material-ui/core';
 
-const PlayerBoard = ({ gameState, setPlayerTurnState, boardData }) => {
+const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState }) => {
 	const [board, setBoard, resetBoard] = useBoardCreator(boardData.length, boardData.length);
 	const { getRandomNonHitCell } = UseBoardScanner(boardData, boardData.length, boardData.length);
-	const { registerHitTaken, isShipDestroyed } = UseUnit('Player', board);
+	const { registerHitTaken, isShipDestroyed, isAllShipsDestroyed } = UseUnit('Player', board);
 	const styles = PlayerBoardStyles();
 
 	/**UseEffect can ben seen almost as a start and update function, akin to Unity.
@@ -19,6 +19,7 @@ const PlayerBoard = ({ gameState, setPlayerTurnState, boardData }) => {
 	 * whenever states changes */
 	useEffect(() => {
 		setBoard(boardData);
+		if (isAllShipsDestroyed()) setLostState();
 		takeHit();
 	}, [setPlayerTurnState]);
 
@@ -32,9 +33,8 @@ const PlayerBoard = ({ gameState, setPlayerTurnState, boardData }) => {
 			newBoard[coords.x][coords.y].isHit = true;
 			setBoard([...newBoard]);
 			registerHitTaken(coords.x, coords.y);
-			// console.log(`Player Board: is Destroyer destroyed? ${isShipDestroyed('destroyer')}`);
 			setPlayerTurnState();
-		}, parseInt(`500`));
+		}, parseInt(`100`));
 	};
 
 	return (

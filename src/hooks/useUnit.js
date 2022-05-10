@@ -4,38 +4,38 @@ import React, { useState } from 'react';
  * contains data regarding hits taken and if any/all ships are destroyed
  */
 const UseUnit = (name, boardData) => {
-    const [destroyerData, setDestroyerData] = useState({
-        name: "destroyer",
+	const [destroyerData, setDestroyerData] = useState({
+		name: 'destroyer',
 		hitCount: 0,
 		maxHitCount: 2,
 		isDestroyed: false,
 	});
-    const [submarineData, setSubmarineData] = useState({
-        name: "submarine",
+	const [submarineData, setSubmarineData] = useState({
+		name: 'submarine',
 		hitCount: 0,
 		maxHitCount: 3,
 		isDestroyed: false,
 	});
-    const [cruiserData, setCruiserData] = useState({
-        name: "cruiser",
+	const [cruiserData, setCruiserData] = useState({
+		name: 'cruiser',
 		hitCount: 0,
 		maxHitCount: 3,
 		isDestroyed: false,
 	});
-    const [battleshipData, setBattleshipData] = useState({
-        name: "battleship",
+	const [battleshipData, setBattleshipData] = useState({
+		name: 'battleship',
 		hitCount: 0,
 		maxHitCount: 4,
 		isDestroyed: false,
 	});
-    const [carrierData, setCarrierData] = useState({
-        name: "carrier",
+	const [carrierData, setCarrierData] = useState({
+		name: 'carrier',
 		hitCount: 0,
 		maxHitCount: 5,
 		isDestroyed: false,
-    });
-    
-    const shipsData = [destroyerData, submarineData, cruiserData, battleshipData, carrierData];
+	});
+
+	const shipsData = [destroyerData, submarineData, cruiserData, battleshipData, carrierData];
 
 	const registerHitTaken = (x, y) => {
 		if (!boardData[x][y].isBattleShip) return;
@@ -74,15 +74,22 @@ const UseUnit = (name, boardData) => {
 			default:
 				break;
 		}
-    };
-    
-    const isShipDestroyed = (type) => {
-        for (let i = 0; i < shipsData.length; i++) {
-            if (shipsData[i].name === type && shipsData[i].hitCount === shipsData[i].maxHitCount) return true;
-        }
-        return false;
-    }
+	};
 
-	return { registerHitTaken, isShipDestroyed };
+	const isShipDestroyed = (type) => {
+		for (let i = 0; i < shipsData.length; i++) {
+			if (shipsData[i].name === type && shipsData[i].hitCount === shipsData[i].maxHitCount) return true;
+		}
+		return false;
+	};
+
+	const isAllShipsDestroyed = () => {
+		for (let i = 0; i < shipsData.length; i++) {
+			if (shipsData[i].hitCount !== shipsData[i].maxHitCount) return false;
+		}
+		return true;
+	};
+
+	return { registerHitTaken, isShipDestroyed, isAllShipsDestroyed };
 };
 export default UseUnit;
