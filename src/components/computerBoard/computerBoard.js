@@ -13,8 +13,6 @@ const ComputerBoard = ({ gameState, setEnemyTurnState }) => {
 	const { placeShip, placeShipsRandomly } = UseShipPlacer(board, boardSize.rows, boardSize.cols);
 	const [shipPlacementQueue, setShipPlacementQueue, defaultShipPlacementQueue] = useShipPlacementQueue(placeShip);
 	const [addHitToShip, checkToDestroy] = UseShipDestroyer(board);
-	console.log(setEnemyTurnState);
-	// setEnemyTurnState();
 
 	useEffect(() => {
 		randomiseBoard();

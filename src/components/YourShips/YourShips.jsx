@@ -17,6 +17,7 @@ const YourShips = () => {
     ], []);
     const [newShips, setNewShips] = useState(shipArr);
     const [allShipsPlaced, setAllShipsPlaced] = useState(false);
+    const [board, setBoard] = useState([]);
 
     const removeShip = useCallback(() => {
         const updatedShips = newShips.slice(1);
@@ -36,10 +37,15 @@ const YourShips = () => {
     useEffect(() => {
         useEventBus.on(`shipPlaced`, (data) => {
             removeShip();
+            setBoard(data.board);
         });
             
         useEventBus.on(`boardRandomized`, (data) => {
             removeAllShips();
+        });
+
+        useEventBus.on(`boardUpdated`, (data) => {
+            setBoard(data.board);
         });
             
         useEventBus.on(`boardReset`, (data) => {
@@ -49,7 +55,6 @@ const YourShips = () => {
         });
     
     }, [removeAllShips, removeShip, shipArr]);
-
     
     return (
         <div>
@@ -61,7 +66,10 @@ const YourShips = () => {
             }) :
                 <div>
                     <Typography variant="h6">Ships are in formation</Typography>
-                    <Link to="/gameSession">
+                    <Link to={{
+                        pathname: "/gameSession",
+                        state: { board },
+                    }}>
                         <Button variant="contained" className={styles.startGame}align="center">Start Game</Button>
                     </Link>
                 </div>}

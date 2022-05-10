@@ -1,5 +1,5 @@
 //#region IMPORTS
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Button } from '@material-ui/core';
 import useBoardCreator from '../../hooks/useBoardCreator';
 import useShipPlacementDirection from '../../hooks/useShipPlacementDirection';
@@ -32,6 +32,10 @@ const SetupBoard = () => {
 
 	//#endregion
 
+	useEffect(() => {
+		useEventBus.dispatch('boardUpdated', { board });
+	}, [board]);
+
 	const handlePlaceShip = (coords) => {
 		//* execute function and save return value
 		const couldBePlaced = shipPlacementQueue.returnFirstInQueue()(coords, placementDirection);
@@ -40,7 +44,7 @@ const SetupBoard = () => {
 			shipPlacementQueue.dequeue();
 			toggleRetroChime();
 			setShipPlacementQueue(shipPlacementQueue);
-			useEventBus.dispatch('shipPlaced', { message: 'ship has been placed' });
+			useEventBus.dispatch('shipPlaced', { message: 'ship has been placed', board });
 			setBoard([...board]);
 		}
 	};
