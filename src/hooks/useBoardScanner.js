@@ -7,11 +7,20 @@ const UseBoardScanner = (board, rows, cols) => {
 	};
 
 	/**
-	 * @returns {object} random empty cell from the board
+	 * @returns {object} random empty (non-battleship) cell from the board 
 	 */
 	const getRandomEmptyCell = () => {
 		const randomCell = getRandomCell();
 		if (randomCell.isBattleShip) return getRandomEmptyCell();
+		return randomCell;
+	};
+
+	/**
+	 * @returns {object} random empty (non-hit) cell from the board 
+	 */
+	 const getRandomNonHitCell = () => {
+		const randomCell = getRandomCell();
+		if (randomCell.isHit) return getRandomNonHitCell();
 		return randomCell;
 	};
 
@@ -37,7 +46,7 @@ const UseBoardScanner = (board, rows, cols) => {
 		return true;
 	};
 
-	return { getRandomEmptyCell, isCellInGrid, isCellEmpty };
+	return { getRandomEmptyCell, isCellInGrid, isCellEmpty, getRandomNonHitCell };
 };
 
 export default UseBoardScanner;

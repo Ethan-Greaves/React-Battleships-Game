@@ -1,43 +1,29 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const cell = (isBattleShip, type, isPreviewing, isUnplaceable, isHit, computerBoardCell) => {
+const cell = (isBattleShip, type, isPreviewing, isUnplaceable, isHit, computerBoardCell, isShipDestroyed) => {
 	let cellColour = 'lightgrey';
 	let cellOpacity = 1;
 	let border = '1px solid black';
+	let cellAnimation = 'shake 50ms 6 alternate backwards';
+	const shipNames = ['destroyer', 'submarine', 'cruiser', 'battleship', 'carrier'];
 
 	if (isHit && isBattleShip) {
-		border = '1px solid red';
+		// border = '1px solid red';
 		cellColour = 'red';
+		for (let i = 0; i < shipNames.length; i++) {
+			if (isShipDestroyed(shipNames[i]) && type === shipNames[i]) {
+				cellColour = '#212529';
+				cellAnimation = 'shake 50ms 6 alternate backwards';
+			}
+		}
 	} else if (isHit && !isBattleShip) {
 		cellColour = 'grey';
 	}
-
 	if (isBattleShip && !isHit && !computerBoardCell) {
-		switch (type) {
-			case 'carrier':
-				cellColour = 'orange';
-				break;
-			case 'battleship':
-				cellColour = 'lightgreen';
-				break;
-			case 'cruiser':
-				cellColour = 'hotpink';
-				break;
-			case 'submarine':
-				cellColour = 'cyan';
-				break;
-			case 'destroyer':
-				cellColour = 'rosybrown';
-				break;
-
-			default:
-				break;
-		}
+		cellColour = '#364fc7';
 	}
 
 	if (!isBattleShip) {
-		// cellOpacity = 0.5;
-
 		if (isPreviewing) {
 			cellColour = 'SkyBlue';
 		}
@@ -46,12 +32,14 @@ const cell = (isBattleShip, type, isPreviewing, isUnplaceable, isHit, computerBo
 		}
 	}
 
+
 	return {
 		width: '40px',
 		height: '40px',
 		backgroundColor: cellColour,
 		border: border,
 		opacity: cellOpacity,
+		Animation: cellAnimation,
 
 		'&:hover': {
 			backgroundColor: cellColour,
@@ -61,8 +49,26 @@ const cell = (isBattleShip, type, isPreviewing, isUnplaceable, isHit, computerBo
 };
 
 const useStyles = makeStyles(() => ({
+	'@keyframes shake': {
+		from: {
+			transform: 'translate(30%, 17%)',
+		},
+
+		to: {
+			transform: 'translate(-30%, -17%)',
+		},
+	},
+
 	cell: (props) =>
-		cell(props.isBattleShip, props.type, props.isPreviewing, props.isUnplaceable, props.isHit, props.computerBoardCell),
+		cell(
+			props.isBattleShip,
+			props.type,
+			props.isPreviewing,
+			props.isUnplaceable,
+			props.isHit,
+			props.computerBoardCell,
+			props.isShipDestroyed
+		),
 }));
 
 export default useStyles;

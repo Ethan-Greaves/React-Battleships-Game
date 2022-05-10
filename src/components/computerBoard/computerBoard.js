@@ -6,6 +6,7 @@ import useShipPlacementQueue from '../../hooks/useShipPlacementQueue';
 import ComputerBoardSetup from '../Board/Board';
 import GridCell from '../GridCell/GridCell';
 import UseShipDestroyer from '../../hooks/useShipDestroyer';
+import { Typography } from '@material-ui/core';
 
 const ComputerBoard = ({ gameState, setEnemyTurnState }) => {
 	const { boardSize } = useContext(settingsContext);
@@ -29,18 +30,20 @@ const ComputerBoard = ({ gameState, setEnemyTurnState }) => {
 	};
 
 	const handleClick = (coords, isBattleShip, type) => {
-		if (gameState !== 'playerTurn') return;
+		if (gameState !== 'playerTurn' || board[coords.x][coords.y].isHit === true) return;
 		const { x, y } = coords;
 		const newBoard = [...board];
 		newBoard[x][y].isHit = true;
 		setBoard(newBoard);
 		addHitToShip(type);
-		console.log(type);
 		setEnemyTurnState();
 	};
 
 	return (
 		<div>
+			<Typography variant="h4" align="center">
+				Computer
+			</Typography>
 			<ComputerBoardSetup
 				boardData={board}
 				render={(cell) => {
@@ -60,6 +63,9 @@ const ComputerBoard = ({ gameState, setEnemyTurnState }) => {
 							coords={cell.coords}
 							computerBoardCell={true}
 							type={cell.type}
+							isShipDestroyed={() => {
+								return;
+							}}
 						/>
 					);
 				}}

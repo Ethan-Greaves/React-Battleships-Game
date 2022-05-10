@@ -18,6 +18,7 @@ const UseBoardCreator = (rows, cols) => {
 					isUnplaceable: false,
 					isHit: false,
 					isDestroyed: false,
+					type: '',
 				});
 			}
 			gridArr.push(rowArr);

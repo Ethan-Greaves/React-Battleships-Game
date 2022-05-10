@@ -13,6 +13,7 @@ const GridCell = ({
 	hoverExitFunction,
 	computerBoardCell,
 	type,
+	isShipDestroyed,
 }) => {
 	const styles = GridCellStyles({
 		isBattleShip,
@@ -21,6 +22,7 @@ const GridCell = ({
 		isUnplaceable,
 		isHit,
 		computerBoardCell,
+		isShipDestroyed,
 	});
 
 	const handleClick = () => {
@@ -38,26 +40,26 @@ const GridCell = ({
 
 	return (
 		<>
-			{coords.x === 0 && <p>{String.fromCharCode(65 + coords.y)}</p>}
-			{coords.y === 0 ? (
-				<>
-					<Grid container>
-						<p style={{ margin: 0 }}>{coords.x}</p>
-						<Box ml={2}></Box>
-						<div
-							onClick={handleClick}
-							onMouseOver={handleHover}
-							onMouseLeave={handleHoverExit}
-							className={styles.cell}></div>
-					</Grid>
-				</>
-			) : (
-				<div
+			{/* {coords.x === 0 && <p>{String.fromCharCode(65 + coords.y)}</p>} */}
+			{/* {coords.y === 0 ? ( */}
+			<>
+				<Grid container>
+					{/* <p style={{ margin: 0 }}>{coords.x}</p> */}
+					{/* <Box ml={2}></Box> */}
+					<div
+						onClick={handleClick}
+						onMouseOver={handleHover}
+						onMouseLeave={handleHoverExit}
+						className={styles.cell}></div>
+				</Grid>
+			</>
+			{/* ) : ( */}
+			{/* <div
 					onClick={handleClick}
 					className={styles.cell}
 					onMouseLeave={handleHoverExit}
-					onMouseOver={handleHover}></div>
-			)}
+					onMouseOver={handleHover}></div> */}
+			{/* ) */}
 		</>
 	);
 };
