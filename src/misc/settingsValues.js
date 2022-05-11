@@ -26,7 +26,7 @@ export const boardSizes = [
 	},
 	{
 		value: 1,
-		label: 'Medium',
+		label: 'Normal',
 		rows: 10,
 		cols: 10,
 	},

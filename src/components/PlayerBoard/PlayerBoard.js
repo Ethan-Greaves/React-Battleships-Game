@@ -7,11 +7,13 @@ import UseBoardScanner from '../../hooks/useBoardScanner';
 import UseUnit from '../../hooks/useUnit';
 import PlayerBoardStyles from './PlayerBoardStyles';
 import { Typography } from '@material-ui/core';
+import UseComputerAI from '../../hooks/useComputerAI';
 
 const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState }) => {
 	const [board, setBoard, resetBoard] = useBoardCreator(boardData.length, boardData.length);
 	const { getRandomNonHitCell } = UseBoardScanner(boardData, boardData.length, boardData.length);
 	const { registerHitTaken, isShipDestroyed, isAllShipsDestroyed } = UseUnit('Player', board);
+	const { aiMakeMove } = UseComputerAI(board, setBoard);
 	const styles = PlayerBoardStyles();
 
 	/**UseEffect can ben seen almost as a start and update function, akin to Unity.
@@ -20,22 +22,21 @@ const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState })
 	useEffect(() => {
 		setBoard(boardData);
 		if (isAllShipsDestroyed()) setLostState();
-		takeHit();
+		if (gameState !== 'enemyTurn') return;
+		aiMakeMove(registerHitTaken, setPlayerTurnState);
 	}, [setPlayerTurnState]);
 
-	const takeHit = () => {
-		if (gameState !== 'enemyTurn') return;
-		const computerThinkingTime = Math.floor(Math.random() * 5) + 1;
+	// const takeHit = () => {
 
-		setTimeout(() => {
-			const newBoard = board;
-			const { coords } = getRandomNonHitCell();
-			newBoard[coords.x][coords.y].isHit = true;
-			setBoard([...newBoard]);
-			registerHitTaken(coords.x, coords.y);
-			setPlayerTurnState();
-		}, parseInt(`100`));
-	};
+	// 	setTimeout(() => {
+	// 		const newBoard = board;
+	// 		const { coords } = getRandomNonHitCell();
+	// 		newBoard[coords.x][coords.y].isHit = true;
+	// 		setBoard([...newBoard]);
+	// 		registerHitTaken(coords.x, coords.y);
+	// 		setPlayerTurnState();
+	// 	}, parseInt(`${computerThinkingTime}000`));
+	// };
 
 	return (
 		<div className={styles.boardOuterMargin}>

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const Settings = () => {
 	const { boardSizeVal, setBoardSizeVal } = useContext(settingsContext);
-	const [cpuDifficultyVal, setCpuDifficultyVal] = useState(0);
+	const { aiDifficulty, setAiDifficulty } = useContext(settingsContext);
 
 	return (
 		<Container>
@@ -20,8 +20,8 @@ const Settings = () => {
 							step={null}
 							min={0}
 							max={3}
-							value={cpuDifficultyVal}
-							onChange={(e, data) => setCpuDifficultyVal(data)}
+							value={aiDifficulty}
+							onChange={(e, data) => setAiDifficulty(data)}
 							marks={cpuDifficultyValues}
 						/>
 					</div>
@@ -40,8 +40,8 @@ const Settings = () => {
 					</div>
 				</Grid>
 				<Grid item>
-					<Link to='/'>
-						<Button variant='contained'>Confirm</Button>
+					<Link to="/">
+						<Button variant="contained">Confirm</Button>
 					</Link>
 				</Grid>
 			</Grid>
