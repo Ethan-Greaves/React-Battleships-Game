@@ -55,7 +55,7 @@ const UseShipDestroyer = (board) => {
 			default:
 				break;
 		}
-		console.log(carrierHitCount);
+		// console.log(carrierHitCount);
 	};
 
 	const checkToDestroy = () => {};
