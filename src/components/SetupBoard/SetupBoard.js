@@ -63,7 +63,7 @@ const SetupBoard = () => {
 	};
 
 	const handleShipPreview = (coords) => {
-		console.log(coords);
+		// console.log(coords);
 		setCurrentHoveredCoordinates(coords);
 		showPreview(coords, fixShipSize(), placementDirection);
 		setBoard([...board]);
