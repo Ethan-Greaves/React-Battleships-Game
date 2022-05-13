@@ -1,6 +1,13 @@
 import { useState } from 'react';
 
-const UseComputerAIMedium = (board, setBoard, registerHitTaken, setPlayerTurnState, hitAnyCellEasy) => {
+const UseComputerAIMedium = (
+	board,
+	setBoard,
+	registerHitTaken,
+	setPlayerTurnState,
+	hitAnyCellEasy,
+	recordHitComputer
+) => {
 	const [cpuThinkingTime, setCpuThinkingTime] = useState(0);
 	const [isHuntingShip, setIsHuntingShip] = useState(true);
 	const [isTargetingShip, setIsTargetingShip] = useState(false);
@@ -44,7 +51,8 @@ const UseComputerAIMedium = (board, setBoard, registerHitTaken, setPlayerTurnSta
 	};
 
 	const searchingHitCell = () => {
-		if (targetingHitList.length <= 0) {
+		console.log(initialHitCell);
+		if (targetingHitList.length <= 0 || board[initialHitCell.coords.x][initialHitCell.coords.y].isDestroyed) {
 			setIsTargetingShip(false);
 			setIsHuntingShip(true);
 			hitAnyCell();
@@ -59,7 +67,8 @@ const UseComputerAIMedium = (board, setBoard, registerHitTaken, setPlayerTurnSta
 		});
 
 		if (cell.isBattleShip) createTargetingList(cell.coords.x, cell.coords.y);
-		if (!cell.isBattleShip) createTargetingList(initialHitCell.coords.x, initialHitCell.coords.y);
+		if (!cell.isBattleShip && targetingHitList <= 0)
+			createTargetingList(initialHitCell.coords.x, initialHitCell.coords.y);
 	};
 
 	const createTargetingList = (x, y) => {

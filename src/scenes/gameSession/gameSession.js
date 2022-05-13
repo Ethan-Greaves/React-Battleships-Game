@@ -7,9 +7,14 @@ import PlayerBoard from '../../components/PlayerBoard/PlayerBoard';
 import gameSessionStyles from './gameSessionStyles';
 import TitleCard from '../../components/TitleCard/TitleCard';
 import GameStateInfo from '../../components/GameStateInfo/GameStateInfo';
+import StatsInfo from '../../components/StatsInfo/StatsInfo';
 
 const GameSession = () => {
 	const [dialogueText, setDialogueText] = useState('Get Ready To Play!');
+	const [playerTotalHits, setPlayerTotalHits] = useState(0);
+	const [computerTotalHits, setComputerTotalHits] = useState(0);
+	const [playerShipHits, setPlayerShipHits] = useState(0);
+	const [computerShipHits, setComputerShipHits] = useState(0);
 	const { gameState, setPlayerTurnState, setEnemyTurnState, setLostState, setWonState } =
 		UseBattleSystem(setDialogueText);
 	const location = useLocation();
@@ -18,10 +23,19 @@ const GameSession = () => {
 
 	useEffect(() => {
 		setTimeout(() => {
-			// setPlayerTurnState();
-			setWonState();
+			setPlayerTurnState();
 		}, 2000);
 	}, []);
+
+	const recordHitPlayer = (isBattleship) => {
+		setPlayerTotalHits(playerTotalHits + 1);
+		if (isBattleship) setPlayerShipHits(playerShipHits + 1);
+	};
+
+	const recordHitComputer = (isBattleship) => {
+		setComputerTotalHits(computerTotalHits + 1);
+		if (isBattleship) setComputerShipHits(computerShipHits + 1);
+	};
 
 	return (
 		<div className={styles.div}>
@@ -47,14 +61,18 @@ const GameSession = () => {
 							setPlayerTurnState={setPlayerTurnState}
 							boardData={fromUseShips.board}
 							setLostState={setLostState}
+							recordHitComputer={recordHitComputer}
 						/>
+						<StatsInfo entity="Player" totalHits={playerTotalHits} shipHits={playerShipHits} />
 					</Grid>
 					<Grid item>
 						<ComputerBoard
 							gameState={gameState.state}
 							setEnemyTurnState={setEnemyTurnState}
 							setWonState={setWonState}
+							recordHitPlayer={recordHitPlayer}
 						/>
+						<StatsInfo entity="Computer" totalHits={computerTotalHits} shipHits={computerShipHits} />
 					</Grid>
 				</Grid>
 			</Grid>

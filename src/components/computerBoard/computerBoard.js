@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useContext, useEffect, useState, useRef, useCallback } from 'react';
 import useBoardCreator from '../../hooks/useBoardCreator';
 import { settingsContext } from '../../context/settings.context';
 import UseShipPlacer from '../../hooks/useShipPlacer';
@@ -9,14 +9,38 @@ import UseShipDestroyer from '../../hooks/useShipDestroyer';
 import { Typography } from '@material-ui/core';
 import UseUnit from '../../hooks/useUnit';
 
-const ComputerBoard = ({ gameState, setEnemyTurnState, setWonState }) => {
+const ComputerBoard = ({ gameState, setEnemyTurnState, setWonState, recordHitPlayer }) => {
 	const { boardSize } = useContext(settingsContext);
 	const [board, setBoard, resetBoard] = useBoardCreator(boardSize.rows, boardSize.cols);
 	const { placeShip, placeShipsRandomly } = UseShipPlacer(board, boardSize.rows, boardSize.cols);
 	const [shipPlacementQueue, setShipPlacementQueue, defaultShipPlacementQueue] = useShipPlacementQueue(placeShip);
 	const [addHitToShip, checkToDestroy] = UseShipDestroyer(board);
-	const { registerHitTaken, isShipDestroyed, isAllShipsDestroyed } = UseUnit('Computer', board);
+	const { registerHitTaken, isShipDestroyed, isAllShipsDestroyed } = UseUnit('Computer', board, setBoard);
 	const isInitialMount = useRef(true);
+
+	const handleResetBoard = useCallback(() => {
+		resetBoard();
+		setShipPlacementQueue(defaultShipPlacementQueue);
+	}, [defaultShipPlacementQueue, resetBoard, setShipPlacementQueue]);
+
+	const randomiseBoard = useCallback(() => {
+		handleResetBoard();
+		placeShipsRandomly(defaultShipPlacementQueue, setShipPlacementQueue);
+	}, [defaultShipPlacementQueue, handleResetBoard, placeShipsRandomly, setShipPlacementQueue]);
+
+	const handleClick = (coords, isBattleShip, type) => {
+		if (gameState !== 'playerTurn' || board[coords.x][coords.y].isHit === true) return;
+
+		const { x, y } = coords;
+		const newBoard = [...board];
+		newBoard[x][y].isHit = true;
+		recordHitPlayer(newBoard[x][y].isBattleShip);
+		setBoard(newBoard);
+		addHitToShip(type);
+		registerHitTaken(x, y);
+
+		setEnemyTurnState();
+	};
 
 	useEffect(() => {
 		if (isInitialMount.current) {
@@ -25,30 +49,7 @@ const ComputerBoard = ({ gameState, setEnemyTurnState, setWonState }) => {
 		} else {
 			if (isAllShipsDestroyed()) setWonState();
 		}
-	}, [isAllShipsDestroyed, setWonState]);
-
-	const randomiseBoard = () => {
-		handleResetBoard();
-		placeShipsRandomly(defaultShipPlacementQueue, setShipPlacementQueue);
-	};
-
-	const handleResetBoard = () => {
-		resetBoard();
-		setShipPlacementQueue(defaultShipPlacementQueue);
-	};
-
-	const handleClick = (coords, isBattleShip, type) => {
-		if (gameState !== 'playerTurn' || board[coords.x][coords.y].isHit === true) return;
-
-		const { x, y } = coords;
-		const newBoard = [...board];
-		newBoard[x][y].isHit = true;
-		setBoard(newBoard);
-		addHitToShip(type);
-		registerHitTaken(x, y);
-
-		setEnemyTurnState();
-	};
+	}, [isAllShipsDestroyed, randomiseBoard, setWonState]);
 
 	return (
 		<div>
@@ -75,6 +76,7 @@ const ComputerBoard = ({ gameState, setEnemyTurnState, setWonState }) => {
 							computerBoardCell={true}
 							type={cell.type}
 							isShipDestroyed={isShipDestroyed}
+							isDestroyed={cell.isDestroyed}
 						/>
 					);
 				}}

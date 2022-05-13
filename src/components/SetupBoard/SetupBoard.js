@@ -106,6 +106,7 @@ const SetupBoard = () => {
 								coords={cell.coords}
 								computerBoardCell={false}
 								type={cell.type}
+								isDestroyed={cell.isDestroyed}
 							/>
 						);
 					}}

@@ -9,11 +9,11 @@ import PlayerBoardStyles from './PlayerBoardStyles';
 import { Typography } from '@material-ui/core';
 import UseComputerAI from '../../hooks/useComputerAI';
 
-const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState }) => {
+const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState, recordHitComputer }) => {
 	const [board, setBoard, resetBoard] = useBoardCreator(boardData.length, boardData.length);
 	const { getRandomNonHitCell } = UseBoardScanner(boardData, boardData.length, boardData.length);
-	const { registerHitTaken, isShipDestroyed, isAllShipsDestroyed } = UseUnit('Player', board);
-	const { aiMakeMove } = UseComputerAI(board, setBoard, registerHitTaken, setPlayerTurnState);
+	const { registerHitTaken, isShipDestroyed, isAllShipsDestroyed } = UseUnit('Player', board, setBoard);
+	const { aiMakeMove } = UseComputerAI(board, setBoard, registerHitTaken, setPlayerTurnState, recordHitComputer);
 	const styles = PlayerBoardStyles();
 
 	/**UseEffect can ben seen almost as a start and update function, akin to Unity.
@@ -53,6 +53,7 @@ const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState })
 							computerBoardCell={false}
 							type={cell.type}
 							isShipDestroyed={isShipDestroyed}
+							isDestroyed={cell.isDestroyed}
 						/>
 					);
 				}}

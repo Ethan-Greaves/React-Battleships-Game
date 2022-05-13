@@ -15,7 +15,7 @@ class AIStates {
 	}
 }
 
-const UseComputerAI = (board, setBoard, registerHitTaken, setPlayerTurnState) => {
+const UseComputerAI = (board, setBoard, registerHitTaken, setPlayerTurnState, recordHitComputer) => {
 	const { aiDifficulty } = useContext(settingsContext);
 	const [aiState, setAiState] = useState(1);
 	const { boardSize } = useContext(settingsContext);
@@ -25,18 +25,26 @@ const UseComputerAI = (board, setBoard, registerHitTaken, setPlayerTurnState) =>
 		const newBoard = board;
 		const { coords } = getRandomNonHitCell();
 		newBoard[coords.x][coords.y].isHit = true;
+		// recordHitComputer(newBoard[coords.x][coords.y].isBattleShip);
 		setBoard([...newBoard]);
 		registerHitTaken(coords.x, coords.y);
 		return newBoard[coords.x][coords.y];
 	};
 
-	const { easySimulateTurn } = UseComputerAIEasy(board, setBoard, registerHitTaken, setPlayerTurnState, hitAnyCellEasy);
+	const { easySimulateTurn } = UseComputerAIEasy(
+		board,
+		setBoard,
+		registerHitTaken,
+		setPlayerTurnState,
+		hitAnyCellEasy,
+	);
 	const { mediumSimulateTurn } = UseComputerAIMedium(
 		board,
 		setBoard,
 		registerHitTaken,
 		setPlayerTurnState,
-		hitAnyCellEasy
+		hitAnyCellEasy,
+		recordHitComputer
 	);
 
 	const aiMakeMove = () => {

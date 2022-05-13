@@ -10,7 +10,7 @@ const GameStateInfo = ({ stateDialogue, gameState }) => {
 	return gameState !== 'won' && gameState !== 'lost' ? (
 		<div style={{ border: '5px solid black', marginBottom: '30px', padding: '15px', backgroundColor: 'white' }}>
 			<Typography align="center" variant="h5">
-				{stateDialogue}
+				{stateDialogue.toUpperCase()}
 			</Typography>
 		</div>
 	) : (
@@ -19,7 +19,7 @@ const GameStateInfo = ({ stateDialogue, gameState }) => {
 				GAME OVER!
 			</Typography>
 			<Typography align="center" variant="body2" style={{ marginBottom: theme.spacing(1.5) }}>
-				<Box fontWeight="bold">{stateDialogue}</Box>
+				<Box fontWeight="bold">{stateDialogue.toUpperCase()}</Box>
 			</Typography>
 
 			<Grid container justify="center" spacing={1}>

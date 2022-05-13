@@ -13,10 +13,7 @@ const CustomButton = ({ text }) => {
 
 	return (
 		<motion.div whileHover={{ scale: 1.05 }}>
-			<Button
-				className={styles.btn}
-				onMouseEnter={toggleClick}
-				onClick={toggleRetroChime}>
+			<Button className={styles.btn} onMouseEnter={toggleClick} onClick={toggleRetroChime} variant="contained">
 				{text}
 			</Button>
 		</motion.div>

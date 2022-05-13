@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-
+import UseBoardScanner from './useBoardScanner';
 /**Hook used for units or entities in the game session
  * contains data regarding hits taken and if any/all ships are destroyed
  */
-const UseUnit = (name, boardData) => {
+const UseUnit = (name, boardData, setBoard) => {
+	const { getCellCoordsOfType } = UseBoardScanner(boardData, boardData.length, boardData.length);
+
 	const [destroyerData, setDestroyerData] = useState({
 		name: 'destroyer',
 		hitCount: 0,
@@ -47,6 +49,7 @@ const UseUnit = (name, boardData) => {
 					hitCount: prevDestroyerData.hitCount + 1,
 				}));
 				break;
+
 			case 'submarine':
 				setSubmarineData((prevSubmarineData) => ({
 					...prevSubmarineData,
@@ -78,7 +81,15 @@ const UseUnit = (name, boardData) => {
 
 	const isShipDestroyed = (type) => {
 		for (let i = 0; i < shipsData.length; i++) {
-			if (shipsData[i].name === type && shipsData[i].hitCount === shipsData[i].maxHitCount) return true;
+			if (shipsData[i].name === type && shipsData[i].hitCount === shipsData[i].maxHitCount) {
+				const typeArr = getCellCoordsOfType(type);
+				const newBoard = boardData;
+				for (let j = 0; j < typeArr.length; j++) {
+					newBoard[typeArr[j].x][typeArr[j].y].isDestroyed = true;
+				}
+				setBoard([...newBoard]);
+				return true;
+			}
 		}
 		return false;
 	};

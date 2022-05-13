@@ -6,7 +6,7 @@ const cell = (isBattleShip, type, isPreviewing, isUnplaceable, isHit, computerBo
 	let border = '3px solid black';
 	let cellAnimation = 'shake 50ms 6 alternate backwards';
 	const shipNames = ['destroyer', 'submarine', 'cruiser', 'battleship', 'carrier'];
-	const cellSize = '55px';
+	const cellSize = '30px';
 
 	if (isHit && isBattleShip) {
 		// border = '1px solid red';
@@ -42,6 +42,7 @@ const cell = (isBattleShip, type, isPreviewing, isUnplaceable, isHit, computerBo
 		opacity: cellOpacity,
 		Animation: cellAnimation,
 		borderRadius: "5px",
+		margin: '0.5px',
 		'&:hover': {
 			backgroundColor: cellColour,
 			opacity: cellOpacity,
