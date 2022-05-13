@@ -4,13 +4,23 @@ import Rules from './scenes/rules/rules';
 import Settings from './scenes/settings/settings';
 import GameSession from './scenes/gameSession/gameSession';
 import { Switch, Route } from 'react-router-dom';
-// import { PlayerBoardProvider } from './context/playerBoard.context';
 import { SettingsProvider } from './context/settings.context';
+import { ThemeProvider, createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
 function App() {
+	const theme = createMuiTheme({
+		spacing: 8,
+
+		// palette: {
+		// 	primary: {
+		// 		// main: '#ff4400',
+		// 	},
+		// },
+	});
+
 	return (
 		<div className="App">
-			{/* <PlayerBoardProvider> */}
+			<ThemeProvider theme={theme}>
 				<SettingsProvider>
 					<Switch>
 						<Route exact path="/" render={() => <MainMenu />} />
@@ -20,7 +30,7 @@ function App() {
 						<Route exact path="/settings" render={() => <Settings />} />
 					</Switch>
 				</SettingsProvider>
-			{/* </PlayerBoardProvider> */}
+			</ThemeProvider>
 		</div>
 	);
 }

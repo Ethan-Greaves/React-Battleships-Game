@@ -12,7 +12,7 @@ const TitleCard = ({ isHomePage }) => {
 				align="center"
 				style={{
 					fontStyle: 'italic',
-					marginBottom: '40px',
+					marginBottom: '20px',
 					fontWeight: 'lighter',
 				}}>
 				<span style={{ fontStyle: 'normal' }}>⚓</span>

@@ -15,7 +15,12 @@ const UseShipPlacementDirection = (startingDirection) => {
 		if (event.key === 'a' || event.key === 'ArrowLeft') setPlacementDirection('horizontal');
 	};
 
-	return [placementDirection, changePlacementDirection];
+	const changePlacementDirectionClick = () => {
+		if (placementDirection === 'vertical') setPlacementDirection('horizontal');
+		else setPlacementDirection('vertical');
+	};
+
+	return [placementDirection, changePlacementDirection, changePlacementDirectionClick];
 };
 
 export default UseShipPlacementDirection;

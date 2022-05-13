@@ -46,13 +46,13 @@ const ComputerBoard = ({ gameState, setEnemyTurnState, setWonState }) => {
 		setBoard(newBoard);
 		addHitToShip(type);
 		registerHitTaken(x, y);
-		
+
 		setEnemyTurnState();
 	};
 
 	return (
 		<div>
-			<Typography variant="h4" align="center">
+			<Typography variant="h5" gutterBottom align="center">
 				Computer
 			</Typography>
 			<ComputerBoardSetup
@@ -74,9 +74,7 @@ const ComputerBoard = ({ gameState, setEnemyTurnState, setWonState }) => {
 							coords={cell.coords}
 							computerBoardCell={true}
 							type={cell.type}
-							isShipDestroyed={() => {
-								return;
-							}}
+							isShipDestroyed={isShipDestroyed}
 						/>
 					);
 				}}

@@ -11,9 +11,6 @@ const BoardSetup = () => {
 		<Container>
 			<TitleCard isHomePage={false} />
 			<Typography variant="h4">Place Your Ships...</Typography>
-			<Typography variant="caption">Press 'A/D/LeftArrow/RightArrow to place horizontal</Typography>
-			<Box ml={3}></Box>
-			<Typography variant="caption">Press 'W/S/UpArrow/DownArrow to place vertical</Typography>
 
 			<Grid container justify="space-evenly" alignItems="center" spacing={0}>
 				<Grid item>

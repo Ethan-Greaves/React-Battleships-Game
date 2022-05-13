@@ -26,21 +26,9 @@ const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState })
 		aiMakeMove();
 	}, [setPlayerTurnState]);
 
-	// const takeHit = () => {
-
-	// 	setTimeout(() => {
-	// 		const newBoard = board;
-	// 		const { coords } = getRandomNonHitCell();
-	// 		newBoard[coords.x][coords.y].isHit = true;
-	// 		setBoard([...newBoard]);
-	// 		registerHitTaken(coords.x, coords.y);
-	// 		setPlayerTurnState();
-	// 	}, parseInt(`${computerThinkingTime}000`));
-	// };
-
 	return (
 		<div className={styles.boardOuterMargin}>
-			<Typography variant="h4" align="center">
+			<Typography variant="h5" gutterBottom align="center">
 				You
 			</Typography>
 			<PlayerBoardSetup

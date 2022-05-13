@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
 	boardOuterMargin: {
-		marginRight: "100px",
+		// marginRight: "100px",
 	},
 }));
 

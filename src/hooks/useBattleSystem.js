@@ -20,22 +20,22 @@ const UseBattleSystem = (setDialogueText) => {
 
 	const setPlayerTurnState = () => {
 		setGameState(GameStates.PLAYERTURN);
-		setDialogueText('Your Turn!');
+		setDialogueText('Your Turn');
 	};
 
 	const setEnemyTurnState = () => {
 		setGameState(GameStates.ENEMYTURN);
-		setDialogueText('Enemy Turn!');
+		setDialogueText('Enemy Turn');
 	};
 
 	const setWonState = () => {
 		setGameState(GameStates.WON);
-		setDialogueText('You Win!');
+		setDialogueText('You Win');
 	};
 
 	const setLostState = () => {
 		setGameState(GameStates.LOST);
-		setDialogueText('You Lost!');
+		setDialogueText('You Lose');
 	};
 
 	return { gameState, setPlayerTurnState, setEnemyTurnState, setWonState, setLostState };

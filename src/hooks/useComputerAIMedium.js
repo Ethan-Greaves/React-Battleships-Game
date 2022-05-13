@@ -5,6 +5,7 @@ const UseComputerAIMedium = (board, setBoard, registerHitTaken, setPlayerTurnSta
 	const [isHuntingShip, setIsHuntingShip] = useState(true);
 	const [isTargetingShip, setIsTargetingShip] = useState(false);
 	const [targetingHitList, setTargetingHitList] = useState([]);
+	const [initialHitCell, setInitialHitCell] = useState({});
 
 	const mediumSimulateTurn = () => {
 		setCpuThinkingTime(Math.floor(Math.random() * 1) + 1);
@@ -26,6 +27,9 @@ const UseComputerAIMedium = (board, setBoard, registerHitTaken, setPlayerTurnSta
 		const hitCell = hitAnyCellEasy();
 		const { x, y } = hitCell.coords;
 		if (!hitCell.isBattleShip) return;
+		setInitialHitCell(() => {
+			return hitCell;
+		});
 		createTargetingList(x, y);
 		setIsHuntingShip(false);
 		setIsTargetingShip(true);
@@ -55,6 +59,7 @@ const UseComputerAIMedium = (board, setBoard, registerHitTaken, setPlayerTurnSta
 		});
 
 		if (cell.isBattleShip) createTargetingList(cell.coords.x, cell.coords.y);
+		if (!cell.isBattleShip) createTargetingList(initialHitCell.coords.x, initialHitCell.coords.y);
 	};
 
 	const createTargetingList = (x, y) => {

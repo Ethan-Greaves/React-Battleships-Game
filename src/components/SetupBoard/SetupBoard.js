@@ -1,6 +1,6 @@
 //#region IMPORTS
 import React, { useContext, useState, useEffect } from 'react';
-import { Button } from '@material-ui/core';
+import { Button, Grid, Tooltip } from '@material-ui/core';
 import useBoardCreator from '../../hooks/useBoardCreator';
 import useShipPlacementDirection from '../../hooks/useShipPlacementDirection';
 import useShipPlacementQueue from '../../hooks/useShipPlacementQueue';
@@ -13,13 +13,16 @@ import useEventBus from '../../hooks/useEventBus';
 import useAudio from '../../hooks/useAudio';
 import retroChimeSfx from '../../assets/sfx/RetroChime.wav';
 import { settingsContext } from '../../context/settings.context';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDice, faRotate, faBackward } from '@fortawesome/free-solid-svg-icons';
 
 //#endregion
 const SetupBoard = () => {
 	//#region INITIALISATION
 	const { boardSize } = useContext(settingsContext);
 	const [board, setBoard, resetBoard] = useBoardCreator(boardSize.rows, boardSize.cols);
-	const [placementDirection, changePlacementDirection] = useShipPlacementDirection('horizontal');
+	const [placementDirection, changePlacementDirection, changePlacementDirectionClick] =
+		useShipPlacementDirection('horizontal');
 	const { placeShip, placeShipsRandomly } = UseShipPlacer(board, boardSize.rows, boardSize.cols);
 	const [shipPlacementQueue, setShipPlacementQueue, defaultShipPlacementQueue] = useShipPlacementQueue(placeShip);
 	const { showPreview, removePreview } = useShipPreview(board, boardSize.rows, boardSize.cols);
@@ -63,7 +66,6 @@ const SetupBoard = () => {
 	};
 
 	const handleShipPreview = (coords) => {
-		// console.log(coords);
 		setCurrentHoveredCoordinates(coords);
 		showPreview(coords, fixShipSize(), placementDirection);
 		setBoard([...board]);
@@ -84,10 +86,10 @@ const SetupBoard = () => {
 
 	return (
 		<div
-			onKeyDown={(e) => {
-				handleRemovePreview(currentHoveredCoordinates);
-				changePlacementDirection(e);
-			}}
+			// onKeyDown={(e) => {
+			// 	handleRemovePreview(currentHoveredCoordinates);
+			// 	changePlacementDirection(e);
+			// }}
 			tabIndex="0">
 			<div className={styles.board}>
 				<PlayerBoardSetup
@@ -110,8 +112,29 @@ const SetupBoard = () => {
 				/>
 			</div>
 
-			<button onClick={randomiseBoard}>Randomise</button>
-			<button onClick={handleResetBoard}>Reset</button>
+			<Grid container justify="center" spacing={2} className={styles.buttonGrid}>
+				<Grid item>
+					<Tooltip title="Randomise">
+						<Button onClick={randomiseBoard} variant="contained" size="large" color="primary">
+							<FontAwesomeIcon icon={faDice} />
+						</Button>
+					</Tooltip>
+				</Grid>
+				<Grid item>
+					<Tooltip title="Reset Ships">
+						<Button onClick={handleResetBoard} variant="contained" size="large" color="primary">
+							<FontAwesomeIcon icon={faBackward} />
+						</Button>
+					</Tooltip>
+				</Grid>
+				<Grid item>
+					<Tooltip title="Rotate Ship">
+						<Button onClick={changePlacementDirectionClick} variant="contained" size="large" color="primary">
+							<FontAwesomeIcon icon={faRotate} />
+						</Button>
+					</Tooltip>
+				</Grid>
+			</Grid>
 		</div>
 	);
 };
