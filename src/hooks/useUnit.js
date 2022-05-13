@@ -79,19 +79,17 @@ const UseUnit = (name, boardData, setBoard) => {
 		}
 	};
 
-	const isShipDestroyed = (type) => {
-		for (let i = 0; i < shipsData.length; i++) {
-			if (shipsData[i].name === type && shipsData[i].hitCount === shipsData[i].maxHitCount) {
-				const typeArr = getCellCoordsOfType(type);
-				const newBoard = boardData;
-				for (let j = 0; j < typeArr.length; j++) {
-					newBoard[typeArr[j].x][typeArr[j].y].isDestroyed = true;
-				}
-				setBoard([...newBoard]);
-				return true;
-			}
+	const isShipDestroyed = (x, y) => {
+		const type = boardData[x][y].type;
+		const typeArr = getCellCoordsOfType(type);
+		const newBoard = boardData;
+		for (let i = 0; i < typeArr.length; i++) {
+			if (!newBoard[typeArr[i].x][typeArr[i].y].isHit) return;
 		}
-		return false;
+		for (let i = 0; i < typeArr.length; i++) {
+			newBoard[typeArr[i].x][typeArr[i].y].isDestroyed = true;
+		}
+		setBoard([...newBoard]);
 	};
 
 	const isAllShipsDestroyed = () => {

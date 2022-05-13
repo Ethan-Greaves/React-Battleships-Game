@@ -6,7 +6,8 @@ const UseComputerAIMedium = (
 	registerHitTaken,
 	setPlayerTurnState,
 	hitAnyCellEasy,
-	recordHitComputer
+	recordHitComputer,
+	isShipDestroyed
 ) => {
 	const [cpuThinkingTime, setCpuThinkingTime] = useState(0);
 	const [isHuntingShip, setIsHuntingShip] = useState(true);
@@ -34,6 +35,7 @@ const UseComputerAIMedium = (
 		const hitCell = hitAnyCellEasy();
 		const { x, y } = hitCell.coords;
 		if (!hitCell.isBattleShip) return;
+		isShipDestroyed(x, y);
 		setInitialHitCell(() => {
 			return hitCell;
 		});
@@ -47,6 +49,7 @@ const UseComputerAIMedium = (
 		newBoard[x][y].isHit = true;
 		setBoard([...newBoard]);
 		registerHitTaken(x, y);
+		if (newBoard[x][y].isBattleShip) isShipDestroyed(x, y);
 		return newBoard[x][y];
 	};
 

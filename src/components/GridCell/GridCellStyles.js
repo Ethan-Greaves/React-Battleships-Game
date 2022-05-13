@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const cell = (isBattleShip, type, isPreviewing, isUnplaceable, isHit, computerBoardCell, isShipDestroyed) => {
+const cell = (isBattleShip, type, isPreviewing, isUnplaceable, isHit, computerBoardCell, isDestroyed) => {
 	let cellColour = 'lightgrey';
 	let cellOpacity = 1;
 	let border = '3px solid black';
@@ -12,7 +12,7 @@ const cell = (isBattleShip, type, isPreviewing, isUnplaceable, isHit, computerBo
 		// border = '1px solid red';
 		cellColour = 'red';
 		for (let i = 0; i < shipNames.length; i++) {
-			if (isShipDestroyed(shipNames[i]) && type === shipNames[i]) {
+			if (isDestroyed) {
 				cellColour = '#212529';
 				border = '3px solid red';
 				cellAnimation = 'shake 50ms 6 alternate backwards';
@@ -41,7 +41,7 @@ const cell = (isBattleShip, type, isPreviewing, isUnplaceable, isHit, computerBo
 		border: border,
 		opacity: cellOpacity,
 		Animation: cellAnimation,
-		borderRadius: "5px",
+		borderRadius: '5px',
 		margin: '0.5px',
 		'&:hover': {
 			backgroundColor: cellColour,
@@ -69,7 +69,7 @@ const useStyles = makeStyles(() => ({
 			props.isUnplaceable,
 			props.isHit,
 			props.computerBoardCell,
-			props.isShipDestroyed
+			props.isDestroyed
 		),
 }));
 

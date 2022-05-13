@@ -13,7 +13,14 @@ const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState, r
 	const [board, setBoard, resetBoard] = useBoardCreator(boardData.length, boardData.length);
 	const { getRandomNonHitCell } = UseBoardScanner(boardData, boardData.length, boardData.length);
 	const { registerHitTaken, isShipDestroyed, isAllShipsDestroyed } = UseUnit('Player', board, setBoard);
-	const { aiMakeMove } = UseComputerAI(board, setBoard, registerHitTaken, setPlayerTurnState, recordHitComputer);
+	const { aiMakeMove } = UseComputerAI(
+		board,
+		setBoard,
+		registerHitTaken,
+		setPlayerTurnState,
+		recordHitComputer,
+		isShipDestroyed
+	);
 	const styles = PlayerBoardStyles();
 
 	/**UseEffect can ben seen almost as a start and update function, akin to Unity.
@@ -52,7 +59,6 @@ const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState, r
 							coords={cell.coords}
 							computerBoardCell={false}
 							type={cell.type}
-							isShipDestroyed={isShipDestroyed}
 							isDestroyed={cell.isDestroyed}
 						/>
 					);

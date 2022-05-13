@@ -13,7 +13,7 @@ const GridCell = ({
 	hoverExitFunction,
 	computerBoardCell,
 	type,
-	isShipDestroyed,
+	isDestroyed,
 }) => {
 	const styles = GridCellStyles({
 		isBattleShip,
@@ -22,7 +22,7 @@ const GridCell = ({
 		isUnplaceable,
 		isHit,
 		computerBoardCell,
-		isShipDestroyed,
+		isDestroyed,
 	});
 
 	const handleClick = () => {
