@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { settingsContext } from '../context/settings.context';
 import UseBoardScanner from './useBoardScanner';
 import UseComputerAIEasy from './useComputerAIEasy';
@@ -15,7 +15,13 @@ class AIStates {
 	}
 }
 
-const UseComputerAI = (board, setBoard, registerHitTaken, setPlayerTurnState, recordHitComputer, isShipDestroyed) => {
+const UseComputerAI = (
+	board,
+	setBoard,
+	registerHitTaken,
+	setPlayerTurnState,
+	isShipDestroyed,
+) => {
 	const { aiDifficulty } = useContext(settingsContext);
 	const [aiState, setAiState] = useState(1);
 	const { boardSize } = useContext(settingsContext);
@@ -25,7 +31,6 @@ const UseComputerAI = (board, setBoard, registerHitTaken, setPlayerTurnState, re
 		const newBoard = board;
 		const { coords } = getRandomNonHitCell();
 		newBoard[coords.x][coords.y].isHit = true;
-		// recordHitComputer(newBoard[coords.x][coords.y].isBattleShip);
 		setBoard([...newBoard]);
 		registerHitTaken(coords.x, coords.y);
 		return newBoard[coords.x][coords.y];
@@ -38,8 +43,7 @@ const UseComputerAI = (board, setBoard, registerHitTaken, setPlayerTurnState, re
 		registerHitTaken,
 		setPlayerTurnState,
 		hitAnyCellEasy,
-		recordHitComputer,
-		isShipDestroyed
+		isShipDestroyed,
 	);
 
 	const aiMakeMove = () => {
@@ -63,7 +67,7 @@ const UseComputerAI = (board, setBoard, registerHitTaken, setPlayerTurnState, re
 		console.log('running hard difficulty');
 	};
 
-	return { aiMakeMove };
+	return { aiMakeMove, aiDifficulty };
 };
 
 export default UseComputerAI;

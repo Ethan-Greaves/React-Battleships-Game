@@ -8,8 +8,9 @@ import UseUnit from '../../hooks/useUnit';
 import PlayerBoardStyles from './PlayerBoardStyles';
 import { Typography } from '@material-ui/core';
 import UseComputerAI from '../../hooks/useComputerAI';
+import StatsInfo from '../StatsInfo/StatsInfo';
 
-const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState, recordHitComputer }) => {
+const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState }) => {
 	const [board, setBoard, resetBoard] = useBoardCreator(boardData.length, boardData.length);
 	const { getRandomNonHitCell } = UseBoardScanner(boardData, boardData.length, boardData.length);
 	const { registerHitTaken, isShipDestroyed, isAllShipsDestroyed } = UseUnit('Player', board, setBoard);
@@ -18,8 +19,9 @@ const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState, r
 		setBoard,
 		registerHitTaken,
 		setPlayerTurnState,
-		recordHitComputer,
-		isShipDestroyed
+		isShipDestroyed,
+		// addShipHitCpu,
+		// addTotalHitCpu
 	);
 	const styles = PlayerBoardStyles();
 
@@ -35,9 +37,6 @@ const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState, r
 
 	return (
 		<div className={styles.boardOuterMargin}>
-			<Typography variant="h5" gutterBottom align="center">
-				You
-			</Typography>
 			<PlayerBoardSetup
 				boardData={board}
 				render={(cell) => {

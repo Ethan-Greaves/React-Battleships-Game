@@ -9,7 +9,7 @@ import UseShipDestroyer from '../../hooks/useShipDestroyer';
 import { Typography } from '@material-ui/core';
 import UseUnit from '../../hooks/useUnit';
 
-const ComputerBoard = ({ gameState, setEnemyTurnState, setWonState, recordHitPlayer }) => {
+const ComputerBoard = ({ gameState, setEnemyTurnState, setWonState, addShipHitPlayer, addTotalHitPlayer }) => {
 	const { boardSize } = useContext(settingsContext);
 	const [board, setBoard, resetBoard] = useBoardCreator(boardSize.rows, boardSize.cols);
 	const { placeShip, placeShipsRandomly } = UseShipPlacer(board, boardSize.rows, boardSize.cols);
@@ -30,15 +30,16 @@ const ComputerBoard = ({ gameState, setEnemyTurnState, setWonState, recordHitPla
 
 	const handleClick = (coords, isBattleShip, type) => {
 		if (gameState !== 'playerTurn' || board[coords.x][coords.y].isHit === true) return;
-
 		const { x, y } = coords;
 		const newBoard = [...board];
 		newBoard[x][y].isHit = true;
-		recordHitPlayer(newBoard[x][y].isBattleShip);
+		addTotalHitPlayer();
+
+		if (newBoard[x][y].isBattleShip) addShipHitPlayer();
 		setBoard(newBoard);
 		addHitToShip(type);
 		registerHitTaken(x, y);
-
+		isShipDestroyed(x, y);
 		setEnemyTurnState();
 	};
 
@@ -53,9 +54,6 @@ const ComputerBoard = ({ gameState, setEnemyTurnState, setWonState, recordHitPla
 
 	return (
 		<div>
-			<Typography variant="h5" gutterBottom align="center">
-				Computer
-			</Typography>
 			<ComputerBoardSetup
 				boardData={board}
 				render={(cell) => {
@@ -75,7 +73,6 @@ const ComputerBoard = ({ gameState, setEnemyTurnState, setWonState, recordHitPla
 							coords={cell.coords}
 							computerBoardCell={true}
 							type={cell.type}
-							isShipDestroyed={isShipDestroyed}
 							isDestroyed={cell.isDestroyed}
 						/>
 					);

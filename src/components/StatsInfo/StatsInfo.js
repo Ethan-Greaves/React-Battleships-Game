@@ -1,16 +1,18 @@
-import { Typography } from '@material-ui/core';
+import { Typography, Box } from '@material-ui/core';
+import UseGameCalculations from '../../hooks/useGameClaculations';
 
-const StatsInfo = ({ entity, totalHits, shipHits }) => {
-	const calculateAccuracy = () => {
-		// console.log(shipHits);
-		return Math.round((shipHits / totalHits) * 100) || 0;
-	};
+const StatsInfo = ({ totalHits, shipHits }) => {
+	const { calculateAccuracy } = UseGameCalculations();
 
 	return (
 		<div>
-			<Typography variant="h5">{`${entity} Stats`}</Typography>
-			<Typography variant="body1">{`Total Hits: ${totalHits}`}</Typography>
-			<Typography variant="body1">{`Accuracy: ${calculateAccuracy()}%`}</Typography>
+			<Typography align="center">
+				<Typography variant="h6">
+					<Box fontWeight={'bold'}>{`Your Stats`}</Box>
+				</Typography>
+				<Typography variant="body1">{`Total Hits: ${totalHits}`}</Typography>
+				<Typography variant="body1">{`Accuracy: ${calculateAccuracy(shipHits, totalHits)}%`}</Typography>
+			</Typography>
 		</div>
 	);
 };

@@ -13,7 +13,7 @@ const TitleCard = ({ isHomePage }) => {
 				style={{
 					fontStyle: 'italic',
 					marginBottom: '20px',
-					fontWeight: 'lighter',
+					// fontWeight: 'lighter',
 				}}>
 				<span style={{ fontStyle: 'normal' }}>⚓</span>
 				The Ship Sinking Strategy Game

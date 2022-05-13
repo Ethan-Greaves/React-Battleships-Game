@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import UseBoardScanner from './useBoardScanner';
 
 const UseComputerAIMedium = (
 	board,
@@ -6,14 +7,16 @@ const UseComputerAIMedium = (
 	registerHitTaken,
 	setPlayerTurnState,
 	hitAnyCellEasy,
-	recordHitComputer,
-	isShipDestroyed
+	isShipDestroyed,
+	addShipHitCpu,
+	addTotalHitCpu
 ) => {
 	const [cpuThinkingTime, setCpuThinkingTime] = useState(0);
 	const [isHuntingShip, setIsHuntingShip] = useState(true);
 	const [isTargetingShip, setIsTargetingShip] = useState(false);
 	const [targetingHitList, setTargetingHitList] = useState([]);
 	const [initialHitCell, setInitialHitCell] = useState({});
+	const { getCellCoordsOfType } = UseBoardScanner(board, board.length, board.length);
 
 	const mediumSimulateTurn = () => {
 		setCpuThinkingTime(Math.floor(Math.random() * 1) + 1);
@@ -32,6 +35,31 @@ const UseComputerAIMedium = (
 		setTargetingHitList(() => {
 			return [];
 		});
+		//*Code for ai going back and finishing off hit but not destroyed ship while in hunt mode, too burnt out to think
+		// let isShipHit = false;
+		// let isShipDestroyed = false;
+		// const shipNames = ['destroyer', 'submarine', 'cruiser', 'battleship', 'carrier'];
+		// for (let i = 0; i < shipNames.length; i++) {
+		// 	const shipTypeCoords = getCellCoordsOfType(shipNames[i]);
+		// 	for (let j = 0; j < shipTypeCoords.length; j++) {
+		// 		if (!isShipHit) {
+		// 			if (board[shipTypeCoords[j].x][shipTypeCoords[j].y].isHit) isShipHit = true;
+		// 			break;
+		// 		}
+		// 	}
+		// 	for (let j = 0; j < shipTypeCoords.length; j++) {
+		// 		if (!isShipDestroyed) {
+		// 			if (board[shipTypeCoords[j].x][shipTypeCoords[j].y].isDestroyed) isShipDestroyed = true;
+		// 			break;
+		// 		}
+		//     }
+
+		//     if (isShipHit && !isShipDestroyed) {
+		//         createTargetingList(cell.coords.x, cell.coords.y);
+		// 		break;
+		// 	}
+		// }
+
 		const hitCell = hitAnyCellEasy();
 		const { x, y } = hitCell.coords;
 		if (!hitCell.isBattleShip) return;
@@ -47,6 +75,8 @@ const UseComputerAIMedium = (
 	const hitCell = (x, y) => {
 		const newBoard = board;
 		newBoard[x][y].isHit = true;
+		// addTotalHitCpu();
+		// if (newBoard[x][y].isBattleShip) addShipHitCpu();
 		setBoard([...newBoard]);
 		registerHitTaken(x, y);
 		if (newBoard[x][y].isBattleShip) isShipDestroyed(x, y);
