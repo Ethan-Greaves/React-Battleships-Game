@@ -19,7 +19,7 @@ const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState })
 		setBoard,
 		registerHitTaken,
 		setPlayerTurnState,
-		isShipDestroyed,
+		isShipDestroyed
 		// addShipHitCpu,
 		// addTotalHitCpu
 	);
@@ -36,7 +36,7 @@ const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState })
 	}, [setPlayerTurnState]);
 
 	return (
-		<div className={styles.boardOuterMargin}>
+		<div className={`${styles.boardOuterMargin} ${styles.board}`}>
 			<PlayerBoardSetup
 				boardData={board}
 				render={(cell) => {

@@ -1,4 +1,4 @@
-import { Container, Grid, Typography } from '@material-ui/core';
+import { Box, Container, Grid, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import ComputerBoard from '../../components/computerBoard/computerBoard';
 import UseBattleSystem from '../../hooks/useBattleSystem';
@@ -43,7 +43,11 @@ const GameSession = () => {
 					<Grid container spacing={2} direction="row" alignItems="center" justifyContent="center" justify="center">
 						<Grid item></Grid>
 						<Grid item>
-							<Typography variant="h5" gutterBottom align="center">
+							<Typography
+								variant="h5"
+								gutterBottom
+								align="center"
+								style={{ color: 'black', backgroundColor: 'orange', borderRadius: '5px' }}>
 								You
 							</Typography>
 							<PlayerBoard
@@ -54,8 +58,12 @@ const GameSession = () => {
 							/>
 						</Grid>
 						<Grid item>
-							<Typography variant="h5" gutterBottom align="center">
-								Computer
+							<Typography
+								variant="h5"
+								gutterBottom
+								align="center"
+								style={{ color: 'black', backgroundColor: 'orange', borderRadius: '5px' }}>
+								<Box>{`Computer`.toUpperCase()}</Box>
 							</Typography>
 							<ComputerBoard
 								gameState={gameState.state}
@@ -66,9 +74,9 @@ const GameSession = () => {
 							/>
 						</Grid>
 					</Grid>
-					<Grid container alignItems="center" justifyContent="center" justify="center" style={{ marginTop: '2em' }}>
+					{/* <Grid container alignItems="center" justifyContent="center" justify="center" style={{ marginTop: '2em' }}>
 						<StatsInfo totalHits={totalHits} shipHits={shipHits} />
-					</Grid>
+					</Grid> */}
 				</Grid>
 			</div>
 		</Container>

@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Box, Button, Typography } from '@material-ui/core';
 import React from 'react';
 import CustomButtonStyles from './CustomButtonStyles';
 import clickSFX from '.././../assets/sfx/click.wav';
@@ -14,7 +14,9 @@ const CustomButton = ({ text }) => {
 	return (
 		<motion.div whileHover={{ scale: 1.05 }}>
 			<Button className={styles.btn} onMouseEnter={toggleClick} onClick={toggleRetroChime} variant="contained">
-				{text}
+				<Typography variant="h4">
+					<Box>{text}</Box>
+				</Typography>
 			</Button>
 		</motion.div>
 	);

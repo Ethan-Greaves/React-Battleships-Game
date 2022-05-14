@@ -11,7 +11,7 @@ import TitleCard from '../../components/TitleCard/TitleCard';
 
 const MainMenu = () => {
 	// const [playing, toggle] = useAudio(musicFile, true);
-
+	const styles = MainMenuStyles();
 	const [multiplayerButtonText, setMPButtonText] = useState('Multiplayer');
 
 	useEffect(() => {
@@ -25,7 +25,7 @@ const MainMenu = () => {
 	};
 
 	return (
-		<div>
+		<div className={styles.background}>
 			{/* <Button onClick={startMusic}>Play Music</Button> */}
 
 			<Grid

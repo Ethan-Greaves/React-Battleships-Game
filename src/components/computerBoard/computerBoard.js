@@ -8,6 +8,7 @@ import GridCell from '../GridCell/GridCell';
 import UseShipDestroyer from '../../hooks/useShipDestroyer';
 import { Typography } from '@material-ui/core';
 import UseUnit from '../../hooks/useUnit';
+import computerBoardStyles from './computerBoardStyles';
 
 const ComputerBoard = ({ gameState, setEnemyTurnState, setWonState, addShipHitPlayer, addTotalHitPlayer }) => {
 	const { boardSize } = useContext(settingsContext);
@@ -17,7 +18,7 @@ const ComputerBoard = ({ gameState, setEnemyTurnState, setWonState, addShipHitPl
 	const [addHitToShip, checkToDestroy] = UseShipDestroyer(board);
 	const { registerHitTaken, isShipDestroyed, isAllShipsDestroyed } = UseUnit('Computer', board, setBoard);
 	const isInitialMount = useRef(true);
-
+	const styles = computerBoardStyles();
 	const handleResetBoard = useCallback(() => {
 		resetBoard();
 		setShipPlacementQueue(defaultShipPlacementQueue);
@@ -53,7 +54,7 @@ const ComputerBoard = ({ gameState, setEnemyTurnState, setWonState, addShipHitPl
 	}, [isAllShipsDestroyed, randomiseBoard, setWonState]);
 
 	return (
-		<div>
+		<div className={styles.board}>
 			<ComputerBoardSetup
 				boardData={board}
 				render={(cell) => {

@@ -8,14 +8,14 @@ const GameStateInfo = ({ stateDialogue, gameState }) => {
 	const theme = useTheme();
 
 	return gameState !== 'won' && gameState !== 'lost' ? (
-		<div style={{ border: '5px solid black', marginBottom: '30px', padding: '15px', backgroundColor: 'white' }}>
-			<Typography align="center" variant="h5">
+		<div style={{ border: '3px solid black', marginBottom: '30px', padding: '10px', backgroundColor: 'white' }}>
+			<Typography align="center" variant="h4">
 				{stateDialogue.toUpperCase()}
 			</Typography>
 		</div>
 	) : (
-		<div style={{ border: '5px solid black', marginBottom: '30px', padding: '15px', backgroundColor: 'white' }}>
-			<Typography align="center" variant="h5" sx={{ fontWeight: 'bold' }}>
+		<div style={{ border: '3px solid black', marginBottom: '30px', padding: '10px', backgroundColor: 'white' }}>
+			<Typography align="center" variant="h4" sx={{ fontWeight: 'bold' }}>
 				GAME OVER!
 			</Typography>
 			<Typography align="center" variant="body2" style={{ marginBottom: theme.spacing(1.5) }}>

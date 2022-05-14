@@ -1,5 +1,7 @@
-import { Box, Grid } from '@material-ui/core';
+import { Box, Grid, Typography } from '@material-ui/core';
 import React from 'react';
+import ShipBottomCell from '../ShipBottomCell/ShipBottomCell';
+import WaterCell from '../WaterCell/WaterCell';
 import GridCellStyles from './GridCellStyles';
 
 const GridCell = ({
@@ -38,6 +40,9 @@ const GridCell = ({
 		return hoverExitFunction(coords);
 	};
 
+	let cell = <WaterCell isHit={isHit} isBattleship={isBattleShip} />;
+	if (!computerBoardCell) if (isBattleShip) cell = <ShipBottomCell isHit={isHit} isDestroyed={isDestroyed} />;
+
 	return (
 		<>
 			{/* {coords.x === 0 && <p>{String.fromCharCode(65 + coords.y)}</p>} */}
@@ -46,11 +51,9 @@ const GridCell = ({
 				<Grid container>
 					{/* <p style={{ margin: 0 }}>{coords.x}</p> */}
 					{/* <Box ml={2}></Box> */}
-					<div
-						onClick={handleClick}
-						onMouseOver={handleHover}
-						onMouseLeave={handleHoverExit}
-						className={styles.cell}></div>
+					<div onClick={handleClick} onMouseOver={handleHover} onMouseLeave={handleHoverExit} className={styles.cell}>
+						{cell}
+					</div>
 				</Grid>
 			</>
 			{/* ) : ( */}

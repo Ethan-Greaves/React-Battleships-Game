@@ -19,7 +19,7 @@ const UseComputerAIMedium = (
 	const { getCellCoordsOfType } = UseBoardScanner(board, board.length, board.length);
 
 	const mediumSimulateTurn = () => {
-		setCpuThinkingTime(Math.floor(Math.random() * 1) + 1);
+		setCpuThinkingTime(Math.floor(Math.random() * 3) + 1);
 		setTimeout(() => {
 			if (isHuntingShip) hitAnyCell();
 			if (isTargetingShip) searchingHitCell();
