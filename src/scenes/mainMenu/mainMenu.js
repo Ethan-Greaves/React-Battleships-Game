@@ -39,19 +39,12 @@ const MainMenu = () => {
 				<TitleCard isHomePage={true} />
 				<Grid item>
 					<Link to="/setupBoard">
-						<CustomButton text="Singleplayer" />
+						<CustomButton text="Play" />
 					</Link>
 				</Grid>
-				<Grid item>
-					{/* <Button
-						color="primary"
-						variant="contained"
-						onMouseOver={() => setMPButtonText('Coming Soon!')}
-						onMouseLeave={() => setMPButtonText('Multiplayer')}>
-						{multiplayerButtonText}
-					</Button> */}
+				{/* <Grid item>
 					<CustomButton text="Multiplayer" />
-				</Grid>
+				</Grid> */}
 				<Grid item>
 					<Link to="/rules">
 						<CustomButton text="Rules" />

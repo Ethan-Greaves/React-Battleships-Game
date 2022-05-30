@@ -1,6 +1,6 @@
 import ShipBottomCellImg from '../../assets/Battleship/PNG/ShipBottom.png';
 import ShipBottomCellHitImg from '../../assets/Battleship/PNG/ShipBottomHit.png';
-import generalStyles from '../../generalStyling/generalStyle';
+import generalStyles from '../../generalCSS/generalStyle';
 
 const ShipBottomCell = ({ isHit, isDestroyed }) => {
 	const styles = generalStyles();

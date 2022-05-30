@@ -10,18 +10,18 @@ const BoardSetup = () => {
 	return (
 		<Container>
 			<TitleCard isHomePage={false} />
-			<Typography variant="h4">Place Your Ships...</Typography>
+			<Typography variant="h4" align="center">
+				Place Your Ships...
+			</Typography>
 
-			<Grid container justify="space-evenly" alignItems="center" spacing={0}>
+			<Grid container alignItems="center" justify="center" justifyContent="center" spacing={2}>
 				<Grid item>
 					<YourShips />
 				</Grid>
 				<Grid item>
 					<SetupBoard />
 				</Grid>
-				<Grid item>
-					{/* <ComputerBoard /> */}
-				</Grid>
+				<Grid item>{/* <ComputerBoard /> */}</Grid>
 			</Grid>
 			{/* //TODO put this component in setupBoard file, make the ships arr part of state, shift array whenever ship is placed and dequeued */}
 		</Container>

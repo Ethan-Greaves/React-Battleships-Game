@@ -113,7 +113,7 @@ const SetupBoard = () => {
 				/>
 			</div>
 
-			<Grid container justify="center" spacing={2} className={styles.buttonGrid}>
+			{/* <Grid container justify="center" spacing={2} className={styles.buttonGrid}>
 				<Grid item>
 					<Tooltip title="Randomise">
 						<Button onClick={randomiseBoard} variant="contained" size="large" color="primary">
@@ -135,7 +135,7 @@ const SetupBoard = () => {
 						</Button>
 					</Tooltip>
 				</Grid>
-			</Grid>
+			</Grid> */}
 		</div>
 	);
 };
