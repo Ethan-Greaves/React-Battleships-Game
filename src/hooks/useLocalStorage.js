@@ -12,8 +12,7 @@ export const UseLocalStorage = (key, initialValue) => {
 	});
 
 	React.useEffect(() => {
-		const rawValue = JSON.stringify(value);
-		localStorage.setItem(key, rawValue);
+		localStorage.setItem(key, value);
 	}, [key, value]);
 
 	return [value, setValue];

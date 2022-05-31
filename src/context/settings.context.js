@@ -1,11 +1,12 @@
 import React, { createContext, useState } from 'react';
+import { UseLocalStorage } from '../hooks/useLocalStorage';
 import { cpuDifficultyValues, boardSizes } from '../misc/settingsValues';
 
 const settingsContext = createContext();
 
 const SettingsProvider = ({ children }) => {
-	const [boardSizeVal, setBoardSizeVal] = useState(0);
-	const [aiDifficulty, setAiDifficulty] = useState(cpuDifficultyValues[0].value);
+	const [boardSizeVal, setBoardSizeVal] = UseLocalStorage('boardSizeVal', 0);
+	const [aiDifficulty, setAiDifficulty] = UseLocalStorage('aiDifficulty', cpuDifficultyValues[0].value);
 	const boardSize = boardSizes[boardSizeVal];
 
 	return (
