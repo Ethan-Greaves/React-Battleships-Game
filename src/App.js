@@ -11,11 +11,18 @@ function App() {
 	const theme = createMuiTheme({
 		spacing: 8,
 
-		// palette: {
-		// 	primary: {
-		// 		// main: '#ff4400',
-		// 	},
-		// },
+		palette: {
+			primary: {
+				main: '#ff9033',
+			},
+			secondary: {
+				main: '#ffff00',
+			},
+		},
+
+		shape: {
+			borderRadius: '10px',
+		},
 	});
 
 	return (

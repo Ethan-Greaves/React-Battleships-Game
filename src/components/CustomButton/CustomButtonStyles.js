@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
 	btn: {
-		border: `5px solid yellow`,
+		border: `5px solid ${theme.palette.secondary.main}`,
 		color: 'white',
 		// backgroundColor: '#ff6633',
 		background: 'rgb(255,102,51)',
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 		height: '4rem',
 		display: 'inline-block',
 		textAlign: 'center',
-		borderRadius: '10px',
+		borderRadius: theme.shape.borderRadius,
 		'&:hover': {
 			backgroundColor: '#ff6633',
 		},

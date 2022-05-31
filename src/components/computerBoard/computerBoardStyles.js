@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
 		cursor: `url(${customCrosshair}) 20 20, auto;`,
 		backgroundColor: 'black',
 		padding: '15px',
-		border: '8px dashed   #666666',
+		border: '8px dashed #666666',
 	},
 
 	buttonGrid: {
