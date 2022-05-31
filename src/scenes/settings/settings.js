@@ -1,68 +1,17 @@
-import { Container, Grid, Slider, Button, Typography } from '@material-ui/core';
+import { Container, Grid, Button, Typography } from '@material-ui/core';
 import React, { useState, useContext } from 'react';
 import TitleCard from '../../components/TitleCard/TitleCard';
 import { cpuDifficultyValues, boardSizes } from '../../misc/settingsValues';
 import { settingsContext } from '../../context/settings.context';
 import { Link } from 'react-router-dom';
 import CustomButton from '../../components/CustomButton/CustomButton';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-
-const sliderTrackHeight = 16;
-const ThumbSize = sliderTrackHeight * 2;
-
-const useStyles = makeStyles((theme) => ({
-	root: {
-		width: 3000 + theme.spacing(3) * 2,
-		margin: theme.spacing(3),
-	},
-	margin: {
-		height: theme.spacing(3),
-	},
-
-	mark: {
-		color: 'white',
-		marginTop: theme.spacing(3),
-		fontSize: theme.typography.body1.fontSize,
-	},
-
-	settingsTitle: {
-		color: 'white',
-	},
-}));
-
-const CustomSlider = withStyles((theme) => ({
-	root: {
-		color: theme.palette.primary.main,
-		height: 8,
-	},
-	thumb: {
-		height: ThumbSize,
-		width: ThumbSize,
-		backgroundColor: theme.palette.primary.main,
-		border: `4px solid ${theme.palette.secondary.main}`,
-		marginTop: -8,
-		marginLeft: -12,
-		'&:focus,&:hover,&$active': {
-			boxShadow: 'inherit',
-		},
-	},
-
-	active: {},
-	track: {
-		height: sliderTrackHeight,
-		borderRadius: theme.shape.borderRadius,
-	},
-	rail: {
-		height: sliderTrackHeight,
-		borderRadius: theme.shape.borderRadius,
-		opacity: 1,
-	},
-}))(Slider);
+import settingsStyles from './settingsStyles';
+import CustomSlider from './customSlider';
 
 const Settings = () => {
 	const { boardSizeVal, setBoardSizeVal } = useContext(settingsContext);
 	const { aiDifficulty, setAiDifficulty } = useContext(settingsContext);
-	const styles = useStyles();
+	const styles = settingsStyles();
 
 	return (
 		<Container>
