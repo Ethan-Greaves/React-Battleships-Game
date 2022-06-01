@@ -23,7 +23,7 @@ const UseComputerAI = (
 	isShipDestroyed,
 ) => {
 	const { aiDifficulty } = useContext(settingsContext);
-	const [aiState, setAiState] = useState(1);
+	const [aiState, setAiState] = useState(aiDifficulty);
 	const { boardSize } = useContext(settingsContext);
 	const { getRandomNonHitCell } = UseBoardScanner(board, boardSize.rows, boardSize.cols);
 
