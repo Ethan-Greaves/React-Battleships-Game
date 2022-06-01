@@ -1,4 +1,4 @@
-import { Box, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import RuleTextStyles from './RuleTextStyles';
 
 const RuleText = ({ title, body }) => {
@@ -9,7 +9,7 @@ const RuleText = ({ title, body }) => {
 				{title}
 			</Typography>
 			<Typography variant="body1" className={styles.spacedApart}>
-				<Box fontWeight="light">{body}</Box>
+				{body}
 			</Typography>
 		</>
 	);
