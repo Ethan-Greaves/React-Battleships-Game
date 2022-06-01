@@ -17,7 +17,7 @@ const Settings = () => {
 		<Container>
 			<TitleCard isHomePage={false} />
 			<Grid container justify={'center'} direction="column" alignItems="center" spacing={3}>
-				<div style={{ backgroundColor: 'rgba(0,0,0,0.3)', padding: '15px', borderRadius: '10px' }}>
+				<div className={styles.background}>
 					<Grid item>
 						<div style={{ width: 500, margin: 60 }} className={styles.root}>
 							<Typography align="center" variant="h5" className={styles.settingsTitle}>
