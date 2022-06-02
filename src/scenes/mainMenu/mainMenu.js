@@ -2,17 +2,13 @@ import { Typography, Grid, Button, Box } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import MainMenuStyles from './mainMenuStyles';
 import { Link } from 'react-router-dom';
-import musicFile from '.././../assets/music/468542__ddmyzik__civil-war-field-loop.wav';
-import useAudio from '../../hooks/useAudio';
-import YourShip from '../../components/YourShip/YourShip';
-import YourShips from '../../components/YourShips/YourShips';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import TitleCard from '../../components/TitleCard/TitleCard';
-
+import { UseQuitGame } from '../../hooks/useQuitGame';
 const MainMenu = () => {
 	// const [playing, toggle] = useAudio(musicFile, true);
 	const styles = MainMenuStyles();
-	const [multiplayerButtonText, setMPButtonText] = useState('Multiplayer');
+	const { quit } = UseQuitGame();
 
 	useEffect(() => {
 		// toggle();
@@ -26,8 +22,6 @@ const MainMenu = () => {
 
 	return (
 		<div className={styles.background}>
-			{/* <Button onClick={startMusic}>Play Music</Button> */}
-
 			<Grid
 				container
 				spacing={2}
@@ -42,9 +36,6 @@ const MainMenu = () => {
 						<CustomButton text="Play" />
 					</Link>
 				</Grid>
-				{/* <Grid item>
-					<CustomButton text="Multiplayer" />
-				</Grid> */}
 				<Grid item>
 					<Link to="/rules">
 						<CustomButton text="Rules" />
@@ -56,7 +47,7 @@ const MainMenu = () => {
 					</Link>
 				</Grid>
 				<Grid item>
-					<CustomButton text="Quit" />
+					<CustomButton text="Quit" onClick={quit} />
 				</Grid>
 			</Grid>
 		</div>
