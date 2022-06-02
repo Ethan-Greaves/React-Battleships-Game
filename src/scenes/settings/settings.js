@@ -7,17 +7,18 @@ import { Link } from 'react-router-dom';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import settingsStyles from './settingsStyles';
 import CustomSlider from './customSlider';
+import generalStyles from '../../generalCSS/generalStyle';
 
 const Settings = () => {
 	const { boardSizeVal, setBoardSizeVal } = useContext(settingsContext);
 	const { aiDifficulty, setAiDifficulty } = useContext(settingsContext);
 	const styles = settingsStyles();
-
+	const generalStyle = generalStyles({ transparentBgPadding: '15px' });
 	return (
 		<Container>
 			<TitleCard isHomePage={false} />
 			<Grid container justify={'center'} direction="column" alignItems="center" spacing={3}>
-				<div className={styles.background}>
+				<div className={generalStyle.transparentBackground}>
 					<Grid item>
 						<div style={{ width: 500, margin: 60 }} className={styles.root}>
 							<Typography align="center" variant="h5" className={styles.settingsTitle}>

@@ -116,13 +116,28 @@ const SetupBoard = () => {
 
 			<Grid container justify="center" spacing={2} className={styles.buttonGrid}>
 				<Grid item>
-					<CustomButton text={<FontAwesomeIcon icon={faDice} size="xs" />} size="small" tooltipText="Randomise" center />
+					<CustomButton
+						text={<FontAwesomeIcon icon={faDice} size="xs" />}
+						size="small"
+						tooltipText="Randomise"
+						onClick={randomiseBoard}
+					/>
 				</Grid>
 				<Grid item>
-					<CustomButton text={<FontAwesomeIcon icon={faBackward} size="xs" />} size="small" tooltipText="Rotate Ship" />
+					<CustomButton
+						text={<FontAwesomeIcon icon={faBackward} size="xs" />}
+						size="small"
+						tooltipText="Reset Ships"
+						onClick={handleResetBoard}
+					/>
 				</Grid>
 				<Grid item>
-					<CustomButton text={<FontAwesomeIcon icon={faRotate} size="xs" />} size="small" tooltipText="Reset Ships" />
+					<CustomButton
+						text={<FontAwesomeIcon icon={faRotate} size="xs" />}
+						size="small"
+						tooltipText="Rotate Ship"
+						onClick={changePlacementDirectionClick}
+					/>
 				</Grid>
 			</Grid>
 		</div>

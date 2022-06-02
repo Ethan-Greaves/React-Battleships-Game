@@ -43,11 +43,7 @@ const GameSession = () => {
 					<Grid container spacing={2} direction="row" alignItems="center" justifyContent="center" justify="center">
 						<Grid item></Grid>
 						<Grid item>
-							<Typography
-								variant="h5"
-								gutterBottom
-								align="center"
-								style={{ color: 'black', backgroundColor: 'orange', borderRadius: '5px' }}>
+							<Typography variant="h5" gutterBottom align="center" className={styles.boardLabel}>
 								You
 							</Typography>
 							<PlayerBoard
@@ -58,11 +54,7 @@ const GameSession = () => {
 							/>
 						</Grid>
 						<Grid item>
-							<Typography
-								variant="h5"
-								gutterBottom
-								align="center"
-								style={{ color: 'black', backgroundColor: 'orange', borderRadius: '5px' }}>
+							<Typography variant="h5" gutterBottom align="center" className={styles.boardLabel}>
 								<Box>{`Computer`.toUpperCase()}</Box>
 							</Typography>
 							<ComputerBoard
@@ -74,9 +66,6 @@ const GameSession = () => {
 							/>
 						</Grid>
 					</Grid>
-					{/* <Grid container alignItems="center" justifyContent="center" justify="center" style={{ marginTop: '2em' }}>
-						<StatsInfo totalHits={totalHits} shipHits={shipHits} />
-					</Grid> */}
 				</Grid>
 			</div>
 		</Container>

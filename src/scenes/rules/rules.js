@@ -2,12 +2,11 @@ import { Box, Container, Grid, Typography } from '@material-ui/core';
 import React from 'react';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import TitleCard from '../../components/TitleCard/TitleCard';
-import RulesStyles from './rulesStyles';
 import { Link } from 'react-router-dom';
 import RuleText from '../../components/RuleText/RuleText';
-
+import generalStyles from '../../generalCSS/generalStyle';
 const Rules = () => {
-	const styles = RulesStyles();
+	const generalStyle = generalStyles({ transparentBgPadding: '35px' });
 	return (
 		<Container maxWidth="md">
 			<Grid
@@ -20,7 +19,7 @@ const Rules = () => {
 				<Grid item>
 					<TitleCard isHomePage={false} />
 				</Grid>
-				<div className={styles.background}>
+				<div className={generalStyle.transparentBackground}>
 					<Grid item>
 						<RuleText
 							title="Game Objective"

@@ -15,12 +15,6 @@ const useStyles = makeStyles((theme) => ({
 		fontSize: theme.typography.body1.fontSize,
 	},
 
-	background: {
-		backgroundColor: 'rgba(0,0,0,0.3)',
-		padding: '15px',
-		borderRadius: '10px',
-	},
-
 	settingsTitle: {
 		color: 'white',
 	},

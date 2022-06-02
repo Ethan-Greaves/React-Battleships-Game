@@ -34,10 +34,6 @@ const useStyles = makeStyles((theme) => ({
 		width: `${width / 4}rem`,
 		height: `${height / 1.1}rem`,
 	},
-
-	// tooltip: {
-	// 	fontSize: '10em',
-	// },
 }));
 
 export default useStyles;

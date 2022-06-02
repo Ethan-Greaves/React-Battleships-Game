@@ -8,7 +8,7 @@ import UseUnit from '../../hooks/useUnit';
 import PlayerBoardStyles from './PlayerBoardStyles';
 import { Typography } from '@material-ui/core';
 import UseComputerAI from '../../hooks/useComputerAI';
-import StatsInfo from '../StatsInfo/StatsInfo';
+import generalStyles from '../../generalCSS/generalStyle';
 
 const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState }) => {
 	const [board, setBoard, resetBoard] = useBoardCreator(boardData.length, boardData.length);
@@ -24,6 +24,7 @@ const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState })
 		// addTotalHitCpu
 	);
 	const styles = PlayerBoardStyles();
+	const generalStyle = generalStyles();
 
 	/**UseEffect can ben seen almost as a start and update function, akin to Unity.
 	 * The function runs on every re-render of a component, a component re-renders
@@ -36,7 +37,7 @@ const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState })
 	}, [setPlayerTurnState]);
 
 	return (
-		<div className={`${styles.boardOuterMargin} ${styles.board}`}>
+		<div className={`${generalStyle.boardBackground} ${styles.board}`}>
 			<PlayerBoardSetup
 				boardData={board}
 				render={(cell) => {
