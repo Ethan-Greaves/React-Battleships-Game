@@ -15,6 +15,7 @@ import retroChimeSfx from '../../assets/sfx/RetroChime.wav';
 import { settingsContext } from '../../context/settings.context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDice, faRotate, faBackward } from '@fortawesome/free-solid-svg-icons';
+import CustomButton from '../CustomButton/CustomButton';
 
 //#endregion
 const SetupBoard = () => {
@@ -113,29 +114,17 @@ const SetupBoard = () => {
 				/>
 			</div>
 
-			{/* <Grid container justify="center" spacing={2} className={styles.buttonGrid}>
+			<Grid container justify="center" spacing={2} className={styles.buttonGrid}>
 				<Grid item>
-					<Tooltip title="Randomise">
-						<Button onClick={randomiseBoard} variant="contained" size="large" color="primary">
-							<FontAwesomeIcon icon={faDice} />
-						</Button>
-					</Tooltip>
+					<CustomButton text={<FontAwesomeIcon icon={faDice} size="xs" />} size="small" tooltipText="Randomise" center />
 				</Grid>
 				<Grid item>
-					<Tooltip title="Reset Ships">
-						<Button onClick={handleResetBoard} variant="contained" size="large" color="primary">
-							<FontAwesomeIcon icon={faBackward} />
-						</Button>
-					</Tooltip>
+					<CustomButton text={<FontAwesomeIcon icon={faBackward} size="xs" />} size="small" tooltipText="Rotate Ship" />
 				</Grid>
 				<Grid item>
-					<Tooltip title="Rotate Ship">
-						<Button onClick={changePlacementDirectionClick} variant="contained" size="large" color="primary">
-							<FontAwesomeIcon icon={faRotate} />
-						</Button>
-					</Tooltip>
+					<CustomButton text={<FontAwesomeIcon icon={faRotate} size="xs" />} size="small" tooltipText="Reset Ships" />
 				</Grid>
-			</Grid> */}
+			</Grid>
 		</div>
 	);
 };
