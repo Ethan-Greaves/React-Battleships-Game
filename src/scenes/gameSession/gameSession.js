@@ -27,47 +27,45 @@ const GameSession = () => {
 
 	return (
 		<Container maxWidth="md">
-			<div className={styles.div}>
-				<Grid
-					container
-					direction="column"
-					alignItems="center"
-					justifyContent="center"
-					justify="center"
-					style={{ minHeight: '90vh' }}>
-					<Grid item>
-						<TitleCard isHomePage={false} />
-						<GameStateInfo stateDialogue={dialogueText} gameState={gameState.state} />
-					</Grid>
+			<Grid
+				container
+				direction="column"
+				alignItems="center"
+				justifyContent="center"
+				justify="center"
+				style={{ minHeight: '90vh' }}>
+				<Grid item>
+					<TitleCard isHomePage={false} />
+					<GameStateInfo stateDialogue={dialogueText} gameState={gameState.state} />
+				</Grid>
 
-					<Grid container spacing={2} direction="row" alignItems="center" justifyContent="center" justify="center">
-						<Grid item></Grid>
-						<Grid item>
-							<Typography variant="h5" gutterBottom align="center" className={styles.boardLabel}>
-								You
-							</Typography>
-							<PlayerBoard
-								gameState={gameState.state}
-								setPlayerTurnState={setPlayerTurnState}
-								boardData={fromUseShips.board}
-								setLostState={setLostState}
-							/>
-						</Grid>
-						<Grid item>
-							<Typography variant="h5" gutterBottom align="center" className={styles.boardLabel}>
-								<Box>{`Computer`.toUpperCase()}</Box>
-							</Typography>
-							<ComputerBoard
-								gameState={gameState.state}
-								setEnemyTurnState={setEnemyTurnState}
-								setWonState={setWonState}
-								addShipHitPlayer={addShipHit}
-								addTotalHitPlayer={addTotalHit}
-							/>
-						</Grid>
+				<Grid container spacing={2} direction="row" alignItems="center" justifyContent="center" justify="center">
+					<Grid item></Grid>
+					<Grid item>
+						<Typography variant="h5" gutterBottom align="center" className={styles.boardLabel}>
+							You
+						</Typography>
+						<PlayerBoard
+							gameState={gameState.state}
+							setPlayerTurnState={setPlayerTurnState}
+							boardData={fromUseShips.board}
+							setLostState={setLostState}
+						/>
+					</Grid>
+					<Grid item>
+						<Typography variant="h5" gutterBottom align="center" className={styles.boardLabel}>
+							<Box>{`Computer`.toUpperCase()}</Box>
+						</Typography>
+						<ComputerBoard
+							gameState={gameState.state}
+							setEnemyTurnState={setEnemyTurnState}
+							setWonState={setWonState}
+							addShipHitPlayer={addShipHit}
+							addTotalHitPlayer={addTotalHit}
+						/>
 					</Grid>
 				</Grid>
-			</div>
+			</Grid>
 		</Container>
 	);
 };

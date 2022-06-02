@@ -4,9 +4,11 @@ import useEventBus from '../../hooks/useEventBus';
 import { Typography, Button } from '@material-ui/core';
 import YourShipStyles from './YourShipsStyles';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-
+import generalStyles from '../../generalCSS/generalStyle'
+import CustomButton from '../CustomButton/CustomButton';
 
 const YourShips = () => {
+    const generalStyle = generalStyles();
     const styles = YourShipStyles();
     const shipArr = useMemo(() => [
         { name: 'Carrier', size: 5, isBeingPlaced: true },
@@ -58,19 +60,19 @@ const YourShips = () => {
     
     return (
         <div>
-            <Typography variant="h5" align="center" gutterBottom >Your Ships</Typography>
-            {!allShipsPlaced ? newShips.map(ship => {
+            {!allShipsPlaced ? <Typography variant="h5" align="center" gutterBottom className={generalStyle.transparentBackground}>Your Ships</Typography> :  ""}
+            {!allShipsPlaced ?
+                newShips.map(ship => {
                 return (
                     <YourShip name={ship.name} size={ship.size} isBeingPlaced={ship.isBeingPlaced}/>
                 );
             }) :
                 <div>
-                    <Typography variant="h6">Ships are in formation</Typography>
                     <Link to={{
                         pathname: "/gameSession",
                         state: { board },
                     }}>
-                        <Button variant="contained" className={styles.startGame}align="center">Start Game</Button>
+                        <CustomButton text={"Start Game"}/>
                     </Link>
                 </div>}
             

@@ -1,32 +1,25 @@
 //#region IMPORTS
 import React, { useContext, useState, useEffect } from 'react';
-import { Button, Grid, Tooltip } from '@material-ui/core';
-import useBoardCreator from '../../hooks/useBoardCreator';
-import useShipPlacementDirection from '../../hooks/useShipPlacementDirection';
-import useShipPlacementQueue from '../../hooks/useShipPlacementQueue';
-import useShipPreview from '../../hooks/useShipPreview';
-import UseShipPlacer from '../../hooks/useShipPlacer';
 import PlayerBoardSetup from '../Board/Board';
 import GridCell from '../GridCell/GridCell';
 import SetupBoardStyles from './SetupBoardStyles';
 import useEventBus from '../../hooks/useEventBus';
 import useAudio from '../../hooks/useAudio';
 import retroChimeSfx from '../../assets/sfx/RetroChime.wav';
-import { settingsContext } from '../../context/settings.context';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDice, faRotate, faBackward } from '@fortawesome/free-solid-svg-icons';
-import CustomButton from '../CustomButton/CustomButton';
+import generalStyles from '../../generalCSS/generalStyle';
 
 //#endregion
-const SetupBoard = () => {
+const SetupBoard = ({
+	board,
+	setBoard,
+	placementDirection,
+	shipPlacementQueue,
+	setShipPlacementQueue,
+	showPreview,
+	removePreview,
+}) => {
 	//#region INITIALISATION
-	const { boardSize } = useContext(settingsContext);
-	const [board, setBoard, resetBoard] = useBoardCreator(boardSize.rows, boardSize.cols);
-	const [placementDirection, changePlacementDirection, changePlacementDirectionClick] =
-		useShipPlacementDirection('horizontal');
-	const { placeShip, placeShipsRandomly } = UseShipPlacer(board, boardSize.rows, boardSize.cols);
-	const [shipPlacementQueue, setShipPlacementQueue, defaultShipPlacementQueue] = useShipPlacementQueue(placeShip);
-	const { showPreview, removePreview } = useShipPreview(board, boardSize.rows, boardSize.cols);
+	const generalStyle = generalStyles();
 	const styles = SetupBoardStyles();
 	const [currentHoveredCoordinates, setCurrentHoveredCoordinates] = useState({
 		x: 0,
@@ -53,19 +46,6 @@ const SetupBoard = () => {
 		}
 	};
 
-	const randomiseBoard = () => {
-		handleResetBoard();
-		placeShipsRandomly(defaultShipPlacementQueue, setShipPlacementQueue);
-		toggleRetroChime();
-		useEventBus.dispatch('boardRandomized', { message: 'board has been randomized' });
-	};
-
-	const handleResetBoard = () => {
-		resetBoard();
-		setShipPlacementQueue(defaultShipPlacementQueue);
-		useEventBus.dispatch('boardReset', { message: 'board has been reset' });
-	};
-
 	const handleShipPreview = (coords) => {
 		setCurrentHoveredCoordinates(coords);
 		showPreview(coords, fixShipSize(), placementDirection);
@@ -86,13 +66,8 @@ const SetupBoard = () => {
 	};
 
 	return (
-		<div
-			// onKeyDown={(e) => {
-			// 	handleRemovePreview(currentHoveredCoordinates);
-			// 	changePlacementDirection(e);
-			// }}
-			tabIndex="0">
-			<div className={styles.board}>
+		<div tabIndex="0">
+			<div className={`${styles.board} ${generalStyle.boardBackground}`}>
 				<PlayerBoardSetup
 					boardData={board}
 					render={(cell) => {
@@ -113,33 +88,6 @@ const SetupBoard = () => {
 					}}
 				/>
 			</div>
-
-			<Grid container justify="center" spacing={2} className={styles.buttonGrid}>
-				<Grid item>
-					<CustomButton
-						text={<FontAwesomeIcon icon={faDice} size="xs" />}
-						size="small"
-						tooltipText="Randomise"
-						onClick={randomiseBoard}
-					/>
-				</Grid>
-				<Grid item>
-					<CustomButton
-						text={<FontAwesomeIcon icon={faBackward} size="xs" />}
-						size="small"
-						tooltipText="Reset Ships"
-						onClick={handleResetBoard}
-					/>
-				</Grid>
-				<Grid item>
-					<CustomButton
-						text={<FontAwesomeIcon icon={faRotate} size="xs" />}
-						size="small"
-						tooltipText="Rotate Ship"
-						onClick={changePlacementDirectionClick}
-					/>
-				</Grid>
-			</Grid>
 		</div>
 	);
 };
