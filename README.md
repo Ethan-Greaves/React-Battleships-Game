@@ -26,7 +26,7 @@ React-Battleships-Game is a video game created in React. It is based upon the cl
 
 ## Visuals 🎬
 <p>Settings menu:</p>
-<img src="https://www.kapwing.com/e/629a58c4490c2b008b566b55" width="auto" />
+<img src="https://media.giphy.com/media/vMcacKs0QQjtVlKbsU/giphy.gif" width="auto" />
 
 <p>Ship Placement</p>
 <img src="https://media.giphy.com/media/KSSZvfa8TWCcz6aZci/giphy.gif" width="auto" />
