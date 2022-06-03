@@ -4,8 +4,6 @@ import PlayerBoardSetup from '../Board/Board';
 import GridCell from '../GridCell/GridCell';
 import SetupBoardStyles from './SetupBoardStyles';
 import useEventBus from '../../hooks/useEventBus';
-import useAudio from '../../hooks/useAudio';
-import retroChimeSfx from '../../assets/sfx/RetroChime.wav';
 import generalStyles from '../../generalCSS/generalStyle';
 
 //#endregion
@@ -25,7 +23,6 @@ const SetupBoard = ({
 		x: 0,
 		y: 0,
 	});
-	const [playingRetroChime, toggleRetroChime] = useAudio(retroChimeSfx, false);
 
 	//#endregion
 
@@ -39,7 +36,6 @@ const SetupBoard = ({
 
 		if (couldBePlaced) {
 			shipPlacementQueue.dequeue();
-			toggleRetroChime();
 			setShipPlacementQueue(shipPlacementQueue);
 			useEventBus.dispatch('shipPlaced', { message: 'ship has been placed', board });
 			setBoard([...board]);

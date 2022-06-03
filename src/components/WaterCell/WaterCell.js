@@ -3,12 +3,9 @@ import waterCellHitImg from '../../assets/Battleship/PNG/tile_red.png';
 import waterCellMissImg from '../../assets/Battleship/PNG/tile_green.png';
 import generalStyles from '../../generalCSS/generalStyle';
 import waterCellStyles from './WaterCellStyles';
-import useAudio from '../../hooks/useAudio';
-import WaterPlopSfx from '../../assets/sfx/WaterMissPlop.ogg';
 import { useEffect } from 'react';
 
 const WaterCell = ({ isHit, isBattleship, isPreviewing }) => {
-	const [isPlaying, toggle] = useAudio(WaterPlopSfx, false);
 	const generalStyle = generalStyles();
 	const style = waterCellStyles();
 
@@ -18,10 +15,6 @@ const WaterCell = ({ isHit, isBattleship, isPreviewing }) => {
 	else if (isHit) {
 		img = waterCellMissImg;
 	}
-
-	useEffect(() => {
-		if (isHit) toggle();
-	}, []);
 
 	return (
 		<>

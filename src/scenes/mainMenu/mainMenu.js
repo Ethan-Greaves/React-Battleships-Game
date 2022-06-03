@@ -6,19 +6,8 @@ import CustomButton from '../../components/CustomButton/CustomButton';
 import TitleCard from '../../components/TitleCard/TitleCard';
 import { UseQuitGame } from '../../hooks/useQuitGame';
 const MainMenu = () => {
-	// const [playing, toggle] = useAudio(musicFile, true);
 	const styles = MainMenuStyles();
 	const { quit } = UseQuitGame();
-
-	useEffect(() => {
-		// toggle();
-	}, []);
-
-	const setGameMode = () => {};
-
-	const closeTab = () => {
-		window.open('', '_self').close();
-	};
 
 	return (
 		<div className={styles.background}>

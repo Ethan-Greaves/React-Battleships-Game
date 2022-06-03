@@ -31,7 +31,6 @@ const BoardSetup = () => {
 	const randomiseBoard = () => {
 		handleResetBoard();
 		placeShipsRandomly(defaultShipPlacementQueue, setShipPlacementQueue);
-		// toggleRetroChime();
 		useEventBus.dispatch('boardRandomized', { message: 'board has been randomized' });
 	};
 
