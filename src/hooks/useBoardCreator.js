@@ -44,6 +44,10 @@ const UseBoardCreator = (rows, cols) => {
 				board[x][y].isDestroyed = false;
 				board[x][y].type = '';
 				board[x][y].isHit = false;
+				board[x][y].isShipBottom = false;
+				board[x][y].isShipMiddle = false;
+				board[x][y].isShipTop = false;
+				board[x][y].direction = '';
 			}
 		}
 
