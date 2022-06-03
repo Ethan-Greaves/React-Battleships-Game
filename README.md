@@ -9,14 +9,14 @@
 <hr>
 
 ## Overview 📖
-React-Battleships-Game is a video game created in React. It is based upon the classic board game "Battleships" created by Hasbro. this project has features such as different enemy AI difficulty levels, ship placement, both manual and random, and a settings menu to adjust the board size and difficulty. 
+React-Battleships-Game is a video game created in React/JavaScript and also uses the UI kit Material-UI and React-Router. It is based upon the classic board game "Battleships" made by Hasbro. this project has features such as different enemy AI difficulty levels, ship placement, both manual and random, and a settings menu to adjust the board size and difficulty. 
 
 ## Details 👨‍💻
 
 ### Technologies & concepts
 * React
 * React-Router
-* Material-ui
+* Material-UI
 
 ### Features
 * Setup your board and place ships manually or randomly 
@@ -29,12 +29,10 @@ React-Battleships-Game is a video game created in React. It is based upon the cl
 <img src="https://www.kapwing.com/e/629a58c4490c2b008b566b55" width="auto" />
 
 <p>Ship Placement</p>
-<img src="https://media.giphy.com/media/KSSZvfa8TWCcz6aZci/giphy.gif" width="auto" />
+<img src="https://media.giphy.com/media/Ex4aajevQbkidr9t7L/giphy.gif" width="auto" />
 
 <p>Play against AI</p>
-<img src="https://media.giphy.com/media/az9JW9xRwXQ2xIvZBi/giphy.gif" width="auto" />
-
-## Setup ⚙️
+<img src="https://media.giphy.com/media/GNlHVIYsHZvk9AWFUa/giphy.gif" width="auto" />
 
 
 
