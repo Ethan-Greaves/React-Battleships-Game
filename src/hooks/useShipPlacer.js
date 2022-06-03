@@ -9,9 +9,15 @@ const UseShipPlacer = (board, rows, cols) => {
 	 * @param coordTwo {number} - The second board coordinate.
 	 * @param type {string} - The ship type that will be added to the cell object.
 	 */
-	const placeCell = (coordOne, coordTwo, type) => {
+	const placeCell = (coordOne, coordTwo, type, i, amount, direction) => {
 		board[coordOne][coordTwo].isBattleShip = !board[coordOne][coordTwo].isBattleShip;
 		board[coordOne][coordTwo].type = type;
+
+		if (i === 0) board[coordOne][coordTwo].isShipBottom = true;
+		else if (i === amount - 1) board[coordOne][coordTwo].isShipTop = true;
+		else board[coordOne][coordTwo].isShipMiddle = true;
+
+		board[coordOne][coordTwo].direction = direction;
 	};
 
 	/**
@@ -29,11 +35,13 @@ const UseShipPlacer = (board, rows, cols) => {
 		const { x, y } = coords;
 		if (direction === 'vertical') {
 			for (let i = 0; i < amount; i++) if (!isCellInGrid(x - i, y) || !isCellEmpty(x - i, y)) return false;
-			for (let i = 0; i < amount; i++) placeCell(x - i, y, type);
+			for (let i = 0; i < amount; i++) placeCell(x - i, y, type, i, amount, direction);
 		} else {
 			for (let i = 0; i < amount; i++) if (!isCellInGrid(x, y - i) || !isCellEmpty(x, y - i)) return false;
-			for (let i = 0; i < amount; i++) placeCell(x, y - i, type);
+			for (let i = 0; i < amount; i++) placeCell(x, y - i, type, i, amount, direction);
 		}
+		console.log(board);
+		console.log(amount);
 		return true;
 	};
 
@@ -47,10 +55,7 @@ const UseShipPlacer = (board, rows, cols) => {
 			const randomDirection = directions[Math.floor(Math.random() * directions.length)];
 
 			//* Execute function which is the value from the first in queue, save the return value of said function
-			const canBePlaced = shipPlacementQueue.returnFirstInQueue()(
-				getRandomEmptyCell().coords,
-				randomDirection
-			);
+			const canBePlaced = shipPlacementQueue.returnFirstInQueue()(getRandomEmptyCell().coords, randomDirection);
 			if (!canBePlaced) return placeShipsRandomly(shipPlacementQueue, setShipPlacementQueue);
 
 			shipPlacementQueue.dequeue();

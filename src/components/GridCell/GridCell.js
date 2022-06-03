@@ -1,6 +1,8 @@
 import { Box, Grid, Typography } from '@material-ui/core';
 import React from 'react';
 import ShipBottomCell from '../ShipBottomCell/ShipBottomCell';
+import ShipMiddleCell from '../ShipMiddleCell/ShipMiddleCell';
+import ShipTopCell from '../ShipTopCell/ShipTopCell';
 import WaterCell from '../WaterCell/WaterCell';
 import GridCellStyles from './GridCellStyles';
 
@@ -16,6 +18,10 @@ const GridCell = ({
 	computerBoardCell,
 	type,
 	isDestroyed,
+	placementDirection,
+	isShipTop,
+	isShipMiddle,
+	isShipBottom,
 }) => {
 	const styles = GridCellStyles({
 		isBattleShip,
@@ -40,15 +46,24 @@ const GridCell = ({
 		return hoverExitFunction(coords);
 	};
 
-	let cell = <WaterCell isHit={isHit} isBattleship={isBattleShip} isPreviewing={isPreviewing} />;
-	if (!computerBoardCell)
-		if (isBattleShip) cell = <ShipBottomCell isHit={isHit} isDestroyed={isDestroyed} isPreviewing={isPreviewing} />;
-	// if (isPreviewing) cell = <ShipBottomCell isHit={isHit} isDestroyed={isDestroyed} isPreviewing={isPreviewing} />;
+	const determineCell = () => {
+		let cell = <WaterCell isHit={isHit} isBattleship={isBattleShip} isPreviewing={isPreviewing} />;
+		if (!computerBoardCell) {
+			if (isBattleShip && isShipBottom)
+				cell = <ShipBottomCell isHit={isHit} isDestroyed={isDestroyed} orientation={placementDirection} />;
+			if (isBattleShip && isShipMiddle)
+				cell = <ShipMiddleCell isHit={isHit} isDestroyed={isDestroyed} orientation={placementDirection} />;
+			if (isBattleShip && isShipTop)
+				cell = <ShipTopCell isHit={isHit} isDestroyed={isDestroyed} orientation={placementDirection} isPlaced={true} />;
+		}
+
+		return cell;
+	};
 
 	return (
 		<Grid container>
 			<div onClick={handleClick} onMouseOver={handleHover} onMouseLeave={handleHoverExit} className={styles.cell}>
-				{cell}
+				{determineCell()}
 			</div>
 		</Grid>
 	);

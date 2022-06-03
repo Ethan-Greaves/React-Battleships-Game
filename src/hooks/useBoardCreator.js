@@ -3,7 +3,7 @@ import { useState } from 'react';
 const UseBoardCreator = (rows, cols) => {
 	/**
 	 * Create a 2D array board with each cell being an object
-	 * containing it's coordinates, isShip and isPreviewing
+	 * containing it's coordinates, isShip, isPreviewing and more
 	 * @returns {array} The grid that has been created
 	 */
 	const createEmptyBoard = () => {
@@ -19,6 +19,10 @@ const UseBoardCreator = (rows, cols) => {
 					isHit: false,
 					isDestroyed: false,
 					type: '',
+					isShipBottom: false,
+					isShipMiddle: false,
+					isShipTop: false,
+					direction: '',
 				});
 			}
 			gridArr.push(rowArr);
@@ -32,7 +36,6 @@ const UseBoardCreator = (rows, cols) => {
 	/**
 	 * Loops through the board and turns any isShip values to false
 	 */
-	// TODO is this necessary? why not re call create empty board then set state
 	const resetBoard = () => {
 		for (let x = 0; x < cols; x++) {
 			for (let y = 0; y < rows; y++) {

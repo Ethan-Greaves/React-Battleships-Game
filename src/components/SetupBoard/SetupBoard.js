@@ -83,6 +83,10 @@ const SetupBoard = ({
 								computerBoardCell={false}
 								type={cell.type}
 								isDestroyed={cell.isDestroyed}
+								placementDirection={cell.direction}
+								isShipTop={cell.isShipTop}
+								isShipMiddle={cell.isShipMiddle}
+								isShipBottom={cell.isShipBottom}
 							/>
 						);
 					}}

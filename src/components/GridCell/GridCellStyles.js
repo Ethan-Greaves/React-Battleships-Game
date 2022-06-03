@@ -42,7 +42,7 @@ const cell = (isBattleShip, type, isPreviewing, isUnplaceable, isHit, computerBo
 		opacity: cellOpacity,
 		Animation: cellAnimation,
 		borderRadius: '5px',
-		margin: '0.5px',
+		// margin: '0.2px',
 		'&:hover': {
 			backgroundColor: cellColour,
 			opacity: cellOpacity,
