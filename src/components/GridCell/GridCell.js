@@ -40,30 +40,17 @@ const GridCell = ({
 		return hoverExitFunction(coords);
 	};
 
-	let cell = <WaterCell isHit={isHit} isBattleship={isBattleShip} />;
-	if (!computerBoardCell) if (isBattleShip) cell = <ShipBottomCell isHit={isHit} isDestroyed={isDestroyed} />;
+	let cell = <WaterCell isHit={isHit} isBattleship={isBattleShip} isPreviewing={isPreviewing} />;
+	if (!computerBoardCell)
+		if (isBattleShip) cell = <ShipBottomCell isHit={isHit} isDestroyed={isDestroyed} isPreviewing={isPreviewing} />;
+	// if (isPreviewing) cell = <ShipBottomCell isHit={isHit} isDestroyed={isDestroyed} isPreviewing={isPreviewing} />;
 
 	return (
-		<>
-			{/* {coords.x === 0 && <p>{String.fromCharCode(65 + coords.y)}</p>} */}
-			{/* {coords.y === 0 ? ( */}
-			<>
-				<Grid container>
-					{/* <p style={{ margin: 0 }}>{coords.x}</p> */}
-					{/* <Box ml={2}></Box> */}
-					<div onClick={handleClick} onMouseOver={handleHover} onMouseLeave={handleHoverExit} className={styles.cell}>
-						{cell}
-					</div>
-				</Grid>
-			</>
-			{/* ) : ( */}
-			{/* <div
-					onClick={handleClick}
-					className={styles.cell}
-					onMouseLeave={handleHoverExit}
-					onMouseOver={handleHover}></div> */}
-			{/* ) */}
-		</>
+		<Grid container>
+			<div onClick={handleClick} onMouseOver={handleHover} onMouseLeave={handleHoverExit} className={styles.cell}>
+				{cell}
+			</div>
+		</Grid>
 	);
 };
 
