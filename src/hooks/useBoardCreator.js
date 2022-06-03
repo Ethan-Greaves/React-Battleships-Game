@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const UseBoardCreator = (rows, cols) => {
+const UseBoardCreator = (rows = 10, cols = 10) => {
 	/**
 	 * Create a 2D array board with each cell being an object
 	 * containing it's coordinates, isShip, isPreviewing and more

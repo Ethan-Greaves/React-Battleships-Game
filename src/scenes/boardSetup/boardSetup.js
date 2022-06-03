@@ -16,7 +16,7 @@ import useEventBus from '../../hooks/useEventBus';
 const BoardSetup = () => {
 	const generalStyle = generalStyles();
 	const { boardSize } = useContext(settingsContext);
-	const [board, setBoard, resetBoard] = useBoardCreator(boardSize.rows || 10, boardSize.cols || 10);
+	const [board, setBoard, resetBoard] = useBoardCreator(boardSize.rows, boardSize.cols);
 	const [placementDirection, changePlacementDirectionClick] = useShipPlacementDirection('horizontal');
 	const { placeShip, placeShipsRandomly } = UseShipPlacer(board, boardSize.rows, boardSize.cols);
 	const [shipPlacementQueue, setShipPlacementQueue, defaultShipPlacementQueue] = useShipPlacementQueue(placeShip);
