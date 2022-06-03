@@ -21,6 +21,8 @@ const ComputerBoard = ({ gameState, setEnemyTurnState, setWonState, addShipHitPl
 	const isInitialMount = useRef(true);
 	const styles = computerBoardStyles();
 	const generalStyle = generalStyles();
+
+	console.log(board);
 	const handleResetBoard = useCallback(() => {
 		resetBoard();
 		setShipPlacementQueue(defaultShipPlacementQueue);
@@ -77,6 +79,10 @@ const ComputerBoard = ({ gameState, setEnemyTurnState, setWonState, addShipHitPl
 							computerBoardCell={true}
 							type={cell.type}
 							isDestroyed={cell.isDestroyed}
+							placementDirection={cell.direction}
+							isShipTop={cell.isShipTop}
+							isShipMiddle={cell.isShipMiddle}
+							isShipBottom={cell.isShipBottom}
 						/>
 					);
 				}}

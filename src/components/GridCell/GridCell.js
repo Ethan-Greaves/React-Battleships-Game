@@ -49,13 +49,21 @@ const GridCell = ({
 	const determineCell = () => {
 		let cell = <WaterCell isHit={isHit} isBattleship={isBattleShip} isPreviewing={isPreviewing} />;
 		if (!computerBoardCell) {
-			if (isBattleShip && isShipBottom)
-				cell = <ShipBottomCell isHit={isHit} isDestroyed={isDestroyed} orientation={placementDirection} />;
-			if (isBattleShip && isShipMiddle)
-				cell = <ShipMiddleCell isHit={isHit} isDestroyed={isDestroyed} orientation={placementDirection} />;
-			if (isBattleShip && isShipTop)
-				cell = <ShipTopCell isHit={isHit} isDestroyed={isDestroyed} orientation={placementDirection} isPlaced={true} />;
+			cell = checkShipType(cell);
+		} else {
+			if (isDestroyed) cell = checkShipType(cell);
 		}
+
+		return cell;
+	};
+
+	const checkShipType = (cell) => {
+		if (isBattleShip && isShipBottom)
+			cell = <ShipBottomCell isHit={isHit} isDestroyed={isDestroyed} orientation={placementDirection} />;
+		if (isBattleShip && isShipMiddle)
+			cell = <ShipMiddleCell isHit={isHit} isDestroyed={isDestroyed} orientation={placementDirection} />;
+		if (isBattleShip && isShipTop)
+			cell = <ShipTopCell isHit={isHit} isDestroyed={isDestroyed} orientation={placementDirection} isPlaced={true} />;
 
 		return cell;
 	};

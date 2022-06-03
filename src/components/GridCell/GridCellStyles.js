@@ -14,7 +14,7 @@ const cell = (isBattleShip, type, isPreviewing, isUnplaceable, isHit, computerBo
 		for (let i = 0; i < shipNames.length; i++) {
 			if (isDestroyed) {
 				cellColour = '#212529';
-				border = '3px solid red';
+				// border = '2px solid red';
 				cellAnimation = 'shake 50ms 6 alternate backwards';
 			}
 		}

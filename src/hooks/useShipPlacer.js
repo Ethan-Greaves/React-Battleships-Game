@@ -40,8 +40,6 @@ const UseShipPlacer = (board, rows, cols) => {
 			for (let i = 0; i < amount; i++) if (!isCellInGrid(x, y - i) || !isCellEmpty(x, y - i)) return false;
 			for (let i = 0; i < amount; i++) placeCell(x, y - i, type, i, amount, direction);
 		}
-		console.log(board);
-		console.log(amount);
 		return true;
 	};
 
