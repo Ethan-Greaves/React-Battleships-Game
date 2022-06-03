@@ -2,21 +2,19 @@ import YourShip from '../YourShip/YourShip';
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import useEventBus from '../../hooks/useEventBus';
 import { Typography, Button } from '@material-ui/core';
-import YourShipStyles from './YourShipsStyles';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import generalStyles from '../../generalCSS/generalStyle'
 import CustomButton from '../CustomButton/CustomButton';
 
 const YourShips = () => {
     const generalStyle = generalStyles();
-    const styles = YourShipStyles();
-    const shipArr = useMemo(() => [
+    const shipArr = () => [
         { name: 'Carrier', size: 5, isBeingPlaced: true },
         { name: 'Battleship', size: 4, isBeingPlaced: false },
         { name: 'Cruiser', size: 3, isBeingPlaced: false },
         { name: 'Submarine', size: 3, isBeingPlaced: false },
         { name: 'Destroyer', size: 2, isBeingPlaced: false },
-    ], []);
+    ];
     const [newShips, setNewShips] = useState(shipArr);
     const [allShipsPlaced, setAllShipsPlaced] = useState(false);
     const [board, setBoard] = useState([]);
@@ -31,10 +29,8 @@ const YourShips = () => {
     }, [newShips])
 
     const removeAllShips = useCallback(() => {
-        const updatedShips = newShips.slice(newShips.length);
-        setNewShips(updatedShips);
         setAllShipsPlaced(true);
-    }, [newShips])
+    }, [])
 
     useEffect(() => {
         useEventBus.on(`shipPlaced`, (data) => {
@@ -56,11 +52,11 @@ const YourShips = () => {
             setNewShips(newShipsArr);
         });
     
-    }, [removeAllShips, removeShip, shipArr]);
-    
+    }, [removeAllShips, removeShip]);
+
     return (
-        <div>
-            {!allShipsPlaced ? <Typography variant="h5" align="center" gutterBottom className={generalStyle.transparentBackground}>Your Ships</Typography> :  ""}
+        <div className={generalStyle.transparentBackground}>
+            {!allShipsPlaced ? <Typography variant="h5" align="center" gutterBottom >Your Ships</Typography> :  ""}
             {!allShipsPlaced ?
                 newShips.map(ship => {
                 return (

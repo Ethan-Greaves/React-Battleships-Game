@@ -1,4 +1,4 @@
-import { Grid, Item, Button, Box } from "@material-ui/core";
+import { Grid, Item, Button, Box, Typography } from "@material-ui/core";
 import YourShipStyles from './YourShipStyles.js';
 
 /**
@@ -26,9 +26,9 @@ const YourShip = ({ name, size, isBeingPlaced }) => {
                     spacing={8}
                     style={{height: "100%", margin: "auto" }}
                 >
-                    <Button variant="contained" className={styles.btn}>
+                    <Button className={styles.btn}>
                         <Grid item xs={7}>
-                            <p className={styles.name}>{name}</p>
+                            <Typography className={styles.name} variant="body1">{name}</Typography>
                         </Grid>
                         
                         <Grid item xs>

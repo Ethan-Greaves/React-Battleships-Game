@@ -1,27 +1,22 @@
 import { makeStyles } from '@material-ui/core/styles';
 import YourShip from './YourShip';
 
-const square = () => {
-	const size = '15px';
+const square = (theme) => {
+	const size = '20px';
 	return {
 		width: size,
 		height: size,
-		backgroundColor: 'gold',
-		border: '1px solid yellow',
+		backgroundColor: theme.palette.primary.main,
+		border: `1px solid ${theme.palette.secondary.main}`,
+		borderRadius: "3px",
 	};
 };
 
-const btn = (isBeingPlaced) => {
-	let bgColor = 'blue';
-	if (isBeingPlaced) bgColor = 'lightgrey';
-
+const btn = (isBeingPlaced, theme) => {
 	return {
-		backgroundColor: `${bgColor} !important`,
-		width: '250px',
+		width: '300px',
 		justifyContent: 'flex-start',
-		border: '2px solid yellow',
-		borderRadius: '0',
-		height: '50px',
+		height: '30px',
 	};
 };
 
@@ -32,10 +27,10 @@ const name = () => {
 	};
 };
 
-const useStyles = makeStyles(() => ({
-	square: () => square(),
+const useStyles = makeStyles((theme) => ({
+	square: () => square(theme),
 	name: () => name(),
-	btn: (props) => btn(props.isBeingPlaced),
+	btn: (props) => btn(props.isBeingPlaced, theme),
 }));
 
 export default useStyles;
