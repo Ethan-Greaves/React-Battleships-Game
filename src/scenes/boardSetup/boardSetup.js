@@ -1,5 +1,5 @@
-import React, { Component, useContext, useState } from 'react';
-import { Typography, Box, Grid, Container } from '@material-ui/core';
+import React, { useContext } from 'react';
+import { Typography, Grid, Container } from '@material-ui/core';
 import YourShips from '../../components/YourShips/YourShips';
 import SetupBoard from '../../components/SetupBoard/SetupBoard';
 import TitleCard from '../../components/TitleCard/TitleCard';
@@ -34,7 +34,6 @@ const BoardSetup = () => {
 		useEventBus.dispatch('boardRandomized', { message: 'board has been randomized' });
 	};
 
-	//TODO Put ship queue here, pass it down to both "yourships" and "setupboard" as props
 	return (
 		<Container maxWidth="md">
 			<Grid
