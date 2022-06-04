@@ -22,7 +22,6 @@ const ComputerBoard = ({ gameState, setEnemyTurnState, setWonState, addShipHitPl
 	const styles = computerBoardStyles();
 	const generalStyle = generalStyles();
 
-	console.log(board);
 	const handleResetBoard = useCallback(() => {
 		resetBoard();
 		setShipPlacementQueue(defaultShipPlacementQueue);

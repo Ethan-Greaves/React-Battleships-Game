@@ -1,7 +1,7 @@
 import { Container, Grid, Button, Typography } from '@material-ui/core';
 import React, { useState, useContext } from 'react';
 import TitleCard from '../../components/TitleCard/TitleCard';
-import { cpuDifficultyValues, boardSizes } from '../../misc/settingsValues';
+import { cpuDifficultyValues, boardSizes, totalShipsValues } from '../../misc/settingsValues';
 import { settingsContext } from '../../context/settings.context';
 import { Link } from 'react-router-dom';
 import CustomButton from '../../components/CustomButton/CustomButton';
@@ -12,6 +12,8 @@ import generalStyles from '../../generalCSS/generalStyle';
 const Settings = () => {
 	const { boardSizeVal, setBoardSizeVal } = useContext(settingsContext);
 	const { aiDifficulty, setAiDifficulty } = useContext(settingsContext);
+	const { totalShips, setTotalShips } = useContext(settingsContext);
+
 	const styles = settingsStyles();
 	const generalStyle = generalStyles({ transparentBgPadding: '15px' });
 	return (
@@ -48,6 +50,22 @@ const Settings = () => {
 								value={boardSizeVal}
 								onChange={(e, data) => setBoardSizeVal(data)}
 								marks={boardSizes}
+								classes={{ markLabel: styles.mark }}
+							/>
+						</div>
+					</Grid>
+					<Grid item>
+						<div style={{ width: 500, margin: 60 }}>
+							<Typography align="center" variant="h5" className={styles.settingsTitle}>
+								Total Ships
+							</Typography>
+							<CustomSlider
+								step={null}
+								min={0}
+								max={4}
+								value={totalShips}
+								onChange={(e, data) => setTotalShips(data)}
+								marks={totalShipsValues}
 								classes={{ markLabel: styles.mark }}
 							/>
 						</div>
