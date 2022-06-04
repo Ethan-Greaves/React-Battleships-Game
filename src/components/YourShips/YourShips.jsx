@@ -55,14 +55,15 @@ const YourShips = () => {
     }, [removeAllShips, removeShip]);
 
     return (
-        <div className={generalStyle.transparentBackground}>
-            {!allShipsPlaced ? <Typography variant="h5" align="center" gutterBottom >Your Ships</Typography> :  ""}
+        <>
             {!allShipsPlaced ?
-                newShips.map(ship => {
-                return (
-                    <YourShip name={ship.name} size={ship.size} isBeingPlaced={ship.isBeingPlaced}/>
-                );
-            }) :
+                <div className={generalStyle.transparentBackground}>
+                    <Typography variant="h5" align="center" gutterBottom >Your Ships</Typography>
+                    {newShips.map((ship) => {
+                        return (<YourShip name={ship.name} size={ship.size} isBeingPlaced={ship.isBeingPlaced}/>);
+                    })}
+                </div>
+                :
                 <div>
                     <Link to={{
                         pathname: "/gameSession",
@@ -70,9 +71,9 @@ const YourShips = () => {
                     }}>
                         <CustomButton text={"Start Game"}/>
                     </Link>
-                </div>}
-            
-        </div>
+                </div>
+            }
+        </>
     );
 };
 
