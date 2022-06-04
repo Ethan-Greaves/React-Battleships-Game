@@ -1,8 +1,6 @@
 import { Box, Grid, Typography } from '@material-ui/core';
 import React from 'react';
-import ShipBottomCell from '../ShipBottomCell/ShipBottomCell';
-import ShipMiddleCell from '../ShipMiddleCell/ShipMiddleCell';
-import ShipTopCell from '../ShipTopCell/ShipTopCell';
+import ShipCell from '../ShipCell/ShipCell';
 import WaterCell from '../WaterCell/WaterCell';
 import GridCellStyles from './GridCellStyles';
 
@@ -59,12 +57,11 @@ const GridCell = ({
 
 	const checkShipType = (cell) => {
 		if (isBattleShip && isShipBottom)
-			cell = <ShipBottomCell isHit={isHit} isDestroyed={isDestroyed} orientation={placementDirection} />;
+			cell = <ShipCell isHit={isHit} isDestroyed={isDestroyed} orientation={placementDirection} type="bottom" />;
 		if (isBattleShip && isShipMiddle)
-			cell = <ShipMiddleCell isHit={isHit} isDestroyed={isDestroyed} orientation={placementDirection} />;
+			cell = <ShipCell isHit={isHit} isDestroyed={isDestroyed} orientation={placementDirection} type="middle" />;
 		if (isBattleShip && isShipTop)
-			cell = <ShipTopCell isHit={isHit} isDestroyed={isDestroyed} orientation={placementDirection} isPlaced={true} />;
-
+			cell = <ShipCell isHit={isHit} isDestroyed={isDestroyed} orientation={placementDirection} type="top" />;
 		return cell;
 	};
 
