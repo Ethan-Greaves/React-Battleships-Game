@@ -23,6 +23,13 @@ function App() {
 		shape: {
 			borderRadius: '10px',
 		},
+		overrides: {
+			MuiTooltip: {
+				tooltip: {
+					fontSize: '1.1em',
+				},
+			},
+		},
 	});
 
 	return (
