@@ -1,24 +1,27 @@
 import YourShip from '../YourShip/YourShip';
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useContext } from 'react';
 import useEventBus from '../../hooks/useEventBus';
 import { Typography, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import generalStyles from '../../generalCSS/generalStyle'
 import CustomButton from '../CustomButton/CustomButton';
+import { settingsContext } from '../../context/settings.context';
 
 const YourShips = () => {
+    const { totalShips } = useContext(settingsContext);
     const generalStyle = generalStyles();
-    const shipArr = () => [
-        { name: 'Carrier', size: 5, isBeingPlaced: true },
-        { name: 'Battleship', size: 4, isBeingPlaced: false },
-        { name: 'Cruiser', size: 3, isBeingPlaced: false },
-        { name: 'Submarine', size: 3, isBeingPlaced: false },
+    const [defaultShipArr, setDefaultShipArr] = useState([
         { name: 'Destroyer', size: 2, isBeingPlaced: false },
-    ];
-    const [newShips, setNewShips] = useState(shipArr);
+        { name: 'Submarine', size: 3, isBeingPlaced: false },
+        { name: 'Cruiser', size: 3, isBeingPlaced: false },
+        { name: 'Battleship', size: 4, isBeingPlaced: false },
+        { name: 'Carrier', size: 5, isBeingPlaced: true },
+    ]);
+    const [newShips, setNewShips] = useState(defaultShipArr);
     const [allShipsPlaced, setAllShipsPlaced] = useState(false);
     const [board, setBoard] = useState([]);
-
+    const newShipArr = [];
+    
     const removeShip = useCallback(() => {
         const updatedShips = newShips.slice(1);
         if (updatedShips.length > 0) {
@@ -31,6 +34,15 @@ const YourShips = () => {
     const removeAllShips = useCallback(() => {
         setAllShipsPlaced(true);
     }, [])
+
+    useEffect(() => {
+        setNewShips(defaultShipArr);
+        const arr = [];
+	    for (let i = 0; i <= totalShips; i++) {
+            arr.unshift(defaultShipArr[i]);
+        }
+        setNewShips(arr);
+    }, []);
 
     useEffect(() => {
         useEventBus.on(`shipPlaced`, (data) => {
@@ -47,12 +59,17 @@ const YourShips = () => {
         });
             
         useEventBus.on(`boardReset`, (data) => {
-            const newShipsArr = shipArr;
+            console.log(newShips);
+
+            const arr = [];
+	        for (let i = 0; i <= totalShips; i++) {
+                arr.unshift(defaultShipArr[i]);
+            }
+            setNewShips(arr);
             setAllShipsPlaced(false);
-            setNewShips(newShipsArr);
         });
     
-    }, [removeAllShips, removeShip]);
+    }, [defaultShipArr, newShipArr, newShips, removeAllShips, removeShip, totalShips]);
 
     return (
         <>

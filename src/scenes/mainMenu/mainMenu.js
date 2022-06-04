@@ -12,11 +12,13 @@ const MainMenu = () => {
 	const { quit } = UseQuitGame();
 	const { boardSizeVal, setBoardSizeVal } = useContext(settingsContext);
 	const { aiDifficulty, setAiDifficulty } = useContext(settingsContext);
+	const { totalShips, setTotalShips } = useContext(settingsContext);
 
 	useEffect(() => {
 		if (!aiDifficulty) setAiDifficulty(0);
 		if (!boardSizeVal) setBoardSizeVal(0);
-	}, [aiDifficulty, boardSizeVal, setAiDifficulty, setBoardSizeVal]);
+		if (!totalShips && totalShips !== 0) setTotalShips(4);
+	}, [aiDifficulty, boardSizeVal, setAiDifficulty, setBoardSizeVal, setTotalShips, totalShips]);
 
 	return (
 		<div className={styles.background}>
