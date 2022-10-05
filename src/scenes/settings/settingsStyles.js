@@ -10,13 +10,13 @@ const useStyles = makeStyles((theme) => ({
 	},
 
 	mark: {
-		color: 'white',
+		color: 'white !important',
 		marginTop: theme.spacing(3),
 		fontSize: theme.typography.body1.fontSize,
 	},
 
 	settingsTitle: {
-		color: 'white',
+		color: 'white !important',
 	},
 }));
 
