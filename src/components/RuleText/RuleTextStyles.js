@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 
 	spacedApart: {
-		marginBottom: '12px',
+		marginBottom: '2em',
 	},
 }));
 
