@@ -13,11 +13,13 @@ const MainMenu = () => {
 	const { boardSizeVal, setBoardSizeVal } = useContext(settingsContext);
 	const { aiDifficulty, setAiDifficulty } = useContext(settingsContext);
 	const { totalShips, setTotalShips } = useContext(settingsContext);
+	const { disableAnimations, setDisableAnimations } = useContext(settingsContext);
 
 	useEffect(() => {
 		if (!aiDifficulty) setAiDifficulty(0);
 		if (!boardSizeVal) setBoardSizeVal(0);
 		if (!totalShips && totalShips !== 0) setTotalShips(4);
+		if (!disableAnimations) setDisableAnimations(false);
 	}, [aiDifficulty, boardSizeVal, setAiDifficulty, setBoardSizeVal, setTotalShips, totalShips]);
 
 	return (
@@ -25,29 +27,30 @@ const MainMenu = () => {
 			<Grid
 				container
 				spacing={2}
-				direction="column"
-				alignItems="center"
-				justifyContent="center"
-				justify="center"
-				style={{ minHeight: '100vh' }}>
+				direction='column'
+				alignItems='center'
+				justifyContent='center'
+				justify='center'
+				style={{ minHeight: '100vh' }}
+			>
 				<TitleCard isHomePage={true} />
 				<Grid item>
-					<Link to="/setupBoard">
-						<CustomButton text="Play" />
+					<Link to='/setupBoard'>
+						<CustomButton text='Play' />
 					</Link>
 				</Grid>
 				<Grid item>
-					<Link to="/rules">
-						<CustomButton text="Rules" />
+					<Link to='/rules'>
+						<CustomButton text='Rules' />
 					</Link>
 				</Grid>
 				<Grid item>
-					<Link to="/settings">
-						<CustomButton text="Settings" />
+					<Link to='/settings'>
+						<CustomButton text='Settings' />
 					</Link>
 				</Grid>
 				<Grid item>
-					<CustomButton text="Quit" onClick={quit} />
+					<CustomButton text='Quit' onClick={quit} />
 				</Grid>
 			</Grid>
 		</div>
