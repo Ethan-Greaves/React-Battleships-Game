@@ -18,6 +18,17 @@ const useStyles = makeStyles((theme) => ({
 	settingsTitle: {
 		color: 'white !important',
 	},
+
+	checkbox: {
+		color: theme.palette.primary.main,
+		'&.Mui-checked': {
+			color: theme.palette.primary.main,
+		},
+	},
+
+	checkboxLabel: {
+		pointerEvents: 'none',
+	},
 }));
 
 export default useStyles;
