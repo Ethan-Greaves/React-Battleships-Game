@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 /**
  * Using a class to represent an enum because JavaScript does not have enums
@@ -16,27 +16,28 @@ class GameStates {
 }
 
 const UseBattleSystem = (setDialogueText) => {
-	const [gameState, setGameState] = useState(GameStates.START);
+	const gameState = useRef(GameStates.START);
 
 	const setPlayerTurnState = () => {
-		setGameState(GameStates.PLAYERTURN);
+		gameState.current = GameStates.PLAYERTURN;
 		setDialogueText('Your Turn');
 	};
 
 	const setEnemyTurnState = () => {
-		setGameState(GameStates.ENEMYTURN);
+		gameState.current = GameStates.ENEMYTURN;
 		setDialogueText('Enemy Turn');
 	};
 
 	const setWonState = () => {
-		setGameState(GameStates.WON);
+		gameState.current = GameStates.WON;
 		setDialogueText('You Win');
 	};
 
 	const setLostState = () => {
-		setGameState(GameStates.LOST);
+		gameState.current = GameStates.LOST;
 		setDialogueText('You Lose');
 	};
+
 
 	return { gameState, setPlayerTurnState, setEnemyTurnState, setWonState, setLostState };
 };

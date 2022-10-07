@@ -21,8 +21,8 @@ export const boardSizes = [
 	{
 		value: 0,
 		label: 'Small',
-		rows: 8,
-		cols: 8,
+		rows: 5,
+		cols: 5,
 	},
 	{
 		value: 1,

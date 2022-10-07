@@ -1,17 +1,22 @@
 import { Typography, Box } from '@material-ui/core';
 import UseGameCalculations from '../../hooks/useGameClaculations';
+import generalStyles from '../../generalCSS/generalStyle';
 
-const StatsInfo = ({ totalHits, shipHits }) => {
+const StatsInfo = ({ name, totalHits, shipHits }) => {
 	const { calculateAccuracy } = UseGameCalculations();
+	const generalStyle = generalStyles();
 
 	return (
-		<div>
-			<Typography align="center">
-				<Typography variant="h6">
-					<Box fontWeight={'bold'}>{`Your Stats`}</Box>
+		<div className={generalStyle.transparentBackground}>
+			<Typography align='center'>
+				<Typography variant='h6'>
+					<Box fontWeight={'bold'}>{`${name} Stats`}</Box>
 				</Typography>
-				<Typography variant="body1">{`Total Hits: ${totalHits}`}</Typography>
-				<Typography variant="body1">{`Accuracy: ${calculateAccuracy(shipHits, totalHits)}%`}</Typography>
+				<Typography variant='body1'>{`Total Hits: ${totalHits}`}</Typography>
+				<Typography variant='body1'>{`Accuracy: ${calculateAccuracy(
+					shipHits,
+					totalHits
+				)}%`}</Typography>
 			</Typography>
 		</div>
 	);
