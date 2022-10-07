@@ -22,7 +22,9 @@ const UseComputerAIMedium = (
 		setCpuThinkingTime(Math.floor(Math.random() * 3) + 1);
 		setTimeout(() => {
 			if (isHuntingShip) hitAnyCell();
-			if (isTargetingShip) searchingHitCell();
+			if (isTargetingShip) {
+				searchingHitCell();
+			}
 			setPlayerTurnState();
 		}, parseInt(`${cpuThinkingTime}000`));
 	};
@@ -35,30 +37,6 @@ const UseComputerAIMedium = (
 		setTargetingHitList(() => {
 			return [];
 		});
-		//*Code for ai going back and finishing off hit but not destroyed ship while in hunt mode, too burnt out to think
-		// let isShipHit = false;
-		// let isShipDestroyed = false;
-		// const shipNames = ['destroyer', 'submarine', 'cruiser', 'battleship', 'carrier'];
-		// for (let i = 0; i < shipNames.length; i++) {
-		// 	const shipTypeCoords = getCellCoordsOfType(shipNames[i]);
-		// 	for (let j = 0; j < shipTypeCoords.length; j++) {
-		// 		if (!isShipHit) {
-		// 			if (board[shipTypeCoords[j].x][shipTypeCoords[j].y].isHit) isShipHit = true;
-		// 			break;
-		// 		}
-		// 	}
-		// 	for (let j = 0; j < shipTypeCoords.length; j++) {
-		// 		if (!isShipDestroyed) {
-		// 			if (board[shipTypeCoords[j].x][shipTypeCoords[j].y].isDestroyed) isShipDestroyed = true;
-		// 			break;
-		// 		}
-		//     }
-
-		//     if (isShipHit && !isShipDestroyed) {
-		//         createTargetingList(cell.coords.x, cell.coords.y);
-		// 		break;
-		// 	}
-		// }
 
 		const hitCell = hitAnyCellEasy();
 		const { x, y } = hitCell.coords;
@@ -75,16 +53,17 @@ const UseComputerAIMedium = (
 	const hitCell = (x, y) => {
 		const newBoard = board;
 		newBoard[x][y].isHit = true;
-		// addTotalHitCpu();
-		// if (newBoard[x][y].isBattleShip) addShipHitCpu();
-		setBoard([...newBoard]);
 		registerHitTaken(x, y);
-		if (newBoard[x][y].isBattleShip) isShipDestroyed(x, y);
+		if (newBoard[x][y].isBattleShip) {
+			// addShipHitCpu();
+			isShipDestroyed(x, y);
+		}
+		setBoard([...newBoard]);
+
 		return newBoard[x][y];
 	};
 
 	const searchingHitCell = () => {
-		console.log(initialHitCell);
 		if (targetingHitList.length <= 0 || board[initialHitCell.coords.x][initialHitCell.coords.y].isDestroyed) {
 			setIsTargetingShip(false);
 			setIsHuntingShip(true);
@@ -99,7 +78,9 @@ const UseComputerAIMedium = (
 			return newArr;
 		});
 
-		if (cell.isBattleShip) createTargetingList(cell.coords.x, cell.coords.y);
+		if (cell.isBattleShip) {
+			createTargetingList(cell.coords.x, cell.coords.y);
+		}
 		if (!cell.isBattleShip && targetingHitList <= 0)
 			createTargetingList(initialHitCell.coords.x, initialHitCell.coords.y);
 	};

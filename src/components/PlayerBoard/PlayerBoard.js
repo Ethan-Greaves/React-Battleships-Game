@@ -10,7 +10,7 @@ import { Typography } from '@material-ui/core';
 import UseComputerAI from '../../hooks/useComputerAI';
 import generalStyles from '../../generalCSS/generalStyle';
 
-const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState }) => {
+const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState, addShipHitCpu, addTotalHitCpu }) => {
 	const [board, setBoard, resetBoard] = useBoardCreator(boardData.length, boardData.length);
 	const { getRandomNonHitCell } = UseBoardScanner(boardData, boardData.length, boardData.length);
 	const { registerHitTaken, isShipDestroyed, isAllShipsDestroyed } = UseUnit('Player', board, setBoard);
@@ -19,9 +19,9 @@ const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState })
 		setBoard,
 		registerHitTaken,
 		setPlayerTurnState,
-		isShipDestroyed
-		// addShipHitCpu,
-		// addTotalHitCpu
+		isShipDestroyed,
+		addShipHitCpu,
+		addTotalHitCpu
 	);
 	const styles = PlayerBoardStyles();
 	const generalStyle = generalStyles();

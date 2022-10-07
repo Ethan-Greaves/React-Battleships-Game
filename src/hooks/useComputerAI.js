@@ -21,6 +21,8 @@ const UseComputerAI = (
 	registerHitTaken,
 	setPlayerTurnState,
 	isShipDestroyed,
+	addShipHitCpu,
+	addTotalHitCpu
 ) => {
 	const { aiDifficulty } = useContext(settingsContext);
 	const [aiState, setAiState] = useState(1);
@@ -28,15 +30,25 @@ const UseComputerAI = (
 	const { getRandomNonHitCell } = UseBoardScanner(board, boardSize.rows, boardSize.cols);
 
 	const hitAnyCellEasy = () => {
+		// addTotalHitCpu();
 		const newBoard = board;
 		const { coords } = getRandomNonHitCell();
 		newBoard[coords.x][coords.y].isHit = true;
-		setBoard([...newBoard]);
+		// if (newBoard[coords.x][coords.y].isBattleShip) addShipHitCpu();
 		registerHitTaken(coords.x, coords.y);
+		setBoard([...newBoard]);
+
 		return newBoard[coords.x][coords.y];
 	};
 
-	const { easySimulateTurn } = UseComputerAIEasy(board, setBoard, registerHitTaken, setPlayerTurnState, hitAnyCellEasy);
+	const { easySimulateTurn } = UseComputerAIEasy(
+		board,
+		setBoard,
+		registerHitTaken,
+		setPlayerTurnState,
+		hitAnyCellEasy,
+		addTotalHitCpu
+	);
 	const { mediumSimulateTurn } = UseComputerAIMedium(
 		board,
 		setBoard,
@@ -44,6 +56,8 @@ const UseComputerAI = (
 		setPlayerTurnState,
 		hitAnyCellEasy,
 		isShipDestroyed,
+		addTotalHitCpu,
+		addShipHitCpu
 	);
 
 	const aiMakeMove = () => {

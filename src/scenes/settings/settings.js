@@ -89,7 +89,7 @@ const Settings = () => {
 										Disable Animations
 									</Typography>
 								}
-								onChange={() => setDisableAnimations(!disableAnimations)}
+								onClick={() => setDisableAnimations(!disableAnimations)}
 								checked={disableAnimations}
 							/>
 						</Grid>

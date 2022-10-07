@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 const UseCollectStats = () => {
 	const [totalHits, setTotalHits] = useState(0);
@@ -12,6 +12,6 @@ const UseCollectStats = () => {
 		setShipHits(shipHits + 1);
 	};
 
-	return {totalHits, shipHits, addTotalHit, addShipHit};
+	return [totalHits, shipHits, addTotalHit, addShipHit];
 };
 export default UseCollectStats;

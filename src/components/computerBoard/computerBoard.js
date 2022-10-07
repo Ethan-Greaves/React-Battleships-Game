@@ -11,13 +11,24 @@ import UseUnit from '../../hooks/useUnit';
 import generalStyles from '../../generalCSS/generalStyle';
 import computerBoardStyles from './computerBoardStyles';
 
-const ComputerBoard = ({ gameState, setEnemyTurnState, setWonState, addShipHitPlayer, addTotalHitPlayer }) => {
+const ComputerBoard = ({
+	gameState,
+	setEnemyTurnState,
+	setWonState,
+	addShipHitPlayer,
+	addTotalHitPlayer,
+}) => {
 	const { boardSize } = useContext(settingsContext);
 	const [board, setBoard, resetBoard] = useBoardCreator(boardSize.rows, boardSize.cols);
 	const { placeShip, placeShipsRandomly } = UseShipPlacer(board, boardSize.rows, boardSize.cols);
-	const [shipPlacementQueue, setShipPlacementQueue, defaultShipPlacementQueue] = useShipPlacementQueue(placeShip);
+	const [shipPlacementQueue, setShipPlacementQueue, defaultShipPlacementQueue] =
+		useShipPlacementQueue(placeShip);
 	const [addHitToShip, checkToDestroy] = UseShipDestroyer(board);
-	const { registerHitTaken, isShipDestroyed, isAllShipsDestroyed } = UseUnit('Computer', board, setBoard);
+	const { registerHitTaken, isShipDestroyed, isAllShipsDestroyed } = UseUnit(
+		'Computer',
+		board,
+		setBoard
+	);
 	const isInitialMount = useRef(true);
 	const styles = computerBoardStyles();
 	const generalStyle = generalStyles();
