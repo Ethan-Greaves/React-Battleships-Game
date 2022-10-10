@@ -8,7 +8,6 @@ const GridCell = ({
 	coords,
 	isBattleShip,
 	isPreviewing,
-	isUnplaceable,
 	isHit,
 	clickFunction,
 	hoverFunction,
@@ -21,15 +20,7 @@ const GridCell = ({
 	isShipMiddle,
 	isShipBottom,
 }) => {
-	const styles = GridCellStyles({
-		isBattleShip,
-		type,
-		isPreviewing,
-		isUnplaceable,
-		isHit,
-		computerBoardCell,
-		isDestroyed,
-	});
+	const styles = GridCellStyles();
 
 	const handleClick = () => {
 		if (!null) return clickFunction(coords, isBattleShip, type);
@@ -46,22 +37,18 @@ const GridCell = ({
 
 	const determineCell = () => {
 		let cell = <WaterCell isHit={isHit} isBattleship={isBattleShip} isPreviewing={isPreviewing} />;
-		if (!computerBoardCell) {
-			cell = checkShipType(cell);
-		} else {
-			if (isDestroyed) cell = checkShipType(cell);
-		}
-
+		if (!computerBoardCell) cell = checkShipType(cell);
+		else if (isDestroyed) cell = checkShipType(cell);
 		return cell;
 	};
 
 	const checkShipType = (cell) => {
 		if (isBattleShip && isShipBottom)
-			cell = <ShipCell isHit={isHit} isDestroyed={isDestroyed} orientation={placementDirection} type="bottom" />;
+			cell = <ShipCell isHit={isHit} isDestroyed={isDestroyed} orientation={placementDirection} type='bottom' />;
 		if (isBattleShip && isShipMiddle)
-			cell = <ShipCell isHit={isHit} isDestroyed={isDestroyed} orientation={placementDirection} type="middle" />;
+			cell = <ShipCell isHit={isHit} isDestroyed={isDestroyed} orientation={placementDirection} type='middle' />;
 		if (isBattleShip && isShipTop)
-			cell = <ShipCell isHit={isHit} isDestroyed={isDestroyed} orientation={placementDirection} type="top" />;
+			cell = <ShipCell isHit={isHit} isDestroyed={isDestroyed} orientation={placementDirection} type='top' />;
 		return cell;
 	};
 
