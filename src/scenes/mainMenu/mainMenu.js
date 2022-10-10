@@ -1,5 +1,5 @@
-import { Typography, Grid, Button, Box } from '@material-ui/core';
-import React, { useEffect, useState, useContext } from 'react';
+import { Grid } from '@material-ui/core';
+import React, { useEffect, useContext } from 'react';
 import MainMenuStyles from './mainMenuStyles';
 import { Link } from 'react-router-dom';
 import CustomButton from '../../components/CustomButton/CustomButton';

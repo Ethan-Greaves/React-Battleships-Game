@@ -1,5 +1,5 @@
 import { Box, Button, Typography, Tooltip } from '@material-ui/core';
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import CustomButtonStyles from './CustomButtonStyles';
 import { motion } from 'framer-motion/dist/es/index';
 import { settingsContext } from '../../context/settings.context';

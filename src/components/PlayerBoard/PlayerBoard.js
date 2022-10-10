@@ -1,18 +1,14 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { settingsContext } from '../../context/settings.context';
+import React, { useEffect } from 'react';
 import useBoardCreator from '../../hooks/useBoardCreator';
 import GridCell from '../GridCell/GridCell';
 import PlayerBoardSetup from '../Board/Board';
-import UseBoardScanner from '../../hooks/useBoardScanner';
 import UseUnit from '../../hooks/useUnit';
 import PlayerBoardStyles from './PlayerBoardStyles';
-import { Typography } from '@material-ui/core';
 import UseComputerAI from '../../hooks/useComputerAI';
 import generalStyles from '../../generalCSS/generalStyle';
 
 const PlayerBoard = ({ gameState, setPlayerTurnState, boardData, setLostState, addShipHitCpu, addTotalHitCpu }) => {
 	const [board, setBoard, resetBoard] = useBoardCreator(boardData.length, boardData.length);
-	const { getRandomNonHitCell } = UseBoardScanner(boardData, boardData.length, boardData.length);
 	const { registerHitTaken, isShipDestroyed, isAllShipsDestroyed } = UseUnit('Player', board, setBoard);
 	const { aiMakeMove } = UseComputerAI(
 		board,
