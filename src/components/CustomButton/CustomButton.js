@@ -29,11 +29,7 @@ const CustomButton = ({ text, onClick, size = 'large', tooltipText = '' }) => {
 	return (
 		<Tooltip title={tooltipText} className={styles.tooltip} arrow>
 			<motion.div whileHover={!disableAnimations && { scale: 1.05 }}>
-				<Button
-					className={`${styles.btn} ${matchButtonSize()}`}
-					onClick={onClick}
-					variant='contained'
-				>
+				<Button className={`${styles.btn} ${matchButtonSize()}`} onClick={onClick} variant='contained'>
 					<Typography variant={size !== 'large' ? 'h5' : 'h4'}>
 						<Box>{text}</Box>
 					</Typography>

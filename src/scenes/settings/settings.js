@@ -1,12 +1,4 @@
-import {
-	Container,
-	Grid,
-	Button,
-	Typography,
-	Checkbox,
-	FormControlLabel,
-	Box,
-} from '@material-ui/core';
+import { Container, Grid, Button, Typography, Checkbox, FormControlLabel, Box } from '@material-ui/core';
 import React, { useState, useContext } from 'react';
 import TitleCard from '../../components/TitleCard/TitleCard';
 import { cpuDifficultyValues, boardSizes, totalShipsValues } from '../../misc/settingsValues';
@@ -25,6 +17,9 @@ const Settings = () => {
 
 	const styles = settingsStyles();
 	const generalStyle = generalStyles({ transparentBgPadding: '15px' });
+
+	console.log(disableAnimations);
+
 	return (
 		<Container>
 			<TitleCard isHomePage={false} />
@@ -83,14 +78,13 @@ const Settings = () => {
 
 						<Grid item>
 							<FormControlLabel
-								control={<Checkbox className={styles.checkbox} />}
+								control={<Checkbox className={styles.checkbox} checked={disableAnimations} />}
 								label={
 									<Typography className={styles.checkboxLabel} disabled variant='h6'>
 										Disable Animations
 									</Typography>
 								}
-								onClick={() => setDisableAnimations(!disableAnimations)}
-								checked={disableAnimations}
+								onChange={() => setDisableAnimations(!disableAnimations)}
 							/>
 						</Grid>
 					</Grid>
