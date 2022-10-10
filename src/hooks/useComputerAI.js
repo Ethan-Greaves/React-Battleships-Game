@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { settingsContext } from '../context/settings.context';
 import UseBoardScanner from './useBoardScanner';
 import UseComputerAIEasy from './useComputerAIEasy';
@@ -25,7 +25,7 @@ const UseComputerAI = (
 	addTotalHitCpu
 ) => {
 	const { aiDifficulty } = useContext(settingsContext);
-	const [aiState, setAiState] = useState(1);
+	const aiState = useRef(1);
 	const { boardSize } = useContext(settingsContext);
 	const { getRandomNonHitCell } = UseBoardScanner(board, boardSize.rows, boardSize.cols);
 
@@ -61,7 +61,7 @@ const UseComputerAI = (
 	);
 
 	const aiMakeMove = () => {
-		switch (aiState) {
+		switch (aiState.current) {
 			case AIStates.EASY.state:
 				easySimulateTurn();
 				break;

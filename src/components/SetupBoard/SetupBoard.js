@@ -1,5 +1,5 @@
 //#region IMPORTS
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PlayerBoardSetup from '../Board/Board';
 import GridCell from '../GridCell/GridCell';
 import SetupBoardStyles from './SetupBoardStyles';
@@ -7,23 +7,10 @@ import useEventBus from '../../hooks/useEventBus';
 import generalStyles from '../../generalCSS/generalStyle';
 
 //#endregion
-const SetupBoard = ({
-	board,
-	setBoard,
-	placementDirection,
-	shipPlacementQueue,
-	setShipPlacementQueue,
-	showPreview,
-	removePreview,
-}) => {
+const SetupBoard = ({ board, setBoard, placementDirection, shipPlacementQueue, setShipPlacementQueue, showPreview, removePreview }) => {
 	//#region INITIALISATION
 	const generalStyle = generalStyles();
 	const styles = SetupBoardStyles();
-	const [currentHoveredCoordinates, setCurrentHoveredCoordinates] = useState({
-		x: 0,
-		y: 0,
-	});
-
 	//#endregion
 
 	useEffect(() => {
@@ -43,7 +30,6 @@ const SetupBoard = ({
 	};
 
 	const handleShipPreview = (coords) => {
-		setCurrentHoveredCoordinates(coords);
 		showPreview(coords, fixShipSize(), placementDirection);
 		setBoard([...board]);
 	};
@@ -62,7 +48,7 @@ const SetupBoard = ({
 	};
 
 	return (
-		<div tabIndex="0">
+		<div tabIndex='0'>
 			<div className={`${styles.board} ${generalStyle.boardBackground}`}>
 				<PlayerBoardSetup
 					boardData={board}

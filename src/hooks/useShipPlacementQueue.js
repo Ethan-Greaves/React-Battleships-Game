@@ -19,7 +19,7 @@ const UseShipPlacementQueue = (placeShip) => {
 	for (let i = 0; i <= totalShips; i++) {
 		shipArr.unshift(defaultShipArr[i]);
 	}
-	
+
 	for (let i = 0; i < shipArr.length; i++) {
 		defaultShipPlacementQueue.enqueue((coords, direction) =>
 			placeShip(coords, shipArr[i].length, direction, shipArr[i].type)

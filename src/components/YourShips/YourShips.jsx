@@ -1,7 +1,7 @@
 import YourShip from '../YourShip/YourShip';
 import React, { useState, useEffect, useCallback, useMemo, useContext } from 'react';
 import useEventBus from '../../hooks/useEventBus';
-import { Typography, Button } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import generalStyles from '../../generalCSS/generalStyle'
 import CustomButton from '../CustomButton/CustomButton';
@@ -21,7 +21,7 @@ const YourShips = () => {
     const [allShipsPlaced, setAllShipsPlaced] = useState(false);
     const [board, setBoard] = useState([]);
     const newShipArr = [];
-    
+
     const removeShip = useCallback(() => {
         const updatedShips = newShips.slice(1);
         if (updatedShips.length > 0) {
@@ -49,7 +49,7 @@ const YourShips = () => {
             removeShip();
             setBoard(data.board);
         });
-            
+
         useEventBus.on(`boardRandomized`, (data) => {
             removeAllShips();
         });
@@ -57,7 +57,7 @@ const YourShips = () => {
         useEventBus.on(`boardUpdated`, (data) => {
             setBoard(data.board);
         });
-            
+
         useEventBus.on(`boardReset`, (data) => {
             console.log(newShips);
 
@@ -68,7 +68,7 @@ const YourShips = () => {
             setNewShips(arr);
             setAllShipsPlaced(false);
         });
-    
+
     }, [defaultShipArr, newShipArr, newShips, removeAllShips, removeShip, totalShips]);
 
     return (

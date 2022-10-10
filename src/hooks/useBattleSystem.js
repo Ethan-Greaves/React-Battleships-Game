@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 
 /**
  * Using a class to represent an enum because JavaScript does not have enums

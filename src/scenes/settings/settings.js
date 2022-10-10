@@ -1,5 +1,5 @@
 import { Container, Grid, Button, Typography, Checkbox, FormControlLabel, Box } from '@material-ui/core';
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import TitleCard from '../../components/TitleCard/TitleCard';
 import { cpuDifficultyValues, boardSizes, totalShipsValues } from '../../misc/settingsValues';
 import { settingsContext } from '../../context/settings.context';
