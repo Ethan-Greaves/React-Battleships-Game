@@ -6,7 +6,7 @@ const transparentBackground = (transparentBgPadding, theme) => {
 		backgroundColor: 'rgba(0,0,0,0.3)',
 		padding: transparentBgPadding || '15px',
 		borderRadius: theme.shape.borderRadius,
-		color: "white"
+		color: "white",
 	};
 };
 
