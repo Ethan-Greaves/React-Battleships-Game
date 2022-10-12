@@ -15,17 +15,14 @@ const ComputerBoard = ({
 	setWonState,
 	addShipHitPlayer,
 	addTotalHitPlayer,
+	addHitToStreak,
+	resetStreak,
 }) => {
 	const { boardSize } = useContext(settingsContext);
 	const [board, setBoard, resetBoard, createEmptyBoard] = useBoardCreator(boardSize.rows, boardSize.cols);
 	const { placeShip, placeShipsRandomly } = UseShipPlacer(board, boardSize.rows, boardSize.cols);
-	const [shipPlacementQueue, setShipPlacementQueue, defaultShipPlacementQueue] =
-		useShipPlacementQueue(placeShip);
-	const { registerHitTaken, isShipDestroyed, isAllShipsDestroyed } = UseUnit(
-		'Computer',
-		board,
-		setBoard
-	);
+	const [shipPlacementQueue, setShipPlacementQueue, defaultShipPlacementQueue] = useShipPlacementQueue(placeShip);
+	const { registerHitTaken, isShipDestroyed, isAllShipsDestroyed } = UseUnit('Computer', board, setBoard);
 	const isInitialMount = useRef(true);
 	const styles = computerBoardStyles();
 	const generalStyle = generalStyles();
@@ -46,7 +43,10 @@ const ComputerBoard = ({
 		const newBoard = [...board];
 		newBoard[x][y].isHit = true;
 		addTotalHitPlayer();
-		if (newBoard[x][y].isBattleShip) addShipHitPlayer();
+		if (newBoard[x][y].isBattleShip) {
+			addShipHitPlayer();
+			addHitToStreak();
+		} else resetStreak();
 		setBoard(newBoard);
 		registerHitTaken(x, y);
 		isShipDestroyed(x, y);

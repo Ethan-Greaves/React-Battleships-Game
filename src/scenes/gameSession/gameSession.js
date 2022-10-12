@@ -8,38 +8,35 @@ import gameSessionStyles from './gameSessionStyles';
 import TitleCard from '../../components/TitleCard/TitleCard';
 import GameStateInfo from '../../components/GameStateInfo/GameStateInfo';
 import StatsInfo from '../../components/StatsInfo/StatsInfo';
-import UseCollectStats from '../../hooks/useCollectStats';
+import UseCalculateStats from '../../hooks/useCalculateStats';
 
 const GameSession = () => {
 	const [dialogueText, setDialogueText] = useState('Get Ready To Play!');
-	const { gameState, setPlayerTurnState, setEnemyTurnState, setLostState, setWonState } =
-		UseBattleSystem(setDialogueText);
+	const { gameState, setPlayerTurnState, setEnemyTurnState, setLostState, setWonState } = UseBattleSystem(setDialogueText);
 	const location = useLocation();
 	const fromUseShips = location.state;
 	const styles = gameSessionStyles();
-	const [totalHits, shipHits, addTotalHit, addShipHit] = UseCollectStats();
-	const [totalHitsCpu, shipHitsCpu, addTotalHitCpu, addShipHitCpu] = UseCollectStats();
+	const [totalHits, shipHits, currentHitStreak, highestStreak, addTotalHit, addShipHit, addHitToStreak, resetStreak] = UseCalculateStats();
+	const [
+		totalHitsCpu,
+		shipHitsCpu,
+		currentHitStreakCpu,
+		highestStreakCpu,
+		addTotalHitCpu,
+		addShipHitCpu,
+		addHitToStreakCpu,
+		resetStreakCpu,
+	] = UseCalculateStats();
 
 	useEffect(() => {
 		setTimeout(() => {
 			setPlayerTurnState();
 		}, 2000);
 	}, []);
-	console.clear();
-	console.log(`Ship hits: ${shipHitsCpu}`);
-	console.log(`total hits: ${totalHitsCpu}`);
-	console.log(`accuracy: ${(Math.round((shipHits / totalHits) * 100) || 0)}`);
 
 	return (
 		<Container maxWidth='lg'>
-			<Grid
-				container
-				direction='column'
-				alignItems='center'
-				justifyContent='center'
-				justify='center'
-				style={{ minHeight: '90vh' }}
-			>
+			<Grid container direction='column' alignItems='center' justifyContent='center' justify='center' style={{ minHeight: '90vh' }}>
 				<Grid item>
 					<TitleCard isHomePage={false} />
 					<GameStateInfo stateDialogue={dialogueText} gameState={gameState.current.state} />
@@ -47,7 +44,13 @@ const GameSession = () => {
 
 				<Grid container spacing={2} direction='row' alignItems='center' justifyContent='center' justify='center'>
 					<Grid item>
-						<StatsInfo name='Your' totalHits={totalHits} shipHits={shipHits} />
+						<StatsInfo
+							name='Your'
+							totalHits={totalHits}
+							shipHits={shipHits}
+							currentHitStreak={currentHitStreak}
+							highestStreak={highestStreak}
+						/>
 					</Grid>
 					<Grid item>
 						<Typography variant='h5' gutterBottom align='center' className={styles.boardLabel}>
@@ -72,10 +75,18 @@ const GameSession = () => {
 							setWonState={setWonState}
 							addShipHitPlayer={addShipHit}
 							addTotalHitPlayer={addTotalHit}
+							addHitToStreak={addHitToStreak}
+							resetStreak={resetStreak}
 						/>
 					</Grid>
 					<Grid item>
-						<StatsInfo name='Computer' totalHits={totalHitsCpu} shipHits={shipHitsCpu} />
+						{/* <StatsInfo
+							name='Computer'
+							totalHits={totalHitsCpu}
+							shipHits={shipHitsCpu}
+							currentHitStreak={currentHitStreakCpu}
+							highestStreak={highestStreakCpu}
+						/> */}
 					</Grid>
 				</Grid>
 			</Grid>

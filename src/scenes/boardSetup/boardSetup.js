@@ -35,28 +35,18 @@ const BoardSetup = () => {
 	};
 
 	return (
-		<Container maxWidth="md">
-			<Grid
-				container
-				direction="column"
-				alignItems="center"
-				justifyContent="center"
-				justify="center"
-				style={{ minHeight: '90vh' }}>
+		<Container maxWidth='md'>
+			<Grid container direction='column' alignItems='center' justifyContent='center' justify='center' style={{ minHeight: '90vh' }}>
 				<Grid item>
 					<TitleCard isHomePage={false} />
-					<Typography
-						variant="h4"
-						align="center"
-						className={generalStyle.transparentBackground}
-						style={{ marginBottom: '30px' }}>
+					<Typography variant='h4' align='center' className={generalStyle.transparentBackground} style={{ marginBottom: '30px' }}>
 						Place Your Ships
 					</Typography>
 				</Grid>
 
-				<Grid container spacing={3} direction="row" alignItems="center" justifyContent="center" justify="center">
+				<Grid container spacing={3} direction='row' alignItems='center' justifyContent='center' justify='center'>
 					<Grid item>
-						<Grid container direction="column">
+						<Grid container direction='column'>
 							<Grid item>
 								<YourShips />
 							</Grid>
