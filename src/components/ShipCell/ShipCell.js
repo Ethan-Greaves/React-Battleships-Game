@@ -11,16 +11,19 @@ import ShipBottomCellHitImg from '../../assets/Battleship/PNG/ShipBottomHit.png'
 const ShipCell = ({ isHit, isDestroyed, orientation, type }) => {
 	const [shipImg, setShipImg] = useState('bottom');
 	const generalStyle = generalStyles();
-    const styles = shipCellStyles();
+	const styles = shipCellStyles();
 
-    const isHitImg = useCallback((normal, hit) => {
-		let img;
-		if (!isHit) img = normal;
-		else img = hit;
-		return img;
-    }, [isHit]);
-    
-    const determineShipType = useCallback(() => {
+	const isHitImg = useCallback(
+		(normal, hit) => {
+			let img;
+			if (!isHit) img = normal;
+			else img = hit;
+			return img;
+		},
+		[isHit]
+	);
+
+	const determineShipType = useCallback(() => {
 		switch (type) {
 			case 'top':
 				setShipImg(isHitImg(ShipTopCellImg, ShipTopCellHitImg));
@@ -40,12 +43,12 @@ const ShipCell = ({ isHit, isDestroyed, orientation, type }) => {
 		determineShipType();
 	}, [determineShipType]);
 
-    return (
+	return (
 		<div>
 			<img
 				className={`${generalStyle.cellSize} ${orientation === 'horizontal' ? styles.rotate : null}`}
 				src={shipImg}
-				alt="Ship Middle Cell"
+				alt={`ship ${type} cell`}
 			/>
 		</div>
 	);
