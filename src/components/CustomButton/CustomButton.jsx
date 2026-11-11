@@ -1,8 +1,8 @@
-import { Box, Button, Typography, Tooltip } from '@material-ui/core';
-import React, { useContext } from 'react';
-import CustomButtonStyles from './CustomButtonStyles';
-import { motion } from 'framer-motion/dist/es/index';
+import { Box, Button, Tooltip, Typography } from '@material-ui/core';
+import { motion } from 'framer-motion';
+import { useContext } from 'react';
 import { settingsContext } from '../../context/settings.context';
+import CustomButtonStyles from './CustomButtonStyles';
 
 const CustomButton = ({ text, onClick, size = 'large', tooltipText = '' }) => {
 	const styles = CustomButtonStyles();
@@ -29,7 +29,11 @@ const CustomButton = ({ text, onClick, size = 'large', tooltipText = '' }) => {
 	return (
 		<Tooltip title={tooltipText} className={styles.tooltip} arrow>
 			<motion.div whileHover={!disableAnimations && { scale: 1.05 }}>
-				<Button className={`${styles.btn} ${matchButtonSize()}`} onClick={onClick} variant='contained'>
+				<Button
+					className={`${styles.btn} ${matchButtonSize()}`}
+					onClick={onClick}
+					variant='contained'
+				>
 					<Typography variant={size !== 'large' ? 'h5' : 'h4'}>
 						<Box>{text}</Box>
 					</Typography>

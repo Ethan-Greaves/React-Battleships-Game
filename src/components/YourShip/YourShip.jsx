@@ -1,52 +1,53 @@
-import { Grid, Item, Button, Box, Typography } from "@material-ui/core";
+import { Grid, Button, Box, Typography } from '@material-ui/core';
 import YourShipStyles from './YourShipStyles.js';
 
 /**
- * Basically the individual ship on the your ships section of this game https://hello-battleship.netlify.app/ 
+ * Basically the individual ship on the your ships section of this game https://hello-battleship.netlify.app/
  * To be used in the board setup scene, so player can keep track of what ship they're placing
- * @returns 
+ * @returns
  */
 const YourShip = ({ name, size, isBeingPlaced }) => {
-    const styles = YourShipStyles({
-        isBeingPlaced
-    });
-    
-    const arr = [];
-    for (let i = 0; i < size; i++){
-        arr.push(true)
-    }
+	const styles = YourShipStyles({
+		isBeingPlaced,
+	});
 
-    return (
-        <>
-            <div >
-                <Grid
-                    container
-                    alignItems="center"
-                    justifyContent="space-between"
-                    spacing={8}
-                    style={{height: "100%", margin: "auto" }}
-                >
-                    <Button className={styles.btn}>
-                        <Grid item xs={7}>
-                            <Typography className={styles.name} variant="body1">{name}</Typography>
-                        </Grid>
-                        
-                        <Grid item xs>
-                            <Grid container>
-                                {arr.map(() => {
-                                    return (
-                                        <Grid item>
-                                            <div className={styles.square}></div>    
-                                        </Grid>
-                                    );
-                                })}
-                            </Grid>
-                        </Grid>
-                    </Button>
-                </Grid>
-            </div>
-            
-        </>
-    );
+	const arr = [];
+	for (let i = 0; i < size; i++) {
+		arr.push(true);
+	}
+
+	return (
+		<>
+			<div>
+				<Grid
+					container
+					alignItems='center'
+					justifyContent='space-between'
+					spacing={8}
+					style={{ height: '100%', margin: 'auto' }}
+				>
+					<Button className={styles.btn}>
+						<Grid item xs={7}>
+							<Typography className={styles.name} variant='body1'>
+								{name}
+							</Typography>
+						</Grid>
+
+						<Grid item xs>
+							<Grid container>
+								{arr.map(() => {
+									return (
+										<Grid item>
+											<div className={styles.square}></div>
+										</Grid>
+									);
+								})}
+							</Grid>
+						</Grid>
+					</Button>
+				</Grid>
+			</div>
+		</>
+	);
 };
 export default YourShip;
