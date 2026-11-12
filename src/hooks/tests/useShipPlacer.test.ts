@@ -1,7 +1,8 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import type { Board } from '../../types/game';
 import UseShipPlacer from '../useShipPlacer';
 
-const makeBoard = (size) =>
+const makeBoard = (size: number): Board =>
 	Array.from({ length: size }, (_, x) =>
 		Array.from({ length: size }, (_, y) => ({
 			coords: { x, y },
@@ -9,6 +10,10 @@ const makeBoard = (size) =>
 			isShipTop: false,
 			isShipMiddle: false,
 			isShipBottom: false,
+			isPreviewing: false,
+			isUnplaceable: false,
+			isHit: false,
+			isDestroyed: false,
 			type: '',
 			direction: '',
 		})),
