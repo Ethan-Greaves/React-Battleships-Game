@@ -31,7 +31,7 @@ const UseBoardScanner = (board, rows, cols) => {
 	 */
 	// TODO This function should be re-factored to check whole cell rather than one coord
 	const isCellInGrid = (x, y) => {
-		if (x < 0 || y < 0 || x > rows || y > cols) return false;
+		if (x < 0 || y < 0 || x >= rows || y > cols) return false;
 		return true;
 	};
 
@@ -61,7 +61,13 @@ const UseBoardScanner = (board, rows, cols) => {
 		return typeArr;
 	};
 
-	return { getRandomEmptyCell, isCellInGrid, isCellEmpty, getRandomNonHitCell, getCellCoordsOfType };
+	return {
+		getRandomEmptyCell,
+		isCellInGrid,
+		isCellEmpty,
+		getRandomNonHitCell,
+		getCellCoordsOfType,
+	};
 };
 
 export default UseBoardScanner;
