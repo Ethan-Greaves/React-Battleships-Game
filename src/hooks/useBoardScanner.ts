@@ -1,15 +1,17 @@
-const UseBoardScanner = (board, rows, cols) => {
+import type { Board, Cell, Coord, ShipType } from '../types/game';
+
+const UseBoardScanner = (board: Board, rows: number, cols: number) => {
 	/**
 	 * @returns {object} random cell from the board
 	 */
-	const getRandomCell = () => {
+	const getRandomCell = (): Cell => {
 		return board[Math.floor(Math.random() * rows)][Math.floor(Math.random() * cols)];
 	};
 
 	/**
 	 * @returns {object} random empty (non-battleship) cell from the board
 	 */
-	const getRandomEmptyCell = () => {
+	const getRandomEmptyCell = (): Cell => {
 		const randomCell = getRandomCell();
 		if (randomCell.isBattleShip) return getRandomEmptyCell();
 		return randomCell;
@@ -18,7 +20,7 @@ const UseBoardScanner = (board, rows, cols) => {
 	/**
 	 * @returns {object} random empty (non-hit) cell from the board
 	 */
-	const getRandomNonHitCell = () => {
+	const getRandomNonHitCell = (): Cell => {
 		const randomCell = getRandomCell();
 		if (randomCell.isHit) return getRandomNonHitCell();
 		return randomCell;
@@ -30,7 +32,7 @@ const UseBoardScanner = (board, rows, cols) => {
 	 * @returns {boolean}
 	 */
 	// TODO This function should be re-factored to check whole cell rather than one coord
-	const isCellInGrid = (x, y) => {
+	const isCellInGrid = (x: number, y: number): boolean => {
 		if (x < 0 || y < 0 || x >= rows || y > cols) return false;
 		return true;
 	};
@@ -41,13 +43,13 @@ const UseBoardScanner = (board, rows, cols) => {
 	 * @param {number} y The Y coordinate of the cell
 	 * @returns {boolean} False if cell is a ship, true if empty
 	 */
-	const isCellEmpty = (x, y) => {
+	const isCellEmpty = (x: number, y: number) => {
 		if (board[x][y].isBattleShip) return false;
 		return true;
 	};
 
-	const getCellCoordsOfType = (type) => {
-		const typeArr = [];
+	const getCellCoordsOfType = (type: ShipType): Coord[] => {
+		const typeArr: Coord[] = [];
 		for (let x = 0; x < cols; x++) {
 			for (let y = 0; y < rows; y++) {
 				if (board[x][y].type === type)
