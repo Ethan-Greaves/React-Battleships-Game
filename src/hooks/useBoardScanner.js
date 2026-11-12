@@ -61,7 +61,13 @@ const UseBoardScanner = (board, rows, cols) => {
 		return typeArr;
 	};
 
-	return { getRandomEmptyCell, isCellInGrid, isCellEmpty, getRandomNonHitCell, getCellCoordsOfType };
+	return {
+		getRandomEmptyCell,
+		isCellInGrid,
+		isCellEmpty,
+		getRandomNonHitCell,
+		getCellCoordsOfType,
+	};
 };
 
 export default UseBoardScanner;
