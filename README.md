@@ -1,4 +1,4 @@
-<h1 align="center">React-Battleships-Game</h1> 
+<h1 align="center">Battleships</h1> 
 
 <p align="center">
   <img src="https://img.shields.io/badge/Made%20by-Ethan%20Greaves-green" >
